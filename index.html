@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subscription Plan Page Prototype</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="top-nav">
+    <div class="nav-left">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 11H7.83L13.42 5.41L12 4L4 12L12 20L13.41 18.59L7.83 13H20V11Z" fill="#42526E"/>
+      </svg>
+      <span class="nav-title">Post a job</span>
+    </div>
+    <div class="nav-center">
+      <div class="step completed"><img src="assets/check.svg" alt="done"></div>
+      <div class="step-line"></div>
+      <div class="step completed"><img src="assets/check.svg" alt="done"></div>
+      <div class="step-line"></div>
+      <div class="step completed"><img src="assets/check.svg" alt="done"></div>
+      <div class="step-line"></div>
+      <div class="step completed"><img src="assets/check.svg" alt="done"></div>
+      <div class="step-line"></div>
+      <div class="step active">5</div>
+      <span class="step-text">Post job</span>
+    </div>
+    <div class="nav-right">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM13 19H11V17H13V19ZM15.07 11.25L14.17 12.17C13.45 12.9 13 13.5 13 15H11V14.5C11 13.4 11.45 12.4 12.17 11.67L13.41 10.41C13.78 10.05 14 9.55 14 9C14 7.9 13.1 7 12 7C10.9 7 10 7.9 10 9H8C8 6.79 9.79 5 12 5C14.21 5 16 6.79 16 9C16 9.88 15.64 10.68 15.07 11.25Z" fill="#42526E"/>
+      </svg>
+      <span>Help</span>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="header">
+      How do you want to hire?
+    </div>
+
+    <div class="plan-section">
+      <!-- Single Job Postings -->
+      <div class="wrapper-box single-jobs-wrapper">
+        <div class="wrapper-header single-jobs-header">
+          <img src="assets/clock.svg" alt="clock">
+          <span>Single job posting</span>
+        </div>
+        
+        <div class="wrapper-body">
+          <div class="single-jobs-cards" onmouseleave="resetToDefault()">
+            
+            <!-- Classic Job -->
+            <div class="card bordered" onmouseenter="selectPlan(this)">
+              <div class="card-title">Classic job</div>
+              <div class="card-price">
+                <span>₹999</span><span class="asterisk">*</span>
+              </div>
+              <button class="btn" onclick="openModal('Classic', 999)">Get classic job</button>
+              <ul class="features">
+                <li class="feature">
+                  <img src="assets/check.svg" class="icon" alt="check">
+                  <span class="feature-text">Job will be active for 15 days</span>
+                </li>
+                <li class="feature disabled">
+                  <img src="assets/close.svg" class="icon" alt="cross">
+                  <span class="feature-text">Higher visibility to candidates</span>
+                </li>
+                <li class="feature disabled">
+                  <img src="assets/close.svg" class="icon" alt="cross">
+                  <span class="feature-text">
+                    WhatsApp job notify 
+                    <img src="assets/whatsapp-gray.svg" class="inline-icon" alt="wa">
+                  </span>
+                </li>
+                <li class="feature disabled">
+                  <img src="assets/close.svg" class="icon" alt="cross">
+                  <span class="feature-text">
+                    Urgently hiring tag 
+                    <img src="assets/hot-gray.svg" class="inline-icon" alt="hot">
+                  </span>
+                </li>
+                <li class="feature disabled">
+                  <img src="assets/close.svg" class="icon" alt="cross">
+                  <span class="feature-text">Top placements in job listings</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Premium Job -->
+            <div class="card premium" onmouseenter="selectPlan(this)">
+              <div class="card-title">Premium job</div>
+              <div class="card-price">
+                <span>₹1,999</span><span class="asterisk">*</span>
+              </div>
+              <button class="btn" onclick="openModal('Premium', 1999)">Get premium job</button>
+              <ul class="features">
+                <li class="feature">
+                  <img src="assets/check.svg" class="icon" alt="check">
+                  <span class="feature-text">Job will be active for 15 days</span>
+                </li>
+                <li class="feature">
+                  <img src="assets/check.svg" class="icon" alt="check">
+                  <span class="feature-text">Higher visibility to candidates</span>
+                </li>
+                <li class="feature">
+                  <img src="assets/check.svg" class="icon" alt="check">
+                  <span class="feature-text">
+                    WhatsApp job notify 
+                    <img src="assets/whatsapp-green.svg" class="inline-icon" alt="wa">
+                  </span>
+                </li>
+                <li class="feature">
+                  <img src="assets/check.svg" class="icon" alt="check">
+                  <span class="feature-text">
+                    Urgently hiring tag 
+                    <img src="assets/hot-red.svg" class="inline-icon" alt="hot">
+                  </span>
+                </li>
+                <li class="feature disabled">
+                  <img src="assets/close.svg" class="icon" alt="cross">
+                  <span class="feature-text">Top placements in job listings</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Super Premium Job -->
+            <div class="card bordered" onmouseenter="selectPlan(this)">
+              <div class="card-title">Super premium job</div>
+              <div class="card-price">
+                <span>₹2,999</span><span class="asterisk">*</span>
+              </div>
+              <button class="btn" onclick="openModal('Super premium', 2999)">Get super premium job</button>
+              <ul class="features">
+                <li class="feature">
+                  <img src="assets/check.svg" class="icon" alt="check">
+                  <span class="feature-text">Job will be active for 15 days</span>
+                </li>
+                <li class="feature">
+                  <img src="assets/done_all.svg" class="icon" alt="done">
+                  <span class="feature-text"><span class="bold">2x</span> more visibility to candidates</span>
+                </li>
+                <li class="feature">
+                  <img src="assets/done_all.svg" class="icon" alt="done">
+                  <span class="feature-text">
+                    <span class="bold">2x</span> WhatsApp job notify 
+                    <img src="assets/whatsapp-green.svg" class="inline-icon" alt="wa">
+                  </span>
+                </li>
+                <li class="feature">
+                  <img src="assets/check.svg" class="icon" alt="check">
+                  <span class="feature-text">
+                    Urgently hiring tag 
+                    <img src="assets/hot-red.svg" class="inline-icon" alt="hot">
+                  </span>
+                </li>
+                <li class="feature">
+                  <img src="assets/check.svg" class="icon" alt="check">
+                  <span class="feature-text">Top placements in job listings</span>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Monthly Plan (apna Unlimited) -->
+      <div class="wrapper-box monthly-wrapper">
+        <div class="wrapper-header monthly-header">
+          <img src="assets/logo-unlimited.svg" alt="apna Unlimited">
+        </div>
+        
+        <div class="wrapper-body">
+          <div class="card">
+            <div class="card-title">Monthly plan</div>
+            <div class="card-price">
+              <span>₹2,499</span><span class="asterisk">*</span><span class="monthly-price-suffix">/month</span>
+            </div>
+            <button class="btn primary" onclick="window.location.href='checkout.html?plan=Monthly&price=2499'">Get apna unlimited</button>
+            
+            <ul class="features">
+              <li class="feature">
+                <img src="assets/business.svg" class="icon" alt="business">
+                <span class="feature-text">
+                  <span class="bold">1</span> Active job slot for <span class="bold">30 days</span>
+                </span>
+              </li>
+              <li class="feature">
+                <img src="assets/infinite.svg" class="icon" alt="infinite">
+                <span class="feature-text">Unlimited free reposts on job expiry</span>
+              </li>
+              <li class="feature">
+                <img src="assets/shield.svg" class="icon" alt="shield">
+                <span class="feature-text">
+                  <span class="bold">200</span> database unlocks <span class="italic">worth ₹2,000</span>
+                </span>
+              </li>
+              <li class="feature">
+                <img src="assets/whatsapp-solid.svg" class="icon" alt="wa-solid">
+                <span class="feature-text">WhatsApp boost for more applications</span>
+              </li>
+              <li class="feature">
+                <img src="assets/support.svg" class="icon" alt="support">
+                <span class="feature-text">Priority support</span>
+              </li>
+            </ul>
+
+            <div class="note">
+              Note: This plan is valid in a single city.
+            </div>
+            <a href="plans.html" class="explore-link">Explore other plans</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="trust-section">
+      <div class="trust-title">
+        Trusted by <span class="bold">1000+ enterprises and 7 lakh+ MSMEs</span> for hiring
+      </div>
+      <div class="trust-logos">
+        <img src="assets/logo-paytm.svg" alt="Paytm">
+        <img src="assets/logo-bajaj.png" alt="Bajaj">
+        <img src="assets/logo-bigbasket.png" alt="Bigbasket">
+        <img src="assets/logo-hdfc.svg" alt="HDFC">
+        <img src="assets/logo-swiggy.svg" alt="Swiggy">
+      </div>
+    </div>
+    
+    <!-- Dev Toggle -->
+    <div style="text-align: center; margin-top: 40px; margin-bottom: 20px;">
+      <label style="cursor: pointer; font-size: 14px; color: var(--neutral-600); display: inline-flex; align-items: center; gap: 8px;">
+        <input type="checkbox" id="toggle-monthly" checked>
+        Show apna unlimited card
+      </label>
+    </div>
+    
+    <script>
+      (function() {
+        const toggle = document.getElementById('toggle-monthly');
+        const wrapper = document.querySelector('.monthly-wrapper');
+        
+        // Restore state
+        const storedState = localStorage.getItem('showMonthlyCard');
+        if (storedState !== null) {
+          const isChecked = storedState === 'true';
+          toggle.checked = isChecked;
+          if (wrapper) wrapper.style.display = isChecked ? 'block' : 'none';
+        }
+        
+        // Save state on change
+        toggle.addEventListener('change', function() {
+          if (wrapper) wrapper.style.display = this.checked ? 'block' : 'none';
+          localStorage.setItem('showMonthlyCard', this.checked);
+        });
+      })();
+    </script>
+  </div>
+
+  <!-- Upsell Modal -->
+  <div class="modal-overlay" id="upsellModal">
+    <div class="modal-content">
+      <div class="modal-close" onclick="closeModal()">
+        <img src="assets/close.svg" alt="close">
+      </div>
+      <div class="modal-title">Buy more, <span class="save-text">save</span> more</div>
+      
+      <div class="upsell-cards">
+        <!-- 1 Job -->
+        <div class="upsell-card active" onclick="selectUpsell(this, 1)">
+          <div class="upsell-price-row">
+            <span class="upsell-price" id="upsell-1-price">₹1,999</span>
+          </div>
+          <div class="upsell-desc">1 <span class="upsell-plan-name">Premium</span> Job</div>
+        </div>
+        
+        <!-- 4 Jobs -->
+        <div class="upsell-card" onclick="selectUpsell(this, 4)">
+          <div class="upsell-desc-row">
+            <div class="upsell-desc">4 <span class="upsell-plan-name">Premium</span> Jobs</div>
+            <div class="upsell-tag" id="upsell-4-save">Save 10%</div>
+          </div>
+          <div class="upsell-price-row">
+            <span class="upsell-old-price" id="upsell-4-old">₹7,996</span>
+            <span class="upsell-price" id="upsell-4-price">₹7,196</span>
+          </div>
+        </div>
+
+        <!-- 8 Jobs -->
+        <div class="upsell-card" onclick="selectUpsell(this, 8)">
+          <div class="upsell-desc-row">
+            <div class="upsell-desc">8 <span class="upsell-plan-name">Premium</span> Jobs</div>
+            <div class="upsell-tag" id="upsell-8-save">Save 20%</div>
+          </div>
+          <div class="upsell-price-row">
+            <span class="upsell-old-price" id="upsell-8-old">₹15,992</span>
+            <span class="upsell-price" id="upsell-8-price">₹12,793</span>
+          </div>
+        </div>
+      </div>
+      
+      <button class="btn primary modal-continue-btn" onclick="goToCheckout()">Continue to Payment</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

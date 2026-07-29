@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout | Apna</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+  <!-- Minimal Top Navigation -->
+  <nav class="top-nav minimal-nav">
+    <div class="nav-left">
+      <a href="index.html" class="back-link-minimal">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 11H7.83L13.42 5.41L12 4L4 12L12 20L13.41 18.59L7.83 13H20V11Z" fill="#42526E"/>
+        </svg>
+        <span class="nav-checkout-title">Checkout</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Main Checkout Container -->
+  <div class="checkout-wrapper">
+    
+    <div class="checkout-grid new-layout single-job-checkout">
+      
+      <!-- LEFT COLUMN: Purchase Summary -->
+      <div class="checkout-left">
+        <div class="purchase-summary-card">
+          <h2 class="card-section-title">Purchase summary</h2>
+
+          <div class="divider"></div>
+          
+          <div class="summary-content">
+            <div class="line-item">
+              <span id="summary-plan-name" class="bold-text">Premium job x 1</span>
+              <span id="summary-plan-price" class="bold-text">₹2,499</span>
+            </div>
+
+            <div class="line-item hidden" id="summary-ai-addon">
+              <span class="bold-text">AI Calling Agent</span>
+              <span class="bold-text">₹1,190</span>
+            </div>
+            
+            <div class="divider"></div>
+            
+            <div class="line-item">
+              <span class="gray-text">Sub total</span>
+              <span id="summary-subtotal" class="bold-text">₹2,499</span>
+            </div>
+            
+            <div class="line-item tax-row">
+              <div class="tax-label-col">
+                <span class="gray-text">GST Fee (18%)</span>
+                <div class="gst-link-row">
+                  <a href="#" class="add-gst-link">Add GSTIN number</a>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#6B7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12 16V12" stroke="#6B7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12 8H12.01" stroke="#6B7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+              </div>
+              <span id="summary-tax" class="bold-text">₹450</span>
+            </div>
+            
+            <div class="divider thick"></div>
+            
+            <div class="line-item total-row">
+              <div class="total-label">Total <span class="inc-tax">(Inc tax)</span></div>
+              <span id="summary-total" class="total-price">₹2,949</span>
+            </div>
+            
+            <p class="disclaimer summary-disclaimer">
+              We protect fair use and privacy; policy violations or fraud may lead to account suspension and loss of service fees. By subscribing, you authorise Apna Incorporated to charge you according to the terms.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN: Select Add-on -->
+      <div class="checkout-right">
+        <div class="addon-section-card">
+          <h2 class="card-section-title">Add-on</h2>
+          
+          <div class="divider"></div>
+          
+          <!-- AI Add-on Box inside right column -->
+          <div class="ai-addon-card" id="ai-addon-box">
+            <!-- Row 1: Title & Price -->
+            <div class="addon-top-row">
+              <div class="addon-title-left">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z" fill="#10b981"/>
+                  <path d="M5 4L5.6 6.4L8 7L5.6 7.6L5 10L4.4 7.6L2 7L4.4 6.4L5 4Z" fill="#3b82f6"/>
+                </svg>
+                <h3>AI Calling Agent</h3>
+              </div>
+              <div class="addon-price-block">
+                <span class="addon-old-price">₹1,700</span>
+                <span class="addon-price">₹1,190</span>
+              </div>
+            </div>
+
+            <!-- Row 2: Description -->
+            <p class="addon-desc">Instantly calls & screens applicants to find top candidates.</p>
+
+            <!-- Row 3: Chips & Toggle Switch -->
+            <div class="addon-bottom-row">
+              <div class="audio-previews compact-previews">
+                <div class="audio-pill">
+                  <div class="audio-avatar">
+                    <div class="avatar-circle"></div>
+                  </div>
+                  <div class="audio-info">
+                    <div class="audio-lang">Listen to demo</div>
+                  </div>
+                  <div class="play-btn-mock">▶</div>
+                </div>
+              </div>
+              
+              <div class="addon-toggle">
+                <label class="switch">
+                  <input type="checkbox" id="ai-toggle-btn" onchange="toggleAIAddon()">
+                  <span class="slider round"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="secure-checkout">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M19 11H5C3.89543 11 3 11.8954 3 13V20C3 21.1046 3.89543 22 5 22H19C20.1046 22 21 21.1046 21 20V13C21 11.8954 20.1046 11 19 11Z" stroke="#6B7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M7 11V7C7 5.67392 7.52678 4.40215 8.46447 3.46447C9.40215 2.52678 10.6739 2 12 2C13.3261 2 14.5979 2.52678 15.5355 3.46447C16.4732 4.40215 17 5.67392 17 7V11" stroke="#6B7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            100% safe and secure checkout
+          </div>
+
+          <button class="btn primary proceed-btn" id="proceed-btn">Proceed to pay ₹2,949</button>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Monthly Checkout Grid (Hidden by Default) -->
+    <div class="checkout-grid new-layout monthly-checkout" style="display: none;">
+      <!-- LEFT COLUMN -->
+      <div class="checkout-left">
+        <div class="purchase-summary-card">
+          <div class="summary-header-monthly" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <h2 class="card-section-title" style="margin-bottom: 0; padding-bottom: 0; border: none;">Purchase summary</h2>
+          </div>
+
+          <div class="divider" style="margin-top: 0;"></div>
+          
+          <div class="line-item monthly-plan-name" style="align-items: flex-start; margin-bottom: 16px;">
+            <div class="plan-desc" style="display: flex; flex-direction: column; gap: 4px;">
+              <span class="plan-title" style="font-weight: 600; color: var(--neutral-800);">Monthly plan</span>
+              <span class="plan-subtext" style="font-size: 12px; color: var(--neutral-600);">(<span class="bold">1 active</span> job slot + <span class="bold">200 Database</span> credits for 30 days)</span>
+            </div>
+            <span class="item-price" id="monthly-base-price">₹2,499</span>
+          </div>
+
+          <div class="line-item discount-row" id="monthly-discount-row">
+            <span style="color: var(--neutral-600);">Auto pay discount (5%)</span>
+            <span class="item-price discount-val" id="monthly-discount-val" style="color: var(--core-green);"></span>
+          </div>
+
+          <div class="divider" style="margin: 16px 0;"></div>
+
+          <div class="line-item">
+            <span>Sub total</span>
+            <span class="item-price" id="monthly-subtotal"></span>
+          </div>
+
+          <div class="line-item tax-row" style="margin-bottom: 4px;">
+            <span>GST Fee (18%)</span>
+            <span class="item-price" id="monthly-tax"></span>
+          </div>
+          <div class="gst-link">
+            <a href="#">Add GSTIN number</a>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#6B7280" stroke-width="2"/>
+              <path d="M12 16V12M12 8H12.01" stroke="#6B7280" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="line-item total-row">
+            <span class="total-label">Total <span class="inc-tax">(Inc tax)</span></span>
+            <span class="total-price" id="monthly-total"></span>
+          </div>
+          
+          <p class="disclaimer summary-disclaimer text-center" style="font-size: 10px; color: var(--neutral-600);">
+            We protect fair use and privacy; policy violations or fraud may lead to account suspension and loss of service fees. By subscribing, you authorise Apna Incorporated to charge you according to the terms.
+          </p>
+
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div class="checkout-right">
+        <div class="addon-section-card">
+          <h2 class="card-section-title">Select payment mode</h2>
+          <div class="divider"></div>
+          
+          <div class="payment-mode-options" style="display: flex; flex-direction: column; gap: 12px;">
+            <!-- Auto Pay Option -->
+            <label class="payment-option" id="option-autopay" style="border: 1px solid var(--core-green); border-radius: 8px; padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; background-color: #F8FCFA;">
+              <div class="option-content">
+                <div class="option-header" style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                  <span class="option-title" style="display: flex; align-items: center; gap: 6px; font-weight: 600; font-size: 14px; color: var(--neutral-800);">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                    Auto pay
+                  </span>
+                  <span class="badge green" style="background-color: var(--core-green); color: white; padding: 2px 8px; border-radius: 12px; font-size: 10px; font-weight: 600; display: flex; align-items: center; gap: 4px;">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    Extra 5% off
+                  </span>
+                </div>
+                <div class="option-subtext" style="font-size: 12px; color: var(--neutral-500);">Uninterrupted hiring</div>
+              </div>
+              <input type="radio" name="payment-mode" value="autopay" checked onchange="updateMonthlyTotals()" style="width: 20px; height: 20px; accent-color: var(--core-green);">
+            </label>
+
+            <!-- One Time Option -->
+            <label class="payment-option" id="option-onetime" style="border: 1px solid var(--neutral-200); border-radius: 8px; padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; cursor: pointer;">
+              <div class="option-content">
+                <div class="option-header" style="margin-bottom: 4px;">
+                  <span class="option-title" style="display: flex; align-items: center; gap: 6px; font-weight: 600; font-size: 14px; color: var(--neutral-800);">
+                    <span style="font-family: monospace; font-size: 14px;">₹</span> One-time
+                  </span>
+                </div>
+                <div class="option-subtext" style="font-size: 12px; color: var(--neutral-500);">Expires after 30 days</div>
+              </div>
+              <input type="radio" name="payment-mode" value="onetime" onchange="updateMonthlyTotals()" style="width: 20px; height: 20px; accent-color: var(--core-green);">
+            </label>
+          </div>
+
+          <div class="secure-checkout">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M19 11H5C3.89543 11 3 11.8954 3 13V20C3 21.1046 3.89543 22 5 22H19C20.1046 22 21 21.1046 21 20V13C21 11.8954 20.1046 11 19 11Z" stroke="#6B7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M7 11V7C7 5.67392 7.52678 4.40215 8.46447 3.46447C9.40215 2.52678 10.6739 2 12 2C13.3261 2 14.5979 2.52678 15.5355 3.46447C16.4732 4.40215 17 5.67392 17 7V11" stroke="#6B7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            100% safe and secure checkout
+          </div>
+
+          <button class="btn primary proceed-btn" id="monthly-proceed-btn">Subscribe ₹2,802 /month</button>
+
+          <!-- Auto Renew Box -->
+          <div class="auto-renew-box" id="monthly-autorenew-box">
+            <div style="border-top: 1px dashed var(--neutral-200); margin: 16px 0 20px;"></div>
+            <p class="renew-text" style="font-size: 11px; color: var(--neutral-600); margin-bottom: 16px; text-align: center;">
+              Your plan will automatically renew on <span id="renew-date" class="bold" style="color: var(--neutral-800);"></span><br> for <span class="bold" id="renew-amount" style="color: var(--neutral-800);"></span> /month (inc. GST)
+            </p>
+            <div class="renew-icons" style="display: flex; justify-content: center; gap: 16px; font-size: 10px; color: var(--neutral-500);">
+              <div class="renew-icon-item" style="display: flex; align-items: center; gap: 4px;">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                Auto-renew
+              </div>
+              <div class="renew-icon-item" style="display: flex; align-items: center; gap: 4px;">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                Renewal reminder
+              </div>
+              <div class="renew-icon-item" style="display: flex; align-items: center; gap: 4px;">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+                Stop or cancel anytime
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="checkout.js"></script>
+</body>
+</html>

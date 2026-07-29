@@ -1,0 +1,165 @@
+document.addEventListener("DOMContentLoaded", () => {
+  // Parse URL parameters
+  const urlParams = new URLSearchParams(window.location.search);
+  const planName = urlParams.get('plan') || 'Premium';
+  const planCount = parseInt(urlParams.get('count') || '1');
+  const basePrice = parseInt(urlParams.get('price') || '2499'); // Default based on screenshot
+
+  // DOM Elements
+  const sumPlanNameEl = document.getElementById('summary-plan-name');
+  const sumPlanPriceEl = document.getElementById('summary-plan-price');
+  
+  const sumAiAddonEl = document.getElementById('summary-ai-addon');
+  const sumSubtotalEl = document.getElementById('summary-subtotal');
+  const sumTaxEl = document.getElementById('summary-tax');
+  const sumTotalEl = document.getElementById('summary-total');
+  
+  const aiToggleBtn = document.getElementById('ai-toggle-btn');
+  const aiAddonBox = document.getElementById('ai-addon-box');
+  const proceedBtn = document.getElementById('proceed-btn');
+
+  const ADDON_PRICE = 1190;
+
+  // Monthly Plan Logic
+  if (planName === 'Monthly') {
+    const singleJobCheckout = document.querySelector('.single-job-checkout');
+    const monthlyCheckout = document.querySelector('.monthly-checkout');
+    if (singleJobCheckout) singleJobCheckout.style.display = 'none';
+    if (monthlyCheckout) monthlyCheckout.style.display = '';
+    
+    // Set auto-renew date (30 days from now)
+    const renewDate = new Date();
+    renewDate.setDate(renewDate.getDate() + 30);
+    const options = { day: 'numeric', month: 'long', year: 'numeric' };
+    const renewDateStr = renewDate.toLocaleDateString('en-GB', options);
+    const renewDateEl = document.getElementById('renew-date');
+    if (renewDateEl) renewDateEl.textContent = renewDateStr;
+
+    window.updateMonthlyTotals = function() {
+      const modeInput = document.querySelector('input[name="payment-mode"]:checked');
+      if (!modeInput) return;
+      const mode = modeInput.value;
+      
+      const optionAutopay = document.getElementById('option-autopay');
+      const optionOnetime = document.getElementById('option-onetime');
+      const discountRow = document.getElementById('monthly-discount-row');
+      const autorenewBox = document.getElementById('monthly-autorenew-box');
+      const subtotalEl = document.getElementById('monthly-subtotal');
+      const taxEl = document.getElementById('monthly-tax');
+      const totalEl = document.getElementById('monthly-total');
+      const proceedBtn = document.getElementById('monthly-proceed-btn');
+      const renewAmountEl = document.getElementById('renew-amount');
+      
+      let discount = 0;
+      
+      if (mode === 'autopay') {
+        if (optionAutopay) {
+          optionAutopay.style.border = '1px solid var(--core-green)';
+          optionAutopay.style.backgroundColor = '#F8FCFA';
+        }
+        if (optionOnetime) {
+          optionOnetime.style.border = '1px solid var(--neutral-200)';
+          optionOnetime.style.backgroundColor = 'transparent';
+        }
+        
+        discount = Math.round(basePrice * 0.05);
+        if (document.getElementById('monthly-discount-val')) {
+          document.getElementById('monthly-discount-val').textContent = `-₹${discount.toLocaleString('en-IN')}`;
+        }
+        if (discountRow) discountRow.style.display = 'flex';
+        if (autorenewBox) autorenewBox.style.display = 'block';
+      } else {
+        if (optionOnetime) {
+          optionOnetime.style.border = '1px solid var(--core-green)';
+          optionOnetime.style.backgroundColor = '#F8FCFA';
+        }
+        if (optionAutopay) {
+          optionAutopay.style.border = '1px solid var(--neutral-200)';
+          optionAutopay.style.backgroundColor = 'transparent';
+        }
+        
+        if (discountRow) discountRow.style.display = 'none';
+        if (autorenewBox) autorenewBox.style.display = 'none';
+      }
+      
+      const subtotal = basePrice - discount;
+      const tax = Math.round(subtotal * 0.18);
+      const total = subtotal + tax;
+      
+      if (subtotalEl) subtotalEl.textContent = `₹${subtotal.toLocaleString('en-IN')}`;
+      if (taxEl) taxEl.textContent = `₹${tax.toLocaleString('en-IN')}`;
+      if (totalEl) totalEl.textContent = `₹${total.toLocaleString('en-IN')}`;
+      
+      if (mode === 'autopay') {
+        if (proceedBtn) proceedBtn.textContent = `Subscribe ₹${total.toLocaleString('en-IN')} /month`;
+        if (renewAmountEl) renewAmountEl.textContent = `₹${total.toLocaleString('en-IN')}`;
+      } else {
+        if (proceedBtn) proceedBtn.textContent = `Proceed to pay ₹${total.toLocaleString('en-IN')}`;
+      }
+    };
+    
+    // Initial calculation
+    updateMonthlyTotals();
+    
+    return; // Exit here, do not run Single Job logic
+  }
+
+  // --- Single Job Logic below ---
+  sumPlanNameEl.textContent = `${planName} job x ${planCount}`;
+  sumPlanPriceEl.textContent = `₹${basePrice.toLocaleString('en-IN')}`;
+
+  // Hide AI addon for multiple jobs
+  if (planCount > 1) {
+    const checkoutRight = document.querySelector('.checkout-right');
+    const checkoutGrid = document.querySelector('.checkout-grid');
+    const checkoutLeftCard = document.querySelector('.purchase-summary-card');
+    const secureCheckout = document.querySelector('.secure-checkout');
+    
+    if (checkoutLeftCard && secureCheckout && proceedBtn) {
+      checkoutLeftCard.appendChild(secureCheckout);
+      checkoutLeftCard.appendChild(proceedBtn);
+    }
+    
+    if (checkoutRight) checkoutRight.style.display = 'none';
+    if (checkoutGrid) {
+      checkoutGrid.style.gridTemplateColumns = '1fr';
+      checkoutGrid.style.maxWidth = '600px';
+      checkoutGrid.style.margin = '0 auto';
+    }
+    aiToggleBtn.checked = false; // ensure it doesn't get calculated
+  }
+
+  function calculateTotals() {
+    let subtotal = basePrice;
+    
+    // Add AI Addon price if toggled
+    if (aiToggleBtn.checked) {
+      subtotal += ADDON_PRICE;
+      sumAiAddonEl.classList.remove('hidden');
+      aiAddonBox.classList.add('active-addon');
+    } else {
+      sumAiAddonEl.classList.add('hidden');
+      aiAddonBox.classList.remove('active-addon');
+    }
+
+    // Calculate tax (18%)
+    const tax = Math.round(subtotal * 0.18);
+    const total = subtotal + tax;
+
+    // Update DOM
+    sumSubtotalEl.textContent = `₹${subtotal.toLocaleString('en-IN')}`;
+    sumTaxEl.textContent = `₹${tax.toLocaleString('en-IN')}`;
+    sumTotalEl.textContent = `₹${total.toLocaleString('en-IN')}`;
+    
+    // Update Checkout Button text
+    proceedBtn.textContent = `Proceed to pay ₹${total.toLocaleString('en-IN')}`;
+  }
+
+  // Handle Toggle Change
+  window.toggleAIAddon = function() {
+    calculateTotals();
+  };
+
+  // Initial Calculation
+  calculateTotals();
+});
