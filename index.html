@@ -51,10 +51,12 @@
           <div class="single-jobs-cards">
             
             <!-- Classic Job -->
-            <div class="card bordered" onclick="openModal(this, 'Classic', 999)">
+            <div class="card bordered" onclick="openModal(this, 'Classic')">
               <div class="card-title">Classic job</div>
               <div class="card-price">
-                <span>₹999</span><span class="asterisk">*</span>
+                <span class="strikethrough-price">₹999</span>
+                <span class="active-price new-user-price">₹999</span>
+                <span class="active-price old-user-price">₹699</span><span class="asterisk">*</span>
               </div>
               <button class="btn">Get classic job</button>
               <ul class="features">
@@ -88,10 +90,12 @@
             </div>
 
             <!-- Premium Job -->
-            <div class="card premium" onclick="openModal(this, 'Premium', 1999)">
+            <div class="card premium" onclick="openModal(this, 'Premium')">
               <div class="card-title">Premium job</div>
               <div class="card-price">
-                <span>₹1,999</span><span class="asterisk">*</span>
+                <span class="strikethrough-price">₹1,999</span>
+                <span class="active-price new-user-price">₹1,999</span>
+                <span class="active-price old-user-price">₹1,399</span><span class="asterisk">*</span>
               </div>
               <button class="btn">Get premium job</button>
               <ul class="features">
@@ -125,10 +129,12 @@
             </div>
 
             <!-- Super Premium Job -->
-            <div class="card bordered" onclick="openModal(this, 'Super premium', 2999)">
+            <div class="card bordered" onclick="openModal(this, 'Super premium')">
               <div class="card-title">Super premium job</div>
               <div class="card-price">
-                <span>₹2,999</span><span class="asterisk">*</span>
+                <span class="strikethrough-price">₹2,999</span>
+                <span class="active-price new-user-price">₹2,999</span>
+                <span class="active-price old-user-price">₹2,799</span><span class="asterisk">*</span>
               </div>
               <button class="btn">Get super premium job</button>
               <ul class="features">
@@ -230,10 +236,15 @@
     </div>
     
     <!-- Dev Toggle -->
-    <div style="text-align: center; margin-top: 40px; margin-bottom: 20px;">
+    <div style="text-align: center; margin-top: 40px; margin-bottom: 20px; display: flex; justify-content: center; gap: 24px;">
       <label style="cursor: pointer; font-size: 14px; color: var(--neutral-600); display: inline-flex; align-items: center; gap: 8px;">
         <input type="checkbox" id="toggle-monthly" checked>
         Show apna unlimited card
+      </label>
+      
+      <label style="cursor: pointer; font-size: 14px; color: var(--neutral-600); display: inline-flex; align-items: center; gap: 8px;">
+        <input type="checkbox" id="toggle-old-user">
+        Enable Old User Pricing
       </label>
     </div>
     
@@ -272,6 +283,27 @@
           if (wrapper) wrapper.style.display = this.checked ? 'block' : 'none';
           localStorage.setItem('showMonthlyCard', this.checked);
           updatePremiumCardState(this.checked);
+        });
+        const oldUserToggle = document.getElementById('toggle-old-user');
+        const jobsWrapper = document.querySelector('.single-jobs-wrapper');
+        
+        // Restore old user state
+        const oldUserState = localStorage.getItem('isOldUser');
+        if (oldUserState !== null) {
+          const isOld = oldUserState === 'true';
+          oldUserToggle.checked = isOld;
+          if (isOld) {
+            jobsWrapper.classList.add('old-user-active');
+          }
+        }
+        
+        oldUserToggle.addEventListener('change', function() {
+          if (this.checked) {
+            jobsWrapper.classList.add('old-user-active');
+          } else {
+            jobsWrapper.classList.remove('old-user-active');
+          }
+          localStorage.setItem('isOldUser', this.checked);
         });
       })();
     </script>

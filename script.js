@@ -34,7 +34,17 @@ function resetToDefault() {
 let currentBasePrice = 0;
 let currentPlanName = "";
 
-function openModal(cardElement, planName, basePrice) {
+function openModal(cardElement, planName) {
+  const isOldUser = document.getElementById('toggle-old-user') && document.getElementById('toggle-old-user').checked;
+  let basePrice = 0;
+  if (planName.toLowerCase() === 'classic') {
+    basePrice = isOldUser ? 699 : 999;
+  } else if (planName.toLowerCase() === 'premium') {
+    basePrice = isOldUser ? 1399 : 1999;
+  } else if (planName.toLowerCase().includes('super')) {
+    basePrice = isOldUser ? 2799 : 2999;
+  }
+  
   currentBasePrice = basePrice;
   currentPlanName = planName;
   

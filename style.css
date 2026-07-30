@@ -996,3 +996,15 @@ input:checked + .slider:before {
     flex-direction: column;
   }
 }
+
+/* Old User Pricing Toggle Logic */
+.strikethrough-price, .old-user-price { display: none; }
+.old-user-active .strikethrough-price, .old-user-active .old-user-price { display: inline; }
+.old-user-active .new-user-price { display: none; }
+.strikethrough-price {
+  text-decoration: line-through;
+  color: var(--neutral-600);
+  font-size: 14px;
+  font-weight: 500;
+  margin-right: 6px;
+}
