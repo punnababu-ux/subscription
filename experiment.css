@@ -1,4 +1,4 @@
-/* experiment.css - 100% Visible & Vector-Aligned Stacking Engine */
+/* experiment.css - Standard Borders & Primary CTAs Layout */
 
 :root {
   --exp-spring-easing: cubic-bezier(0.22, 1, 0.36, 1);
@@ -157,7 +157,7 @@
   transform: translate(322px, 0px) rotate(0deg) !important;
   opacity: 1 !important;
   box-shadow: none !important;
-  border: 2px solid var(--core-green) !important;
+  border: 1px solid var(--neutral-200) !important;
   pointer-events: auto !important;
   transition-delay: 0.03s !important;
 }
@@ -172,7 +172,7 @@
   transition-delay: 0.06s !important;
 }
 
-/* --- SINGLE JOBS COLLAPSED STATE (Classic on Top, Premium & Super slide under peeking right) --- */
+/* --- SINGLE JOBS COLLAPSED STATE --- */
 .exp-plan-section.active-unlimited .single-jobs-wrapper .card-classic {
   z-index: 3;
   transform: translate(0px, 0px) rotate(0deg) !important;
@@ -237,7 +237,7 @@
   transition-delay: 0s !important;
 }
 
-/* --- APNA UNLIMITED COLLAPSED STATE (Yearly Top on Right, Monthly & Quarterly slide right under Yearly peeking left) --- */
+/* --- APNA UNLIMITED COLLAPSED STATE --- */
 .exp-plan-section.active-single .monthly-wrapper .card-yearly {
   z-index: 3;
   transform: translate(16px, 0px) rotate(0deg) !important;
