@@ -1,4 +1,4 @@
-/* experiment.css - Symmetrical Layout & Optical Header Alignment */
+/* experiment.css - Symmetrical Layout & Generous CTA Top Spacing */
 
 .exp-plan-section {
   display: flex;
@@ -131,9 +131,9 @@
   width: 310px !important;
   min-width: 310px !important;
   max-width: 310px !important;
-  height: 454px !important;
-  min-height: 454px !important;
-  max-height: 454px !important;
+  height: 460px !important;
+  min-height: 460px !important;
+  max-height: 460px !important;
   opacity: 1 !important;
   transform: translate(0, 0) !important;
   z-index: 1 !important;
@@ -221,7 +221,7 @@
   display: none;
   font-size: 13px;
   font-weight: 600;
-  margin-top: 8px;
+  margin-top: 16px; /* Generous top margin above CTA */
   padding: 2px 4px;
   cursor: pointer;
   align-items: center;
