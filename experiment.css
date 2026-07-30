@@ -160,6 +160,26 @@
   border-top: 1px solid var(--neutral-200) !important;
 }
 
+/* Unlimited Expanded Note below cards */
+.unlimited-expanded-note {
+  display: none;
+  font-size: 13px;
+  line-height: 16px;
+  color: var(--neutral-600);
+  margin-top: 16px;
+  padding-left: 2px;
+}
+
+/* Hide card-level notes on unlimited cards when expanded */
+.exp-plan-section.active-unlimited .monthly-wrapper .exp-card .note {
+  display: none !important;
+}
+
+/* Show single note below unlimited cards when expanded */
+.exp-plan-section.active-unlimited .monthly-wrapper .unlimited-expanded-note {
+  display: block !important;
+}
+
 /* --- SINGLE JOBS EXPANDED STATE --- */
 .exp-plan-section.active-single .single-jobs-wrapper .card-classic {
   z-index: 3;
