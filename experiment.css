@@ -1,4 +1,4 @@
-/* experiment.css - Clearly Visible Stacked Card Deck */
+/* experiment.css - Even Balanced Padding & Reduced Offset Stack */
 
 .exp-plan-section {
   display: flex;
@@ -20,7 +20,7 @@
   cursor: default;
 }
 .exp-plan-section.active-single .monthly-wrapper {
-  flex: 0 0 350px;
+  flex: 0 0 318px;
   cursor: pointer;
 }
 
@@ -29,7 +29,7 @@
   cursor: default;
 }
 .exp-plan-section.active-unlimited .single-jobs-wrapper {
-  flex: 0 0 350px;
+  flex: 0 0 318px;
   cursor: pointer;
 }
 
@@ -79,7 +79,7 @@
   filter: none !important;
 }
 
-/* --- COLLAPSED STATE: Clearly Revealing Underneath Cards --- */
+/* --- COLLAPSED STATE: Reduced Offsets & Balanced Even Padding --- */
 .exp-plan-section.active-unlimited .single-jobs-wrapper .exp-cards-deck,
 .exp-plan-section.active-single .monthly-wrapper .exp-cards-deck {
   display: block;
@@ -92,8 +92,8 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 275px !important;
-  min-width: 275px !important;
+  width: 284px !important;
+  min-width: 284px !important;
   height: 440px !important;
   pointer-events: none;
 }
@@ -108,49 +108,49 @@
 .exp-plan-section.active-single .monthly-wrapper .card-monthly {
   z-index: 3;
   transform: translate(0, 0);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   opacity: 1;
   background: #FFFFFF;
 }
 
-/* Card 2 (Middle Layer - Clearly Peeking 18px Right) */
+/* Card 2 (Middle Layer - Reduced Offset 8px Right) */
 .exp-plan-section.active-unlimited .single-jobs-wrapper .card-premium,
 .exp-plan-section.active-single .monthly-wrapper .card-quarterly {
   z-index: 2;
-  transform: translate(18px, 6px);
+  transform: translate(8px, 4px);
   opacity: 0.95;
   background: #FAFAFA;
   border: 1px solid var(--neutral-300) !important;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 }
 
-/* Card 3 (Bottom Layer - Clearly Peeking 34px Right) */
+/* Card 3 (Bottom Layer - Reduced Offset 16px Right) */
 .exp-plan-section.active-unlimited .single-jobs-wrapper .card-super,
 .exp-plan-section.active-single .monthly-wrapper .card-yearly {
   z-index: 1;
-  transform: translate(34px, 12px);
+  transform: translate(16px, 8px);
   opacity: 0.88;
   background: #F5F5F5;
   border: 1px solid var(--neutral-300) !important;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
-/* Interactive Hover Lift & Reveal Effect */
+/* Subtle Hover Lift Effect */
 .exp-plan-section.active-unlimited .single-jobs-wrapper:hover .card-premium {
-  transform: translate(24px, 6px);
+  transform: translate(12px, 4px);
 }
 .exp-plan-section.active-unlimited .single-jobs-wrapper:hover .card-super {
-  transform: translate(44px, 12px);
+  transform: translate(22px, 8px);
 }
 
 .exp-plan-section.active-single .monthly-wrapper:hover .card-quarterly {
-  transform: translate(24px, 6px);
+  transform: translate(12px, 4px);
 }
 .exp-plan-section.active-single .monthly-wrapper:hover .card-yearly {
-  transform: translate(44px, 12px);
+  transform: translate(22px, 8px);
 }
 
-/* --- View More Plans Bottom CTA (Positioned BELOW Card Deck) --- */
+/* --- View More Plans Bottom CTA --- */
 .view-more-cta {
   display: none;
   font-size: 13px;
