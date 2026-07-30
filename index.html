@@ -241,19 +241,37 @@
       (function() {
         const toggle = document.getElementById('toggle-monthly');
         const wrapper = document.querySelector('.monthly-wrapper');
+        const premiumCard = document.querySelectorAll('.single-jobs-cards .card')[1];
         
+        function updatePremiumCardState(isMonthlyShown) {
+          if (premiumCard) {
+            if (isMonthlyShown) {
+              premiumCard.classList.remove('premium');
+              premiumCard.classList.add('bordered');
+            } else {
+              premiumCard.classList.remove('bordered');
+              premiumCard.classList.add('premium');
+            }
+          }
+        }
+
         // Restore state
         const storedState = localStorage.getItem('showMonthlyCard');
         if (storedState !== null) {
           const isChecked = storedState === 'true';
           toggle.checked = isChecked;
           if (wrapper) wrapper.style.display = isChecked ? 'block' : 'none';
+          updatePremiumCardState(isChecked);
+        } else {
+          // Default state (checked = true)
+          updatePremiumCardState(true);
         }
         
         // Save state on change
         toggle.addEventListener('change', function() {
           if (wrapper) wrapper.style.display = this.checked ? 'block' : 'none';
           localStorage.setItem('showMonthlyCard', this.checked);
+          updatePremiumCardState(this.checked);
         });
       })();
     </script>
