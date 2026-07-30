@@ -1,4 +1,4 @@
-/* experiment.css - Standard Borders & Primary CTAs Layout */
+/* experiment.css - Standard Borders, Primary CTAs & Optical Alignment */
 
 :root {
   --exp-spring-easing: cubic-bezier(0.22, 1, 0.36, 1);
@@ -290,10 +290,14 @@
 
 .single-view-more {
   color: var(--blue-500);
+  margin-left: auto !important;
+  align-self: flex-end !important;
 }
 
 .unlimited-view-more {
   color: #60A5FA;
+  margin-right: auto !important;
+  align-self: flex-start !important;
 }
 
 .view-more-text {
