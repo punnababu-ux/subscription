@@ -121,7 +121,11 @@ body {
   display: flex;
   flex-direction: column;
   position: relative;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: background-color 0.2s ease;
+}
+
+.card:hover {
+  background-color: var(--neutral-100, #F4F5F7);
 }
 
 /* Card Borders */
