@@ -1,4 +1,10 @@
-/* experiment.css - Symmetrical Layout & Generous CTA Top Spacing */
+/* experiment.css - Richer Darker Green Container Tone & Symmetrical Layout */
+
+/* Darker, Richer Green Tone for Single Job Posting Container */
+.single-jobs-wrapper {
+  background-color: #D4EFE7 !important;
+  border-color: #A3DDD0 !important;
+}
 
 .exp-plan-section {
   display: flex;
@@ -221,7 +227,7 @@
   display: none;
   font-size: 13px;
   font-weight: 600;
-  margin-top: 16px; /* Generous top margin above CTA */
+  margin-top: 16px;
   padding: 2px 4px;
   cursor: pointer;
   align-items: center;
