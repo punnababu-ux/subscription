@@ -93,14 +93,11 @@ function closeMonthlyModal() {
 }
 
 function continueWithSingleJob() {
-  // Same as old checkout logic for 1 job
-  alert(`Proceeding to checkout for ${currentPlanName} Job (1 post) at ₹${currentBasePrice}`);
-  closeMonthlyModal();
+  window.location.href = `checkout.html?plan=${encodeURIComponent(currentPlanName)}&count=1&price=${currentBasePrice}`;
 }
 
 function switchToMonthly() {
-  alert(`Proceeding to checkout for Apna Unlimited Monthly Plan at ₹2,499`);
-  closeMonthlyModal();
+  window.location.href = `checkout.html?plan=${encodeURIComponent('Apna Unlimited Monthly Plan')}&count=1&price=2499`;
 }
 
 function goToCheckout() {
