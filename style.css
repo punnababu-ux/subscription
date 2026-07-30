@@ -125,7 +125,7 @@ body {
 }
 
 .card:hover {
-  background-color: var(--neutral-100, #F4F5F7);
+  background-color: #FAFBFC;
 }
 
 /* Card Borders */
