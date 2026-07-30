@@ -127,9 +127,17 @@
               box-shadow var(--exp-duration) var(--exp-spring-easing) !important;
 }
 
+.plan-upfront {
+  font-size: 12px !important;
+  color: var(--neutral-500) !important;
+  margin-top: 2px !important;
+  margin-bottom: 8px !important;
+  font-weight: 500 !important;
+}
+
 .exp-card .features {
   flex: none !important;
-  padding-top: 16px !important;
+  padding-top: 12px !important;
   gap: 10px !important;
 }
 
