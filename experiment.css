@@ -106,7 +106,7 @@
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* Card 2 (Middle Layer - Identical Height, Offset Right) */
+/* Card 2 (Middle Layer) */
 .exp-plan-section.active-unlimited .single-jobs-wrapper .card-premium,
 .exp-plan-section.active-single .monthly-wrapper .card-quarterly {
   z-index: 2;
@@ -116,7 +116,7 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 }
 
-/* Card 3 (Bottom Layer - Identical Height, Offset Further Right) */
+/* Card 3 (Bottom Layer) */
 .exp-plan-section.active-unlimited .single-jobs-wrapper .card-super,
 .exp-plan-section.active-single .monthly-wrapper .card-yearly {
   z-index: 1;
@@ -152,15 +152,18 @@
   align-items: center;
   gap: 6px;
   transition: all 0.2s ease;
+  text-decoration: none !important;
 }
 
 .single-view-more {
   color: var(--blue-500);
-  text-decoration: underline;
 }
 
 .unlimited-view-more {
   color: #60A5FA;
+}
+
+.view-more-text {
   text-decoration: underline;
 }
 
@@ -168,6 +171,7 @@
   font-size: 16px;
   font-weight: 700;
   display: inline-block;
+  text-decoration: none !important;
   transition: transform 0.2s ease;
 }
 
