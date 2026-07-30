@@ -1,4 +1,4 @@
-/* experiment.css - 100% Continuous GPU Card Sliding Animation (Zero Display Jumps) */
+/* experiment.css - Perfectly Natural Vector-Matched Card Sliding Animation */
 
 :root {
   --exp-spring-easing: cubic-bezier(0.22, 1, 0.36, 1);
@@ -89,7 +89,7 @@
   width: 100%;
 }
 
-/* Cards Deck Layout (Always Relative Container) */
+/* Cards Deck Layout */
 .exp-cards-deck {
   width: 100%;
   height: 460px;
@@ -97,7 +97,7 @@
   transition: all var(--exp-duration) var(--exp-spring-easing);
 }
 
-/* PERMANENT ABSOLUTE CARDS (Animates purely via GPU transforms with ZERO display pops) */
+/* PERMANENT ABSOLUTE CARDS */
 .exp-card {
   position: absolute !important;
   top: 0;
@@ -141,7 +141,7 @@
   border-top: 1px solid var(--neutral-200) !important;
 }
 
-/* --- SINGLE JOBS EXPANDED STATE (Cards 1, 2, 3 side-by-side in horizontal row) --- */
+/* --- SINGLE JOBS EXPANDED STATE --- */
 .exp-plan-section.active-single .single-jobs-wrapper .card-classic {
   z-index: 3;
   transform: translate(0px, 0px) rotate(0deg) !important;
@@ -171,14 +171,14 @@
   transition-delay: 0.06s !important;
 }
 
-/* --- SINGLE JOBS COLLAPSED STATE (Cards 2 & 3 slide UNDER Card 1 peeking right) --- */
+/* --- SINGLE JOBS COLLAPSED STATE (Classic on Top, Premium & Super slide under peeking right) --- */
 .exp-plan-section.active-unlimited .single-jobs-wrapper .card-classic {
   z-index: 3;
   transform: translate(0px, 0px) rotate(0deg) !important;
   opacity: 1 !important;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1) !important;
   pointer-events: none;
-  transition-delay: 0.04s !important;
+  transition-delay: 0s !important;
 }
 
 .exp-plan-section.active-unlimited .single-jobs-wrapper .card-premium {
@@ -198,7 +198,7 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
   border: 1px solid var(--neutral-300) !important;
   pointer-events: none;
-  transition-delay: 0s !important;
+  transition-delay: 0.04s !important;
 }
 
 .exp-plan-section.active-unlimited .single-jobs-wrapper:hover .card-premium {
@@ -208,19 +208,14 @@
   transform: translate(22px, 6px) rotate(1.4deg) !important;
 }
 
-/* --- APNA UNLIMITED EXPANDED STATE (Cards 1, 2, 3 side-by-side in horizontal row) --- */
-.exp-plan-section.active-unlimited .monthly-wrapper .exp-card {
-  left: 0 !important;
-  right: auto !important;
-}
-
+/* --- APNA UNLIMITED EXPANDED STATE --- */
 .exp-plan-section.active-unlimited .monthly-wrapper .card-monthly {
-  z-index: 3;
+  z-index: 1;
   transform: translate(0px, 0px) rotate(0deg) !important;
   opacity: 1 !important;
   box-shadow: none !important;
   pointer-events: auto !important;
-  transition-delay: 0s !important;
+  transition-delay: 0.06s !important;
 }
 
 .exp-plan-section.active-unlimited .monthly-wrapper .card-quarterly {
@@ -233,32 +228,27 @@
 }
 
 .exp-plan-section.active-unlimited .monthly-wrapper .card-yearly {
-  z-index: 1;
+  z-index: 3;
   transform: translate(644px, 0px) rotate(0deg) !important;
   opacity: 1 !important;
   box-shadow: none !important;
   pointer-events: auto !important;
-  transition-delay: 0.06s !important;
+  transition-delay: 0s !important;
 }
 
-/* --- APNA UNLIMITED COLLAPSED STATE (Cards 2 & 3 slide UNDER Card 1 peeking left) --- */
-.exp-plan-section.active-single .monthly-wrapper .exp-card {
-  left: auto !important;
-  right: 0 !important;
-}
-
-.exp-plan-section.active-single .monthly-wrapper .card-monthly {
+/* --- APNA UNLIMITED COLLAPSED STATE (Yearly on Top, Quarterly & Monthly slide right under Yearly) --- */
+.exp-plan-section.active-single .monthly-wrapper .card-yearly {
   z-index: 3;
-  transform: translate(0px, 0px) rotate(0deg) !important;
+  transform: translate(644px, 0px) rotate(0deg) !important;
   opacity: 1 !important;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1) !important;
   pointer-events: none;
-  transition-delay: 0.04s !important;
+  transition-delay: 0s !important;
 }
 
 .exp-plan-section.active-single .monthly-wrapper .card-quarterly {
   z-index: 2;
-  transform: translate(-8px, 4px) rotate(-0.5deg) !important;
+  transform: translate(636px, 4px) rotate(-0.5deg) !important;
   opacity: 0.95 !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06) !important;
   border: 1px solid var(--neutral-300) !important;
@@ -266,21 +256,21 @@
   transition-delay: 0.02s !important;
 }
 
-.exp-plan-section.active-single .monthly-wrapper .card-yearly {
+.exp-plan-section.active-single .monthly-wrapper .card-monthly {
   z-index: 1;
-  transform: translate(-16px, 8px) rotate(-1.0deg) !important;
+  transform: translate(628px, 8px) rotate(-1.0deg) !important;
   opacity: 0.88 !important;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
   border: 1px solid var(--neutral-300) !important;
   pointer-events: none;
-  transition-delay: 0s !important;
+  transition-delay: 0.04s !important;
 }
 
 .exp-plan-section.active-single .monthly-wrapper:hover .card-quarterly {
-  transform: translate(-12px, 3px) rotate(-0.7deg) !important;
+  transform: translate(632px, 3px) rotate(-0.7deg) !important;
 }
-.exp-plan-section.active-single .monthly-wrapper:hover .card-yearly {
-  transform: translate(-22px, 6px) rotate(-1.4deg) !important;
+.exp-plan-section.active-single .monthly-wrapper:hover .card-monthly {
+  transform: translate(622px, 6px) rotate(-1.4deg) !important;
 }
 
 /* --- View More Plans Bottom CTA --- */
