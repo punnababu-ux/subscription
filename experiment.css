@@ -1,11 +1,11 @@
-/* experiment.css - Clean Component Consistency & Click Mechanics */
+/* experiment.css - Exact Card Sizing & Outer CTA Placement */
 
 .exp-plan-section {
   display: flex;
   gap: 16px;
   align-items: stretch;
   transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  min-height: 530px;
+  min-height: 520px;
 }
 
 .exp-wrapper {
@@ -20,7 +20,7 @@
   cursor: default;
 }
 .exp-plan-section.active-single .monthly-wrapper {
-  flex: 0 0 348px;
+  flex: 0 0 350px;
   cursor: pointer;
 }
 
@@ -29,8 +29,15 @@
   cursor: default;
 }
 .exp-plan-section.active-unlimited .single-jobs-wrapper {
-  flex: 0 0 348px;
+  flex: 0 0 350px;
   cursor: pointer;
+}
+
+/* Deck Container */
+.deck-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 /* Cards Deck Layout */
@@ -42,12 +49,15 @@
   gap: 8px;
 }
 
-/* Strict Card Dimensions for Consistent Sizing */
+/* Strict Identical Card Dimensions Across ALL Cards */
 .exp-card {
   width: 310px !important;
   min-width: 310px !important;
+  height: 440px !important;
+  min-height: 440px !important;
+  max-height: 440px !important;
   flex-shrink: 0 !important;
-  box-sizing: border-box;
+  box-sizing: border-box !important;
   transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   margin-bottom: 0 !important;
 }
@@ -65,18 +75,18 @@
   top: 0 !important;
   left: 0 !important;
   opacity: 1 !important;
-  transform: translateX(0) scale(1) !important;
+  transform: translateX(0) !important;
   z-index: 1 !important;
   box-shadow: none !important;
   pointer-events: auto !important;
   filter: none !important;
 }
 
-/* --- COLLAPSED STATE: Clean Horizontal Stack --- */
+/* --- COLLAPSED STATE: Exact Same Card Sizes Offset Horizontally --- */
 .exp-plan-section.active-unlimited .single-jobs-wrapper .exp-cards-deck,
 .exp-plan-section.active-single .monthly-wrapper .exp-cards-deck {
   display: block;
-  height: 485px;
+  height: 440px;
   position: relative;
 }
 
@@ -92,54 +102,55 @@
 .exp-plan-section.active-unlimited .single-jobs-wrapper .card-classic,
 .exp-plan-section.active-single .monthly-wrapper .card-monthly {
   z-index: 3;
-  transform: translateX(0) scale(1);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  transform: translateX(0);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* Card 2 (Middle Layer) */
+/* Card 2 (Middle Layer - Identical Height, Offset Right) */
 .exp-plan-section.active-unlimited .single-jobs-wrapper .card-premium,
 .exp-plan-section.active-single .monthly-wrapper .card-quarterly {
   z-index: 2;
-  transform: translateX(10px) scale(0.97);
-  opacity: 0.88;
+  transform: translateX(12px);
+  opacity: 0.9;
   filter: brightness(0.96);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 }
 
-/* Card 3 (Bottom Layer) */
+/* Card 3 (Bottom Layer - Identical Height, Offset Further Right) */
 .exp-plan-section.active-unlimited .single-jobs-wrapper .card-super,
 .exp-plan-section.active-single .monthly-wrapper .card-yearly {
   z-index: 1;
-  transform: translateX(20px) scale(0.94);
-  opacity: 0.75;
+  transform: translateX(24px);
+  opacity: 0.8;
   filter: brightness(0.92);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
-/* Hover Subtle Lift Effect (Click still required to trigger expansion) */
+/* Subtle Hover Lift Effect */
 .exp-plan-section.active-unlimited .single-jobs-wrapper:hover .card-premium {
-  transform: translateX(14px) scale(0.97);
+  transform: translateX(16px);
 }
 .exp-plan-section.active-unlimited .single-jobs-wrapper:hover .card-super {
-  transform: translateX(28px) scale(0.94);
+  transform: translateX(32px);
 }
 
 .exp-plan-section.active-single .monthly-wrapper:hover .card-quarterly {
-  transform: translateX(14px) scale(0.97);
+  transform: translateX(16px);
 }
 .exp-plan-section.active-single .monthly-wrapper:hover .card-yearly {
-  transform: translateX(28px) scale(0.94);
+  transform: translateX(32px);
 }
 
-/* --- View More Plans Bottom CTA & Chevrons --- */
+/* --- View More Plans Bottom CTA (Positioned BELOW the Card Stack) --- */
 .view-more-cta {
   display: none;
   font-size: 13px;
   font-weight: 600;
-  margin-top: 16px;
+  margin-top: 14px;
+  padding: 4px 8px;
   cursor: pointer;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   transition: all 0.2s ease;
 }
 
@@ -149,7 +160,7 @@
 }
 
 .unlimited-view-more {
-  color: #2563EB;
+  color: #60A5FA;
   text-decoration: underline;
 }
 

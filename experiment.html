@@ -43,112 +43,114 @@
         </div>
         
         <div class="wrapper-body">
-          <div class="single-jobs-cards exp-cards-deck">
-            
-            <!-- Classic Job Card -->
-            <div class="card bordered exp-card card-classic" onclick="handleCardClick(event, 'Classic')">
-              <div class="card-title">Classic job</div>
-              <div class="card-price">
-                <span class="active-price new-user-price">₹999</span>
-                <span class="active-price old-user-price">₹699</span><span class="asterisk">*</span>
-                <span class="strikethrough-price">₹999</span>
+          <div class="deck-container">
+            <div class="single-jobs-cards exp-cards-deck">
+              
+              <!-- Classic Job Card -->
+              <div class="card bordered exp-card card-classic" onclick="handleCardClick(event, 'Classic')">
+                <div class="card-title">Classic job</div>
+                <div class="card-price">
+                  <span class="active-price new-user-price">₹999</span>
+                  <span class="active-price old-user-price">₹699</span><span class="asterisk">*</span>
+                  <span class="strikethrough-price">₹999</span>
+                </div>
+                <button class="btn">Get classic job</button>
+                <ul class="features">
+                  <li class="feature">
+                    <img src="assets/check.svg" class="icon" alt="check">
+                    <span class="feature-text">Job will be active for 15 days</span>
+                  </li>
+                  <li class="feature disabled">
+                    <img src="assets/close.svg" class="icon" alt="cross">
+                    <span class="feature-text">Higher visibility to candidates</span>
+                  </li>
+                  <li class="feature disabled">
+                    <img src="assets/close.svg" class="icon" alt="cross">
+                    <span class="feature-text">WhatsApp job notify <img src="assets/whatsapp-gray.svg" class="inline-icon" alt="wa"></span>
+                  </li>
+                  <li class="feature disabled">
+                    <img src="assets/close.svg" class="icon" alt="cross">
+                    <span class="feature-text">Urgently hiring tag <img src="assets/hot-gray.svg" class="inline-icon" alt="hot"></span>
+                  </li>
+                  <li class="feature disabled">
+                    <img src="assets/close.svg" class="icon" alt="cross">
+                    <span class="feature-text">Top placements in job listings</span>
+                  </li>
+                </ul>
               </div>
-              <button class="btn">Get classic job</button>
-              <ul class="features">
-                <li class="feature">
-                  <img src="assets/check.svg" class="icon" alt="check">
-                  <span class="feature-text">Job will be active for 15 days</span>
-                </li>
-                <li class="feature disabled">
-                  <img src="assets/close.svg" class="icon" alt="cross">
-                  <span class="feature-text">Higher visibility to candidates</span>
-                </li>
-                <li class="feature disabled">
-                  <img src="assets/close.svg" class="icon" alt="cross">
-                  <span class="feature-text">WhatsApp job notify <img src="assets/whatsapp-gray.svg" class="inline-icon" alt="wa"></span>
-                </li>
-                <li class="feature disabled">
-                  <img src="assets/close.svg" class="icon" alt="cross">
-                  <span class="feature-text">Urgently hiring tag <img src="assets/hot-gray.svg" class="inline-icon" alt="hot"></span>
-                </li>
-                <li class="feature disabled">
-                  <img src="assets/close.svg" class="icon" alt="cross">
-                  <span class="feature-text">Top placements in job listings</span>
-                </li>
-              </ul>
 
-              <!-- Bottom CTA when Single Jobs collapsed (Points RIGHT) -->
-              <div class="view-more-cta single-view-more">
-                View more plans <span class="chevron-right">›</span>
+              <!-- Premium Job Card -->
+              <div class="card premium exp-card card-premium" onclick="handleCardClick(event, 'Premium')">
+                <div class="card-title">Premium job</div>
+                <div class="card-price">
+                  <span class="active-price new-user-price">₹1,999</span>
+                  <span class="active-price old-user-price">₹1,399</span><span class="asterisk">*</span>
+                  <span class="strikethrough-price">₹1,999</span>
+                </div>
+                <button class="btn">Get premium job</button>
+                <ul class="features">
+                  <li class="feature">
+                    <img src="assets/check.svg" class="icon" alt="check">
+                    <span class="feature-text">Job will be active for 15 days</span>
+                  </li>
+                  <li class="feature">
+                    <img src="assets/check.svg" class="icon" alt="check">
+                    <span class="feature-text">Higher visibility to candidates</span>
+                  </li>
+                  <li class="feature">
+                    <img src="assets/check.svg" class="icon" alt="check">
+                    <span class="feature-text">WhatsApp job notify <img src="assets/whatsapp-green.svg" class="inline-icon" alt="wa"></span>
+                  </li>
+                  <li class="feature">
+                    <img src="assets/check.svg" class="icon" alt="check">
+                    <span class="feature-text">Urgently hiring tag <img src="assets/hot-red.svg" class="inline-icon" alt="hot"></span>
+                  </li>
+                  <li class="feature disabled">
+                    <img src="assets/close.svg" class="icon" alt="cross">
+                    <span class="feature-text">Top placements in job listings</span>
+                  </li>
+                </ul>
               </div>
+
+              <!-- Super Premium Job Card -->
+              <div class="card bordered exp-card card-super" onclick="handleCardClick(event, 'Super premium')">
+                <div class="card-title">Super premium job</div>
+                <div class="card-price">
+                  <span class="active-price new-user-price">₹2,999</span>
+                  <span class="active-price old-user-price">₹2,799</span><span class="asterisk">*</span>
+                  <span class="strikethrough-price">₹2,999</span>
+                </div>
+                <button class="btn">Get super premium job</button>
+                <ul class="features">
+                  <li class="feature">
+                    <img src="assets/check.svg" class="icon" alt="check">
+                    <span class="feature-text">Job will be active for 15 days</span>
+                  </li>
+                  <li class="feature">
+                    <img src="assets/done_all.svg" class="icon" alt="done">
+                    <span class="feature-text"><span class="bold">2x</span> more visibility to candidates</span>
+                  </li>
+                  <li class="feature">
+                    <img src="assets/done_all.svg" class="icon" alt="done">
+                    <span class="feature-text"><span class="bold">2x</span> WhatsApp job notify <img src="assets/whatsapp-green.svg" class="inline-icon" alt="wa"></span>
+                  </li>
+                  <li class="feature">
+                    <img src="assets/check.svg" class="icon" alt="check">
+                    <span class="feature-text">Urgently hiring tag <img src="assets/hot-red.svg" class="inline-icon" alt="hot"></span>
+                  </li>
+                  <li class="feature">
+                    <img src="assets/check.svg" class="icon" alt="check">
+                    <span class="feature-text">Top placements in job listings</span>
+                  </li>
+                </ul>
+              </div>
+
             </div>
 
-            <!-- Premium Job Card -->
-            <div class="card premium exp-card card-premium" onclick="handleCardClick(event, 'Premium')">
-              <div class="card-title">Premium job</div>
-              <div class="card-price">
-                <span class="active-price new-user-price">₹1,999</span>
-                <span class="active-price old-user-price">₹1,399</span><span class="asterisk">*</span>
-                <span class="strikethrough-price">₹1,999</span>
-              </div>
-              <button class="btn">Get premium job</button>
-              <ul class="features">
-                <li class="feature">
-                  <img src="assets/check.svg" class="icon" alt="check">
-                  <span class="feature-text">Job will be active for 15 days</span>
-                </li>
-                <li class="feature">
-                  <img src="assets/check.svg" class="icon" alt="check">
-                  <span class="feature-text">Higher visibility to candidates</span>
-                </li>
-                <li class="feature">
-                  <img src="assets/check.svg" class="icon" alt="check">
-                  <span class="feature-text">WhatsApp job notify <img src="assets/whatsapp-green.svg" class="inline-icon" alt="wa"></span>
-                </li>
-                <li class="feature">
-                  <img src="assets/check.svg" class="icon" alt="check">
-                  <span class="feature-text">Urgently hiring tag <img src="assets/hot-red.svg" class="inline-icon" alt="hot"></span>
-                </li>
-                <li class="feature disabled">
-                  <img src="assets/close.svg" class="icon" alt="cross">
-                  <span class="feature-text">Top placements in job listings</span>
-                </li>
-              </ul>
+            <!-- Bottom CTA outside cards (Points RIGHT) -->
+            <div class="view-more-cta single-view-more">
+              View more plans <span class="chevron-right">›</span>
             </div>
-
-            <!-- Super Premium Job Card -->
-            <div class="card bordered exp-card card-super" onclick="handleCardClick(event, 'Super premium')">
-              <div class="card-title">Super premium job</div>
-              <div class="card-price">
-                <span class="active-price new-user-price">₹2,999</span>
-                <span class="active-price old-user-price">₹2,799</span><span class="asterisk">*</span>
-                <span class="strikethrough-price">₹2,999</span>
-              </div>
-              <button class="btn">Get super premium job</button>
-              <ul class="features">
-                <li class="feature">
-                  <img src="assets/check.svg" class="icon" alt="check">
-                  <span class="feature-text">Job will be active for 15 days</span>
-                </li>
-                <li class="feature">
-                  <img src="assets/done_all.svg" class="icon" alt="done">
-                  <span class="feature-text"><span class="bold">2x</span> more visibility to candidates</span>
-                </li>
-                <li class="feature">
-                  <img src="assets/done_all.svg" class="icon" alt="done">
-                  <span class="feature-text"><span class="bold">2x</span> WhatsApp job notify <img src="assets/whatsapp-green.svg" class="inline-icon" alt="wa"></span>
-                </li>
-                <li class="feature">
-                  <img src="assets/check.svg" class="icon" alt="check">
-                  <span class="feature-text">Urgently hiring tag <img src="assets/hot-red.svg" class="inline-icon" alt="hot"></span>
-                </li>
-                <li class="feature">
-                  <img src="assets/check.svg" class="icon" alt="check">
-                  <span class="feature-text">Top placements in job listings</span>
-                </li>
-              </ul>
-            </div>
-
           </div>
         </div>
       </div>
@@ -162,115 +164,117 @@
         </div>
         
         <div class="wrapper-body">
-          <div class="unlimited-cards exp-cards-deck">
-            
-            <!-- Monthly Card -->
-            <div class="card exp-card card-monthly" onclick="handleUnlimitedClick(event, 'Monthly', 2499)">
-              <div class="card-title">Monthly plan</div>
-              <div class="card-price">
-                <span>₹2,499</span><span class="asterisk">*</span><span class="monthly-price-suffix">/month</span>
-              </div>
-              <button class="btn primary">Get apna unlimited</button>
+          <div class="deck-container">
+            <div class="unlimited-cards exp-cards-deck">
               
-              <ul class="features">
-                <li class="feature">
-                  <img src="assets/business.svg" class="icon" alt="business">
-                  <span class="feature-text"><span class="bold">1</span> Active job slot for <span class="bold">30 days</span></span>
-                </li>
-                <li class="feature">
-                  <img src="assets/infinite.svg" class="icon" alt="infinite">
-                  <span class="feature-text">Unlimited free reposts on job expiry</span>
-                </li>
-                <li class="feature">
-                  <img src="assets/shield.svg" class="icon" alt="shield">
-                  <span class="feature-text"><span class="bold">200</span> database unlocks <span class="italic">worth ₹2,000</span></span>
-                </li>
-                <li class="feature">
-                  <img src="assets/whatsapp-solid.svg" class="icon" alt="wa">
-                  <span class="feature-text">WhatsApp boost for more applications</span>
-                </li>
-                <li class="feature">
-                  <img src="assets/support.svg" class="icon" alt="support">
-                  <span class="feature-text">Priority support</span>
-                </li>
-              </ul>
+              <!-- Monthly Card -->
+              <div class="card exp-card card-monthly" onclick="handleUnlimitedClick(event, 'Monthly', 2499)">
+                <div class="card-title">Monthly plan</div>
+                <div class="card-price">
+                  <span>₹2,499</span><span class="asterisk">*</span><span class="monthly-price-suffix">/month</span>
+                </div>
+                <button class="btn primary">Get apna unlimited</button>
+                
+                <ul class="features">
+                  <li class="feature">
+                    <img src="assets/business.svg" class="icon" alt="business">
+                    <span class="feature-text"><span class="bold">1</span> Active job slot for <span class="bold">30 days</span></span>
+                  </li>
+                  <li class="feature">
+                    <img src="assets/infinite.svg" class="icon" alt="infinite">
+                    <span class="feature-text">Unlimited free reposts on job expiry</span>
+                  </li>
+                  <li class="feature">
+                    <img src="assets/shield.svg" class="icon" alt="shield">
+                    <span class="feature-text"><span class="bold">200</span> database unlocks <span class="italic">worth ₹2,000</span></span>
+                  </li>
+                  <li class="feature">
+                    <img src="assets/whatsapp-solid.svg" class="icon" alt="wa">
+                    <span class="feature-text">WhatsApp boost for more applications</span>
+                  </li>
+                  <li class="feature">
+                    <img src="assets/support.svg" class="icon" alt="support">
+                    <span class="feature-text">Priority support</span>
+                  </li>
+                </ul>
 
-              <div class="note">Note: This plan is valid in a single city.</div>
-
-              <!-- Bottom CTA when Unlimited collapsed (Points LEFT) -->
-              <div class="view-more-cta unlimited-view-more">
-                <span class="chevron-left">‹</span> View more plans
+                <div class="note">Note: This plan is valid in a single city.</div>
               </div>
+
+              <!-- Quarterly Card -->
+              <div class="card exp-card card-quarterly" onclick="handleUnlimitedClick(event, 'Quarterly', 5999)">
+                <div class="card-title">Quarterly plan</div>
+                <div class="card-price">
+                  <span>₹1,999</span><span class="asterisk">*</span><span class="monthly-price-suffix">/month</span>
+                </div>
+                <button class="btn primary">Get quarterly plan</button>
+                
+                <ul class="features">
+                  <li class="feature">
+                    <img src="assets/business.svg" class="icon" alt="business">
+                    <span class="feature-text"><span class="bold">1</span> Active job slot for <span class="bold">90 days</span></span>
+                  </li>
+                  <li class="feature">
+                    <img src="assets/infinite.svg" class="icon" alt="infinite">
+                    <span class="feature-text">Unlimited free reposts on job expiry</span>
+                  </li>
+                  <li class="feature">
+                    <img src="assets/shield.svg" class="icon" alt="shield">
+                    <span class="feature-text"><span class="bold">600</span> database unlocks <span class="italic">worth ₹6,000</span></span>
+                  </li>
+                  <li class="feature">
+                    <img src="assets/whatsapp-solid.svg" class="icon" alt="wa">
+                    <span class="feature-text">WhatsApp boost for more applications</span>
+                  </li>
+                  <li class="feature">
+                    <img src="assets/support.svg" class="icon" alt="support">
+                    <span class="feature-text">Priority support</span>
+                  </li>
+                </ul>
+
+                <div class="note">Note: Pay upfront ₹5,999. Save 20%.</div>
+              </div>
+
+              <!-- Yearly Card -->
+              <div class="card exp-card card-yearly" onclick="handleUnlimitedClick(event, 'Yearly', 15999)">
+                <div class="card-title">Yearly plan</div>
+                <div class="card-price">
+                  <span>₹1,333</span><span class="asterisk">*</span><span class="monthly-price-suffix">/month</span>
+                </div>
+                <button class="btn primary">Get yearly plan</button>
+                
+                <ul class="features">
+                  <li class="feature">
+                    <img src="assets/business.svg" class="icon" alt="business">
+                    <span class="feature-text"><span class="bold">1</span> Active job slot for <span class="bold">365 days</span></span>
+                  </li>
+                  <li class="feature">
+                    <img src="assets/infinite.svg" class="icon" alt="infinite">
+                    <span class="feature-text">Unlimited free reposts on job expiry</span>
+                  </li>
+                  <li class="feature">
+                    <img src="assets/shield.svg" class="icon" alt="shield">
+                    <span class="feature-text"><span class="bold">1,000</span> database unlocks <span class="italic">worth ₹10,000</span></span>
+                  </li>
+                  <li class="feature">
+                    <img src="assets/whatsapp-solid.svg" class="icon" alt="wa">
+                    <span class="feature-text">WhatsApp boost for more applications</span>
+                  </li>
+                  <li class="feature">
+                    <img src="assets/support.svg" class="icon" alt="support">
+                    <span class="feature-text">Priority support</span>
+                  </li>
+                </ul>
+
+                <div class="note">Note: Pay upfront ₹15,999. Best Value.</div>
+              </div>
+
             </div>
 
-            <!-- Quarterly Card -->
-            <div class="card exp-card card-quarterly" onclick="handleUnlimitedClick(event, 'Quarterly', 5999)">
-              <div class="card-title">Quarterly plan</div>
-              <div class="card-price">
-                <span>₹1,999</span><span class="asterisk">*</span><span class="monthly-price-suffix">/month</span>
-              </div>
-              <button class="btn primary">Get quarterly plan</button>
-              
-              <ul class="features">
-                <li class="feature">
-                  <img src="assets/business.svg" class="icon" alt="business">
-                  <span class="feature-text"><span class="bold">1</span> Active job slot for <span class="bold">90 days</span></span>
-                </li>
-                <li class="feature">
-                  <img src="assets/infinite.svg" class="icon" alt="infinite">
-                  <span class="feature-text">Unlimited free reposts on job expiry</span>
-                </li>
-                <li class="feature">
-                  <img src="assets/shield.svg" class="icon" alt="shield">
-                  <span class="feature-text"><span class="bold">600</span> database unlocks <span class="italic">worth ₹6,000</span></span>
-                </li>
-                <li class="feature">
-                  <img src="assets/whatsapp-solid.svg" class="icon" alt="wa">
-                  <span class="feature-text">WhatsApp boost for more applications</span>
-                </li>
-                <li class="feature">
-                  <img src="assets/support.svg" class="icon" alt="support">
-                  <span class="feature-text">Priority support</span>
-                </li>
-              </ul>
-
-              <div class="note">Note: Pay upfront ₹5,999. Save 20%.</div>
+            <!-- Bottom CTA outside cards (Points LEFT) -->
+            <div class="view-more-cta unlimited-view-more">
+              <span class="chevron-left">‹</span> View more plans
             </div>
-
-            <!-- Yearly Card -->
-            <div class="card exp-card card-yearly" onclick="handleUnlimitedClick(event, 'Yearly', 15999)">
-              <div class="card-title">Yearly plan</div>
-              <div class="card-price">
-                <span>₹1,333</span><span class="asterisk">*</span><span class="monthly-price-suffix">/month</span>
-              </div>
-              <button class="btn primary">Get yearly plan</button>
-              
-              <ul class="features">
-                <li class="feature">
-                  <img src="assets/business.svg" class="icon" alt="business">
-                  <span class="feature-text"><span class="bold">1</span> Active job slot for <span class="bold">365 days</span></span>
-                </li>
-                <li class="feature">
-                  <img src="assets/infinite.svg" class="icon" alt="infinite">
-                  <span class="feature-text">Unlimited free reposts on job expiry</span>
-                </li>
-                <li class="feature">
-                  <img src="assets/shield.svg" class="icon" alt="shield">
-                  <span class="feature-text"><span class="bold">1,000</span> database unlocks <span class="italic">worth ₹10,000</span></span>
-                </li>
-                <li class="feature">
-                  <img src="assets/whatsapp-solid.svg" class="icon" alt="wa">
-                  <span class="feature-text">WhatsApp boost for more applications</span>
-                </li>
-                <li class="feature">
-                  <img src="assets/support.svg" class="icon" alt="support">
-                  <span class="feature-text">Priority support</span>
-                </li>
-              </ul>
-
-              <div class="note">Note: Pay upfront ₹15,999. Best Value.</div>
-            </div>
-
           </div>
         </div>
       </div>
