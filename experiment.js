@@ -1,6 +1,5 @@
-// experiment.js - Horizontal Morphing & Slide-Out Cards Logic
+// experiment.js - Click-Only Card Stack Morphing Logic
 
-let hoverTimer = null;
 let currentActiveSection = 'single'; // 'single' or 'unlimited'
 
 function setActiveSection(section) {
@@ -16,15 +15,6 @@ function setActiveSection(section) {
     layout.classList.add('active-unlimited');
     currentActiveSection = 'unlimited';
   }
-}
-
-function handleHoverSection(section) {
-  if (section === currentActiveSection) return;
-  
-  clearTimeout(hoverTimer);
-  hoverTimer = setTimeout(() => {
-    setActiveSection(section);
-  }, 150);
 }
 
 function handleCardClick(event, planName) {

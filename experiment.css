@@ -1,25 +1,26 @@
-/* experiment.css - Horizontal Deck Reveal Animation */
+/* experiment.css - Clean Component Consistency & Click Mechanics */
 
 .exp-plan-section {
   display: flex;
   gap: 16px;
   align-items: stretch;
   transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  min-height: 520px;
+  min-height: 530px;
 }
 
 .exp-wrapper {
   transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   box-sizing: border-box;
+  overflow: hidden !important;
 }
 
-/* Flex Container Ratios */
+/* Flex Ratios */
 .exp-plan-section.active-single .single-jobs-wrapper {
   flex: 3;
   cursor: default;
 }
 .exp-plan-section.active-single .monthly-wrapper {
-  flex: 0 0 340px;
+  flex: 0 0 348px;
   cursor: pointer;
 }
 
@@ -28,30 +29,36 @@
   cursor: default;
 }
 .exp-plan-section.active-unlimited .single-jobs-wrapper {
-  flex: 0 0 340px;
+  flex: 0 0 348px;
   cursor: pointer;
 }
 
-/* Card Deck Wrapper */
+/* Cards Deck Layout */
 .exp-cards-deck {
   width: 100%;
   position: relative;
   transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   gap: 8px;
-  overflow: visible;
 }
 
-/* Fixed Width Cards to Prevent Text Wrapping during transition */
+/* Strict Card Dimensions for Consistent Sizing */
 .exp-card {
   width: 310px !important;
   min-width: 310px !important;
   flex-shrink: 0 !important;
-  box-sizing: border-box !alignment;
+  box-sizing: border-box;
   transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  margin-bottom: 0 !important;
 }
 
 /* --- EXPANDED STATE --- */
+.exp-plan-section.active-single .single-jobs-wrapper .exp-cards-deck,
+.exp-plan-section.active-unlimited .monthly-wrapper .exp-cards-deck {
+  display: flex;
+  gap: 8px;
+}
+
 .exp-plan-section.active-single .single-jobs-wrapper .exp-card,
 .exp-plan-section.active-unlimited .monthly-wrapper .exp-card {
   position: relative !important;
@@ -65,11 +72,11 @@
   filter: none !important;
 }
 
-/* --- COLLAPSED STATE: Horizontal 3D Deck Stack --- */
+/* --- COLLAPSED STATE: Clean Horizontal Stack --- */
 .exp-plan-section.active-unlimited .single-jobs-wrapper .exp-cards-deck,
 .exp-plan-section.active-single .monthly-wrapper .exp-cards-deck {
   display: block;
-  height: 480px;
+  height: 485px;
   position: relative;
 }
 
@@ -86,79 +93,83 @@
 .exp-plan-section.active-single .monthly-wrapper .card-monthly {
   z-index: 3;
   transform: translateX(0) scale(1);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
 }
 
-/* Card 2 (Stacked Horizontally Behind Card 1) */
+/* Card 2 (Middle Layer) */
 .exp-plan-section.active-unlimited .single-jobs-wrapper .card-premium,
 .exp-plan-section.active-single .monthly-wrapper .card-quarterly {
   z-index: 2;
-  transform: translateX(12px) scale(0.97);
-  opacity: 0.85;
+  transform: translateX(10px) scale(0.97);
+  opacity: 0.88;
   filter: brightness(0.96);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
 }
 
-/* Card 3 (Stacked Horizontally Further Behind) */
+/* Card 3 (Bottom Layer) */
 .exp-plan-section.active-unlimited .single-jobs-wrapper .card-super,
 .exp-plan-section.active-single .monthly-wrapper .card-yearly {
   z-index: 1;
-  transform: translateX(24px) scale(0.94);
-  opacity: 0.7;
+  transform: translateX(20px) scale(0.94);
+  opacity: 0.75;
   filter: brightness(0.92);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-/* Horizontal Peeking Effect on Hover */
+/* Hover Subtle Lift Effect (Click still required to trigger expansion) */
 .exp-plan-section.active-unlimited .single-jobs-wrapper:hover .card-premium {
-  transform: translateX(20px) scale(0.97);
-  opacity: 0.95;
+  transform: translateX(14px) scale(0.97);
 }
 .exp-plan-section.active-unlimited .single-jobs-wrapper:hover .card-super {
-  transform: translateX(36px) scale(0.94);
-  opacity: 0.85;
+  transform: translateX(28px) scale(0.94);
 }
 
 .exp-plan-section.active-single .monthly-wrapper:hover .card-quarterly {
-  transform: translateX(20px) scale(0.97);
-  opacity: 0.95;
+  transform: translateX(14px) scale(0.97);
 }
 .exp-plan-section.active-single .monthly-wrapper:hover .card-yearly {
-  transform: translateX(36px) scale(0.94);
-  opacity: 0.85;
+  transform: translateX(28px) scale(0.94);
 }
 
-/* --- View More Plans Bottom CTA --- */
+/* --- View More Plans Bottom CTA & Chevrons --- */
 .view-more-cta {
   display: none;
   font-size: 13px;
   font-weight: 600;
-  color: var(--blue-500);
-  text-decoration: underline;
-  margin-top: 14px;
+  margin-top: 16px;
   cursor: pointer;
   align-items: center;
   gap: 4px;
   transition: all 0.2s ease;
 }
 
-.monthly-wrapper .view-more-cta {
-  color: #60A5FA;
+.single-view-more {
+  color: var(--blue-500);
+  text-decoration: underline;
 }
 
-.chevron-left {
+.unlimited-view-more {
+  color: #2563EB;
+  text-decoration: underline;
+}
+
+.chevron-left, .chevron-right {
   font-size: 16px;
   font-weight: 700;
   display: inline-block;
   transition: transform 0.2s ease;
 }
 
-/* Show View More CTA when collapsed */
+/* Show CTAs ONLY when container is collapsed */
 .exp-plan-section.active-unlimited .single-view-more,
 .exp-plan-section.active-single .unlimited-view-more {
   display: flex;
 }
 
-.exp-wrapper:hover .chevron-left {
+.single-jobs-wrapper:hover .chevron-right {
+  transform: translateX(4px);
+}
+
+.monthly-wrapper:hover .chevron-left {
   transform: translateX(-4px);
 }

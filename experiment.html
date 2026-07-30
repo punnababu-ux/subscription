@@ -34,7 +34,7 @@
     <div class="plan-section exp-plan-section active-single" id="expSection">
       
       <!-- Single Job Postings Container -->
-      <div class="wrapper-box single-jobs-wrapper exp-wrapper" id="singleWrapper" onclick="setActiveSection('single')" onmouseenter="handleHoverSection('single')">
+      <div class="wrapper-box single-jobs-wrapper exp-wrapper" id="singleWrapper" onclick="setActiveSection('single')">
         <div class="wrapper-header single-jobs-header">
           <div class="header-title">
             <img src="assets/clock.svg" alt="clock">
@@ -45,7 +45,7 @@
         <div class="wrapper-body">
           <div class="single-jobs-cards exp-cards-deck">
             
-            <!-- Classic Job Card (Top of stack when collapsed) -->
+            <!-- Classic Job Card -->
             <div class="card bordered exp-card card-classic" onclick="handleCardClick(event, 'Classic')">
               <div class="card-title">Classic job</div>
               <div class="card-price">
@@ -77,9 +77,9 @@
                 </li>
               </ul>
 
-              <!-- Bottom CTA when collapsed -->
+              <!-- Bottom CTA when Single Jobs collapsed (Points RIGHT) -->
               <div class="view-more-cta single-view-more">
-                <span class="chevron-left">‹</span> View more plans
+                View more plans <span class="chevron-right">›</span>
               </div>
             </div>
 
@@ -154,7 +154,7 @@
       </div>
 
       <!-- Monthly Plan (apna Unlimited) Container -->
-      <div class="wrapper-box monthly-wrapper exp-wrapper" id="unlimitedWrapper" onclick="setActiveSection('unlimited')" onmouseenter="handleHoverSection('unlimited')">
+      <div class="wrapper-box monthly-wrapper exp-wrapper" id="unlimitedWrapper" onclick="setActiveSection('unlimited')">
         <div class="wrapper-header monthly-header">
           <div class="header-title">
             <img src="assets/logo-unlimited.svg" alt="apna Unlimited">
@@ -164,7 +164,7 @@
         <div class="wrapper-body">
           <div class="unlimited-cards exp-cards-deck">
             
-            <!-- Monthly Card (Top of stack when collapsed) -->
+            <!-- Monthly Card -->
             <div class="card exp-card card-monthly" onclick="handleUnlimitedClick(event, 'Monthly', 2499)">
               <div class="card-title">Monthly plan</div>
               <div class="card-price">
@@ -197,7 +197,7 @@
 
               <div class="note">Note: This plan is valid in a single city.</div>
 
-              <!-- Bottom CTA when collapsed -->
+              <!-- Bottom CTA when Unlimited collapsed (Points LEFT) -->
               <div class="view-more-cta unlimited-view-more">
                 <span class="chevron-left">‹</span> View more plans
               </div>
