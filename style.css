@@ -937,7 +937,7 @@ input:checked + .slider:before {
 
 /* Cross-sell Modal Styles */
 .cross-sell-modal {
-  max-width: 1000px;
+  max-width: 900px;
   width: 90%;
 }
 
