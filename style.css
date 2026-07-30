@@ -934,3 +934,76 @@ input:checked + .slider:before {
   border-left: 1px solid var(--neutral-200);
   padding-left: 8px;
 }
+
+/* Cross-sell Modal Styles */
+.cross-sell-modal {
+  max-width: 700px;
+  width: 90%;
+  padding: 32px;
+}
+
+.cross-sell-title {
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 24px;
+  color: var(--neutral-900);
+}
+
+.cross-sell-container {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.cross-sell-container .wrapper-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.cross-sell-container .wrapper-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.cross-sell-container .card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.cross-sell-container .btn {
+  margin-top: auto;
+}
+
+.cross-sell-container .single-jobs-container {
+  background-color: #F0FDF4; /* Faint green */
+  border: 1px solid #d1fae5;
+  border-radius: 12px;
+}
+
+.cross-sell-container .monthly-wrapper {
+  background-color: #221C2B;
+  border-radius: 12px;
+}
+
+.cross-sell-container .monthly-wrapper .card {
+  background-color: white;
+}
+
+.cross-sell-container .single-jobs-header {
+  border-bottom: none;
+}
+
+.cross-sell-container .monthly-header {
+  border-bottom: none;
+}
+
+@media (max-width: 768px) {
+  .cross-sell-container {
+    flex-direction: column;
+  }
+}

@@ -51,7 +51,7 @@
           <div class="single-jobs-cards">
             
             <!-- Classic Job -->
-            <div class="card bordered" onclick="openModal('Classic', 999)">
+            <div class="card bordered" onclick="openModal(this, 'Classic', 999)">
               <div class="card-title">Classic job</div>
               <div class="card-price">
                 <span>₹999</span><span class="asterisk">*</span>
@@ -88,7 +88,7 @@
             </div>
 
             <!-- Premium Job -->
-            <div class="card premium" onclick="openModal('Premium', 1999)">
+            <div class="card premium" onclick="openModal(this, 'Premium', 1999)">
               <div class="card-title">Premium job</div>
               <div class="card-price">
                 <span>₹1,999</span><span class="asterisk">*</span>
@@ -125,7 +125,7 @@
             </div>
 
             <!-- Super Premium Job -->
-            <div class="card bordered" onclick="openModal('Super premium', 2999)">
+            <div class="card bordered" onclick="openModal(this, 'Super premium', 2999)">
               <div class="card-title">Super premium job</div>
               <div class="card-price">
                 <span>₹2,999</span><span class="asterisk">*</span>
@@ -320,6 +320,79 @@
       </div>
       
       <button class="btn primary modal-continue-btn" onclick="goToCheckout()">Continue to Payment</button>
+    </div>
+  </div>
+
+  <!-- Monthly Upsell Modal (Cross-sell) -->
+  <div class="modal-overlay" id="monthlyUpsellModal">
+    <div class="modal-content cross-sell-modal">
+      <div class="modal-close" onclick="closeMonthlyModal()">
+        <img src="assets/close.svg" alt="close">
+      </div>
+      <div class="modal-title cross-sell-title">
+        Get 30-day unlimited hiring for just <span class="save-text" id="monthly-diff-price">₹1,100</span> more
+      </div>
+      
+      <div class="cross-sell-container">
+        <!-- Left Side: Single Job -->
+        <div class="wrapper-container single-jobs-container" style="margin-top:0; width: 100%;">
+          <div class="wrapper-header single-jobs-header" style="justify-content: flex-start; padding-left: 16px;">
+            <img src="assets/clock.svg" alt="clock">
+            <span>Single job posting</span>
+          </div>
+          <div class="wrapper-body" style="padding: 16px;">
+            <div class="card bordered" style="cursor: default;" id="monthly-upsell-left-card">
+              <div class="card-title" id="mu-plan-name">Classic job</div>
+              <div class="card-price">
+                <span id="mu-plan-price">₹999</span><span class="asterisk">*</span>
+              </div>
+              <div id="mu-plan-features">
+                <!-- Injected dynamically -->
+              </div>
+              <button class="btn" style="margin-bottom:0; pointer-events: auto;" id="mu-btn-continue" onclick="continueWithSingleJob()">Continue with classic job</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side: Apna Unlimited -->
+        <div class="wrapper-container monthly-wrapper" style="margin-top:0; width: 100%;">
+          <div class="wrapper-header monthly-header" style="justify-content: flex-start; padding-left: 16px;">
+            <img src="assets/apna-unlimited.svg" alt="apna unlimited" class="apna-unlimited-logo">
+          </div>
+          <div class="wrapper-body" style="padding: 16px;">
+            <div class="card" style="cursor: default;">
+              <div class="card-title">Monthly plan</div>
+              <div class="card-price">
+                <span>₹2,499</span><span class="asterisk">*</span> <span class="per-month">/month</span>
+              </div>
+              <ul class="features">
+                <li class="feature">
+                  <img src="assets/briefcase.svg" class="icon" alt="briefcase">
+                  <span class="feature-text"><span style="font-weight:600;">1</span> Active job slot for <span style="font-weight:600;">30 days</span></span>
+                </li>
+                <li class="feature">
+                  <img src="assets/infinity.svg" class="icon" alt="infinity">
+                  <span class="feature-text">Unlimited free reposts on job expiry</span>
+                </li>
+                <li class="feature">
+                  <img src="assets/database.svg" class="icon" alt="database">
+                  <span class="feature-text"><span style="font-weight:600;">200</span> database unlocks <span style="font-style:italic;">worth ₹2,000</span></span>
+                </li>
+                <li class="feature">
+                  <img src="assets/whatsapp-gray.svg" class="icon" alt="wa">
+                  <span class="feature-text">WhatsApp boost for more applications</span>
+                </li>
+                <li class="feature">
+                  <img src="assets/support.svg" class="icon" alt="support">
+                  <span class="feature-text">Priority support</span>
+                </li>
+              </ul>
+              <div class="note">Note: This plan is valid in a single city.</div>
+              <button class="btn primary" style="margin-bottom:0; pointer-events: auto;" onclick="switchToMonthly()">Switch to apna unlimited</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 

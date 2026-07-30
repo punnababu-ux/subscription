@@ -34,45 +34,73 @@ function resetToDefault() {
 let currentBasePrice = 0;
 let currentPlanName = "";
 
-function openModal(planName, basePrice) {
+function openModal(cardElement, planName, basePrice) {
   currentBasePrice = basePrice;
   currentPlanName = planName;
   
-  // Update Plan Names inside the cards
-  const nameSpans = document.querySelectorAll('.upsell-plan-name');
-  nameSpans.forEach(span => span.textContent = planName);
-  
-  // Update Prices
-  // 1 Job
-  document.getElementById('upsell-1-price').textContent = `₹${basePrice.toLocaleString('en-IN')}`;
-  
-  // 4 Jobs (10% off)
-  const price4Old = basePrice * 4;
-  const price4New = Math.round(price4Old * 0.9);
-  const save4 = price4Old - price4New;
-  document.getElementById('upsell-4-old').textContent = `₹${price4Old.toLocaleString('en-IN')}`;
-  document.getElementById('upsell-4-price').textContent = `₹${price4New.toLocaleString('en-IN')}`;
-  document.getElementById('upsell-4-save').textContent = `Save ₹${save4.toLocaleString('en-IN')}`;
-  
-  // 8 Jobs (20% off)
-  const price8Old = basePrice * 8;
-  const price8New = Math.round(price8Old * 0.8);
-  const save8 = price8Old - price8New;
-  document.getElementById('upsell-8-old').textContent = `₹${price8Old.toLocaleString('en-IN')}`;
-  document.getElementById('upsell-8-price').textContent = `₹${price8New.toLocaleString('en-IN')}`;
-  document.getElementById('upsell-8-save').textContent = `Save ₹${save8.toLocaleString('en-IN')}`;
-  
-  // Show Modal
-  document.getElementById('upsellModal').classList.add('show');
-  
-  // Reset selection to 1 Job card by default
-  const cards = document.querySelectorAll('.upsell-card');
-  cards.forEach(c => c.classList.remove('active'));
-  cards[0].classList.add('active');
+  const toggle = document.getElementById('toggle-monthly');
+  if (toggle && toggle.checked) {
+    // Show old quantity upsell modal
+    const nameSpans = document.querySelectorAll('.upsell-plan-name');
+    nameSpans.forEach(span => span.textContent = planName);
+    
+    document.getElementById('upsell-1-price').textContent = `₹${basePrice.toLocaleString('en-IN')}`;
+    
+    const price4Old = basePrice * 4;
+    const price4New = Math.round(price4Old * 0.9);
+    const save4 = price4Old - price4New;
+    document.getElementById('upsell-4-old').textContent = `₹${price4Old.toLocaleString('en-IN')}`;
+    document.getElementById('upsell-4-price').textContent = `₹${price4New.toLocaleString('en-IN')}`;
+    document.getElementById('upsell-4-save').textContent = `Save ₹${save4.toLocaleString('en-IN')}`;
+    
+    const price8Old = basePrice * 8;
+    const price8New = Math.round(price8Old * 0.8);
+    const save8 = price8Old - price8New;
+    document.getElementById('upsell-8-old').textContent = `₹${price8Old.toLocaleString('en-IN')}`;
+    document.getElementById('upsell-8-price').textContent = `₹${price8New.toLocaleString('en-IN')}`;
+    document.getElementById('upsell-8-save').textContent = `Save ₹${save8.toLocaleString('en-IN')}`;
+    
+    document.getElementById('upsellModal').classList.add('show');
+    
+    const cards = document.querySelectorAll('.upsell-card');
+    cards.forEach(c => c.classList.remove('active'));
+    cards[0].classList.add('active');
+  } else {
+    // Show new monthly cross-sell modal
+    const diff = 2499 - basePrice;
+    document.getElementById('monthly-diff-price').textContent = `₹${diff.toLocaleString('en-IN')}`;
+    
+    document.getElementById('mu-plan-name').textContent = planName + ' job';
+    document.getElementById('mu-plan-price').textContent = `₹${basePrice.toLocaleString('en-IN')}`;
+    document.getElementById('mu-btn-continue').textContent = `Continue with ${planName.toLowerCase()} job`;
+    
+    // Copy features from the clicked card
+    const featuresList = cardElement.querySelector('.features');
+    if (featuresList) {
+      document.getElementById('mu-plan-features').innerHTML = featuresList.outerHTML;
+    }
+    
+    document.getElementById('monthlyUpsellModal').classList.add('show');
+  }
 }
 
 function closeModal() {
   document.getElementById('upsellModal').classList.remove('show');
+}
+
+function closeMonthlyModal() {
+  document.getElementById('monthlyUpsellModal').classList.remove('show');
+}
+
+function continueWithSingleJob() {
+  // Same as old checkout logic for 1 job
+  alert(`Proceeding to checkout for ${currentPlanName} Job (1 post) at ₹${currentBasePrice}`);
+  closeMonthlyModal();
+}
+
+function switchToMonthly() {
+  alert(`Proceeding to checkout for Apna Unlimited Monthly Plan at ₹2,499`);
+  closeMonthlyModal();
 }
 
 function goToCheckout() {
