@@ -1,4 +1,4 @@
-/* experiment.css - Master 120fps Hardware-Accelerated Fluid Motion System */
+/* experiment.css - 100% Continuous GPU Card Sliding Animation (Zero Display Jumps) */
 
 :root {
   --exp-spring-easing: cubic-bezier(0.22, 1, 0.36, 1);
@@ -89,28 +89,33 @@
   width: 100%;
 }
 
-/* Cards Deck Layout */
+/* Cards Deck Layout (Always Relative Container) */
 .exp-cards-deck {
   width: 100%;
+  height: 460px;
   position: relative;
   transition: all var(--exp-duration) var(--exp-spring-easing);
-  display: flex;
-  gap: 12px;
 }
 
-/* PERMANENT FIXED 310px CARD WIDTH & HARDWARE ACCELERATED MOTION */
+/* PERMANENT ABSOLUTE CARDS (Animates purely via GPU transforms with ZERO display pops) */
 .exp-card {
+  position: absolute !important;
+  top: 0;
+  left: 0;
   width: 310px !important;
   min-width: 310px !important;
   max-width: 310px !important;
+  height: 460px !important;
+  min-height: 460px !important;
+  max-height: 460px !important;
   box-sizing: border-box !important;
-  margin-bottom: 0 !important;
+  margin: 0 !important;
   overflow: hidden !important;
   display: flex !important;
   flex-direction: column !important;
   padding: 20px 16px 16px 16px !important;
   
-  /* GPU Compositing Layers for 120fps Smoothness */
+  /* GPU Compositing Layers */
   will-change: transform, opacity, box-shadow;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
@@ -119,39 +124,6 @@
   transition: transform var(--exp-duration) var(--exp-spring-easing), 
               opacity calc(var(--exp-duration) * 0.8) var(--exp-spring-easing), 
               box-shadow var(--exp-duration) var(--exp-spring-easing) !important;
-}
-
-/* Bi-Directional Choreographed Staggered Delays */
-/* EXPANDING: Fanning Out Cascade (Card 1 -> Card 2 -> Card 3) */
-.exp-plan-section.active-single .single-jobs-wrapper .exp-card:nth-child(1),
-.exp-plan-section.active-unlimited .monthly-wrapper .exp-card:nth-child(1) {
-  transition-delay: 0.01s !important;
-}
-
-.exp-plan-section.active-single .single-jobs-wrapper .exp-card:nth-child(2),
-.exp-plan-section.active-unlimited .monthly-wrapper .exp-card:nth-child(2) {
-  transition-delay: 0.04s !important;
-}
-
-.exp-plan-section.active-single .single-jobs-wrapper .exp-card:nth-child(3),
-.exp-plan-section.active-unlimited .monthly-wrapper .exp-card:nth-child(3) {
-  transition-delay: 0.07s !important;
-}
-
-/* COLLAPSING: Folding In Cascade (Card 3 -> Card 2 -> Card 1) */
-.exp-plan-section.active-unlimited .single-jobs-wrapper .exp-card:nth-child(1),
-.exp-plan-section.active-single .monthly-wrapper .exp-card:nth-child(1) {
-  transition-delay: 0.05s !important;
-}
-
-.exp-plan-section.active-unlimited .single-jobs-wrapper .exp-card:nth-child(2),
-.exp-plan-section.active-single .monthly-wrapper .exp-card:nth-child(2) {
-  transition-delay: 0.03s !important;
-}
-
-.exp-plan-section.active-unlimited .single-jobs-wrapper .exp-card:nth-child(3),
-.exp-plan-section.active-single .monthly-wrapper .exp-card:nth-child(3) {
-  transition-delay: 0.01s !important;
 }
 
 .exp-card .features {
@@ -169,139 +141,146 @@
   border-top: 1px solid var(--neutral-200) !important;
 }
 
-/* --- EXPANDED STATE --- */
-.exp-plan-section.active-single .single-jobs-wrapper .exp-cards-deck,
-.exp-plan-section.active-unlimited .monthly-wrapper .exp-cards-deck {
-  display: flex;
-  gap: 12px;
-}
-
-.exp-plan-section.active-single .single-jobs-wrapper .exp-card,
-.exp-plan-section.active-unlimited .monthly-wrapper .exp-card {
-  position: relative !important;
-  top: 0 !important;
-  left: 0 !important;
-  right: auto !important;
-  flex: none !important;
-  width: 310px !important;
-  min-width: 310px !important;
-  max-width: 310px !important;
-  height: 460px !important;
-  min-height: 460px !important;
-  max-height: 460px !important;
+/* --- SINGLE JOBS EXPANDED STATE (Cards 1, 2, 3 side-by-side in horizontal row) --- */
+.exp-plan-section.active-single .single-jobs-wrapper .card-classic {
+  z-index: 3;
+  transform: translate(0px, 0px) rotate(0deg) !important;
   opacity: 1 !important;
-  transform: translate(0, 0) rotate(0deg) !important;
-  z-index: 1 !important;
   box-shadow: none !important;
   pointer-events: auto !important;
-  filter: none !important;
+  transition-delay: 0s !important;
 }
 
-/* --- COLLAPSED STATE BASE --- */
-.exp-plan-section.active-unlimited .single-jobs-wrapper .exp-cards-deck,
-.exp-plan-section.active-single .monthly-wrapper .exp-cards-deck {
-  display: block;
-  height: 424px;
-  position: relative;
+.exp-plan-section.active-single .single-jobs-wrapper .card-premium {
+  z-index: 2;
+  transform: translate(322px, 0px) rotate(0deg) !important;
+  opacity: 1 !important;
+  box-shadow: none !important;
+  border: 2px solid var(--core-green) !important;
+  pointer-events: auto !important;
+  transition-delay: 0.03s !important;
 }
 
-/* --- SINGLE JOBS COLLAPSED STACK (Peeks to the RIGHT) --- */
-.exp-plan-section.active-unlimited .single-jobs-wrapper .exp-card {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: auto;
-  width: 310px !important;
-  min-width: 310px !important;
-  max-width: 310px !important;
-  height: 424px !important;
-  min-height: 424px !important;
-  max-height: 424px !important;
-  pointer-events: none;
+.exp-plan-section.active-single .single-jobs-wrapper .card-super {
+  z-index: 1;
+  transform: translate(644px, 0px) rotate(0deg) !important;
+  opacity: 1 !important;
+  box-shadow: none !important;
+  border: 1px solid var(--neutral-200) !important;
+  pointer-events: auto !important;
+  transition-delay: 0.06s !important;
 }
 
-.exp-plan-section.active-unlimited .single-jobs-wrapper .card-premium {
-  border: 1px solid var(--neutral-300) !important;
-}
-
+/* --- SINGLE JOBS COLLAPSED STATE (Cards 2 & 3 slide UNDER Card 1 peeking right) --- */
 .exp-plan-section.active-unlimited .single-jobs-wrapper .card-classic {
   z-index: 3;
-  transform: translate(0, 0) rotate(0deg);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
-  opacity: 1;
-  background: #FFFFFF;
+  transform: translate(0px, 0px) rotate(0deg) !important;
+  opacity: 1 !important;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1) !important;
+  pointer-events: none;
+  transition-delay: 0.04s !important;
 }
 
 .exp-plan-section.active-unlimited .single-jobs-wrapper .card-premium {
   z-index: 2;
-  transform: translate(8px, 4px) rotate(0.5deg);
-  opacity: 0.95;
-  background: #FAFAFA;
-  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.05);
+  transform: translate(8px, 4px) rotate(0.5deg) !important;
+  opacity: 0.95 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06) !important;
+  border: 1px solid var(--neutral-300) !important;
+  pointer-events: none;
+  transition-delay: 0.02s !important;
 }
 
 .exp-plan-section.active-unlimited .single-jobs-wrapper .card-super {
   z-index: 1;
-  transform: translate(16px, 8px) rotate(1.0deg);
-  opacity: 0.88;
-  background: #F5F5F5;
+  transform: translate(16px, 8px) rotate(1.0deg) !important;
+  opacity: 0.88 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
   border: 1px solid var(--neutral-300) !important;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
+  pointer-events: none;
+  transition-delay: 0s !important;
 }
 
 .exp-plan-section.active-unlimited .single-jobs-wrapper:hover .card-premium {
-  transform: translate(12px, 3px) rotate(0.7deg);
+  transform: translate(12px, 3px) rotate(0.7deg) !important;
 }
 .exp-plan-section.active-unlimited .single-jobs-wrapper:hover .card-super {
-  transform: translate(22px, 6px) rotate(1.4deg);
+  transform: translate(22px, 6px) rotate(1.4deg) !important;
 }
 
-/* --- APNA UNLIMITED COLLAPSED STACK (Peeks to the LEFT) --- */
+/* --- APNA UNLIMITED EXPANDED STATE (Cards 1, 2, 3 side-by-side in horizontal row) --- */
+.exp-plan-section.active-unlimited .monthly-wrapper .exp-card {
+  left: 0 !important;
+  right: auto !important;
+}
+
+.exp-plan-section.active-unlimited .monthly-wrapper .card-monthly {
+  z-index: 3;
+  transform: translate(0px, 0px) rotate(0deg) !important;
+  opacity: 1 !important;
+  box-shadow: none !important;
+  pointer-events: auto !important;
+  transition-delay: 0s !important;
+}
+
+.exp-plan-section.active-unlimited .monthly-wrapper .card-quarterly {
+  z-index: 2;
+  transform: translate(322px, 0px) rotate(0deg) !important;
+  opacity: 1 !important;
+  box-shadow: none !important;
+  pointer-events: auto !important;
+  transition-delay: 0.03s !important;
+}
+
+.exp-plan-section.active-unlimited .monthly-wrapper .card-yearly {
+  z-index: 1;
+  transform: translate(644px, 0px) rotate(0deg) !important;
+  opacity: 1 !important;
+  box-shadow: none !important;
+  pointer-events: auto !important;
+  transition-delay: 0.06s !important;
+}
+
+/* --- APNA UNLIMITED COLLAPSED STATE (Cards 2 & 3 slide UNDER Card 1 peeking left) --- */
 .exp-plan-section.active-single .monthly-wrapper .exp-card {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: auto;
-  width: 310px !important;
-  min-width: 310px !important;
-  max-width: 310px !important;
-  height: 424px !important;
-  min-height: 424px !important;
-  max-height: 424px !important;
-  pointer-events: none;
+  left: auto !important;
+  right: 0 !important;
 }
 
 .exp-plan-section.active-single .monthly-wrapper .card-monthly {
   z-index: 3;
-  transform: translate(0, 0) rotate(0deg);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
-  opacity: 1;
-  background: #FFFFFF;
+  transform: translate(0px, 0px) rotate(0deg) !important;
+  opacity: 1 !important;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1) !important;
+  pointer-events: none;
+  transition-delay: 0.04s !important;
 }
 
 .exp-plan-section.active-single .monthly-wrapper .card-quarterly {
   z-index: 2;
-  transform: translate(-8px, 4px) rotate(-0.5deg);
-  opacity: 0.95;
-  background: #FAFAFA;
+  transform: translate(-8px, 4px) rotate(-0.5deg) !important;
+  opacity: 0.95 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06) !important;
   border: 1px solid var(--neutral-300) !important;
-  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.05);
+  pointer-events: none;
+  transition-delay: 0.02s !important;
 }
 
 .exp-plan-section.active-single .monthly-wrapper .card-yearly {
   z-index: 1;
-  transform: translate(-16px, 8px) rotate(-1.0deg);
-  opacity: 0.88;
-  background: #F5F5F5;
+  transform: translate(-16px, 8px) rotate(-1.0deg) !important;
+  opacity: 0.88 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
   border: 1px solid var(--neutral-300) !important;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
+  pointer-events: none;
+  transition-delay: 0s !important;
 }
 
 .exp-plan-section.active-single .monthly-wrapper:hover .card-quarterly {
-  transform: translate(-12px, 3px) rotate(-0.7deg);
+  transform: translate(-12px, 3px) rotate(-0.7deg) !important;
 }
 .exp-plan-section.active-single .monthly-wrapper:hover .card-yearly {
-  transform: translate(-22px, 6px) rotate(-1.4deg);
+  transform: translate(-22px, 6px) rotate(-1.4deg) !important;
 }
 
 /* --- View More Plans Bottom CTA --- */
