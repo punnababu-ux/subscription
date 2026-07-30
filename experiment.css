@@ -1,11 +1,11 @@
-/* experiment.css - Even Balanced Padding & Reduced Offset Stack */
+/* experiment.css - Clean Card Containment & Overflow Fix */
 
 .exp-plan-section {
   display: flex;
   gap: 16px;
   align-items: stretch;
   transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  min-height: 520px;
+  min-height: 560px;
 }
 
 .exp-wrapper {
@@ -49,11 +49,12 @@
   gap: 8px;
 }
 
-/* Base Card Sizing */
+/* Strict Card Sizing & Containment (Prevents Note Spill) */
 .exp-card {
   box-sizing: border-box !important;
   transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   margin-bottom: 0 !important;
+  overflow: hidden !important; /* Contains all content strictly inside card */
 }
 
 /* --- EXPANDED STATE --- */
@@ -70,7 +71,9 @@
   left: 0 !important;
   width: 310px !important;
   min-width: 310px !important;
-  height: 440px !important;
+  height: 475px !important;
+  min-height: 475px !important;
+  max-height: 475px !important;
   opacity: 1 !important;
   transform: none !important;
   z-index: 1 !important;
@@ -79,11 +82,11 @@
   filter: none !important;
 }
 
-/* --- COLLAPSED STATE: Reduced Offsets & Balanced Even Padding --- */
+/* --- COLLAPSED STATE: Stacked Cards with Clean Padding --- */
 .exp-plan-section.active-unlimited .single-jobs-wrapper .exp-cards-deck,
 .exp-plan-section.active-single .monthly-wrapper .exp-cards-deck {
   display: block;
-  height: 440px;
+  height: 475px;
   position: relative;
 }
 
@@ -94,7 +97,9 @@
   left: 0;
   width: 284px !important;
   min-width: 284px !important;
-  height: 440px !important;
+  height: 475px !important;
+  min-height: 475px !important;
+  max-height: 475px !important;
   pointer-events: none;
 }
 
@@ -150,7 +155,7 @@
   transform: translate(22px, 8px);
 }
 
-/* --- View More Plans Bottom CTA --- */
+/* --- View More Plans Bottom CTA (Positioned BELOW Card Deck) --- */
 .view-more-cta {
   display: none;
   font-size: 13px;
