@@ -165,7 +165,7 @@
   display: none;
   font-size: 13px;
   line-height: 16px;
-  color: var(--neutral-600);
+  color: #FFFFFF !important;
   margin-top: 16px;
   padding-left: 2px;
 }
