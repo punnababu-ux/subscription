@@ -46,6 +46,14 @@ function openModal(cardElement, planName, basePrice) {
     
     document.getElementById('upsell-1-price').textContent = `₹${basePrice.toLocaleString('en-IN')}`;
     
+    // Reset selection to 1 job
+    const cards = document.querySelectorAll('.upsell-card');
+    cards.forEach(c => c.classList.remove('active'));
+    if(cards.length > 0) cards[0].classList.add('active');
+    
+    const btn = document.getElementById('upsell-btn');
+    if(btn) btn.textContent = 'Proceed to pay';
+    
     const price4Old = basePrice * 4;
     const price4New = Math.round(price4Old * 0.9);
     const save4 = price4Old - price4New;
@@ -126,4 +134,16 @@ function selectUpsell(card, count) {
   const cards = document.querySelectorAll('.upsell-card');
   cards.forEach(c => c.classList.remove('active'));
   card.classList.add('active');
+
+  const btn = document.getElementById('upsell-btn');
+  if(btn) {
+    if(count === 1) {
+      btn.textContent = 'Proceed to pay';
+    } else {
+      const oldPrice = currentBasePrice * count;
+      let finalPrice = count === 4 ? Math.round(oldPrice * 0.9) : Math.round(oldPrice * 0.8);
+      const savings = oldPrice - finalPrice;
+      btn.textContent = `Continue with ₹${savings.toLocaleString('en-IN')} saving`;
+    }
+  }
 }
