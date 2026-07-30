@@ -1,17 +1,32 @@
-/* experiment.css - Clean Card Containment & Overflow Fix */
+/* experiment.css - Perfectly Equal Container Padding Across All Sides */
 
 .exp-plan-section {
   display: flex;
   gap: 16px;
   align-items: stretch;
   transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  min-height: 560px;
 }
 
 .exp-wrapper {
   transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   box-sizing: border-box;
   overflow: hidden !important;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header & Body Equal 16px Padding System */
+.exp-wrapper .wrapper-header {
+  padding: 16px 16px 12px 16px !important;
+  height: auto !important;
+  flex-shrink: 0;
+}
+
+.exp-wrapper .wrapper-body {
+  padding: 0 16px 16px 16px !important; /* Exactly 16px bottom, left, and right padding */
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Flex Ratios */
@@ -20,7 +35,7 @@
   cursor: default;
 }
 .exp-plan-section.active-single .monthly-wrapper {
-  flex: 0 0 318px;
+  flex: 0 0 324px;
   cursor: pointer;
 }
 
@@ -29,7 +44,7 @@
   cursor: default;
 }
 .exp-plan-section.active-unlimited .single-jobs-wrapper {
-  flex: 0 0 318px;
+  flex: 0 0 324px;
   cursor: pointer;
 }
 
@@ -46,22 +61,22 @@
   position: relative;
   transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
-  gap: 8px;
+  gap: 12px;
 }
 
-/* Strict Card Sizing & Containment (Prevents Note Spill) */
+/* Base Card Sizing */
 .exp-card {
   box-sizing: border-box !important;
   transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   margin-bottom: 0 !important;
-  overflow: hidden !important; /* Contains all content strictly inside card */
+  overflow: hidden !important;
 }
 
 /* --- EXPANDED STATE --- */
 .exp-plan-section.active-single .single-jobs-wrapper .exp-cards-deck,
 .exp-plan-section.active-unlimited .monthly-wrapper .exp-cards-deck {
   display: flex;
-  gap: 8px;
+  gap: 12px;
 }
 
 .exp-plan-section.active-single .single-jobs-wrapper .exp-card,
@@ -69,11 +84,12 @@
   position: relative !important;
   top: 0 !important;
   left: 0 !important;
-  width: 310px !important;
-  min-width: 310px !important;
-  height: 475px !important;
-  min-height: 475px !important;
-  max-height: 475px !important;
+  flex: 1 !important;
+  width: auto !important;
+  min-width: 0 !important;
+  height: 440px !important;
+  min-height: 440px !important;
+  max-height: 440px !important;
   opacity: 1 !important;
   transform: none !important;
   z-index: 1 !important;
@@ -82,11 +98,11 @@
   filter: none !important;
 }
 
-/* --- COLLAPSED STATE: Stacked Cards with Clean Padding --- */
+/* --- COLLAPSED STATE --- */
 .exp-plan-section.active-unlimited .single-jobs-wrapper .exp-cards-deck,
 .exp-plan-section.active-single .monthly-wrapper .exp-cards-deck {
   display: block;
-  height: 475px;
+  height: 440px;
   position: relative;
 }
 
@@ -95,11 +111,11 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 284px !important;
-  min-width: 284px !important;
-  height: 475px !important;
-  min-height: 475px !important;
-  max-height: 475px !important;
+  width: 276px !important;
+  min-width: 276px !important;
+  height: 440px !important;
+  min-height: 440px !important;
+  max-height: 440px !important;
   pointer-events: none;
 }
 
@@ -118,7 +134,7 @@
   background: #FFFFFF;
 }
 
-/* Card 2 (Middle Layer - Reduced Offset 8px Right) */
+/* Card 2 (Middle Layer - 8px Offset) */
 .exp-plan-section.active-unlimited .single-jobs-wrapper .card-premium,
 .exp-plan-section.active-single .monthly-wrapper .card-quarterly {
   z-index: 2;
@@ -129,7 +145,7 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 }
 
-/* Card 3 (Bottom Layer - Reduced Offset 16px Right) */
+/* Card 3 (Bottom Layer - 16px Offset) */
 .exp-plan-section.active-unlimited .single-jobs-wrapper .card-super,
 .exp-plan-section.active-single .monthly-wrapper .card-yearly {
   z-index: 1;
@@ -155,13 +171,13 @@
   transform: translate(22px, 8px);
 }
 
-/* --- View More Plans Bottom CTA (Positioned BELOW Card Deck) --- */
+/* --- View More Plans Bottom CTA --- */
 .view-more-cta {
   display: none;
   font-size: 13px;
   font-weight: 600;
-  margin-top: 14px;
-  padding: 4px 8px;
+  margin-top: 10px;
+  padding: 2px 4px;
   cursor: pointer;
   align-items: center;
   gap: 6px;
