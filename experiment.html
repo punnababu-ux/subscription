@@ -40,13 +40,12 @@
             <img src="assets/clock.svg" alt="clock">
             <span>Single job posting</span>
           </div>
-          <div class="stack-badge">3 Plans Stacked <span class="chevron">›</span></div>
         </div>
         
         <div class="wrapper-body">
           <div class="single-jobs-cards exp-cards-deck">
             
-            <!-- Classic Job -->
+            <!-- Classic Job Card (Top of stack when collapsed) -->
             <div class="card bordered exp-card card-classic" onclick="handleCardClick(event, 'Classic')">
               <div class="card-title">Classic job</div>
               <div class="card-price">
@@ -77,9 +76,14 @@
                   <span class="feature-text">Top placements in job listings</span>
                 </li>
               </ul>
+
+              <!-- Bottom CTA when collapsed -->
+              <div class="view-more-cta single-view-more">
+                <span class="chevron-left">‹</span> View more plans
+              </div>
             </div>
 
-            <!-- Premium Job -->
+            <!-- Premium Job Card -->
             <div class="card premium exp-card card-premium" onclick="handleCardClick(event, 'Premium')">
               <div class="card-title">Premium job</div>
               <div class="card-price">
@@ -112,7 +116,7 @@
               </ul>
             </div>
 
-            <!-- Super Premium Job -->
+            <!-- Super Premium Job Card -->
             <div class="card bordered exp-card card-super" onclick="handleCardClick(event, 'Super premium')">
               <div class="card-title">Super premium job</div>
               <div class="card-price">
@@ -155,13 +159,12 @@
           <div class="header-title">
             <img src="assets/logo-unlimited.svg" alt="apna Unlimited">
           </div>
-          <div class="stack-badge">Monthly, Quarterly & Yearly Stacked <span class="chevron">›</span></div>
         </div>
         
         <div class="wrapper-body">
           <div class="unlimited-cards exp-cards-deck">
             
-            <!-- Monthly Card -->
+            <!-- Monthly Card (Top of stack when collapsed) -->
             <div class="card exp-card card-monthly" onclick="handleUnlimitedClick(event, 'Monthly', 2499)">
               <div class="card-title">Monthly plan</div>
               <div class="card-price">
@@ -193,6 +196,11 @@
               </ul>
 
               <div class="note">Note: This plan is valid in a single city.</div>
+
+              <!-- Bottom CTA when collapsed -->
+              <div class="view-more-cta unlimited-view-more">
+                <span class="chevron-left">‹</span> View more plans
+              </div>
             </div>
 
             <!-- Quarterly Card -->

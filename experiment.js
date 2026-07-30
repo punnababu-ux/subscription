@@ -1,4 +1,4 @@
-// experiment.js - Morphing & Stacked Cards Logic
+// experiment.js - Horizontal Morphing & Slide-Out Cards Logic
 
 let hoverTimer = null;
 let currentActiveSection = 'single'; // 'single' or 'unlimited'
