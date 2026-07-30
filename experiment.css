@@ -1,4 +1,4 @@
-/* experiment.css - Perfectly Natural Vector-Matched Card Sliding Animation */
+/* experiment.css - 100% Visible & Vector-Aligned Stacking Engine */
 
 :root {
   --exp-spring-easing: cubic-bezier(0.22, 1, 0.36, 1);
@@ -102,6 +102,7 @@
   position: absolute !important;
   top: 0;
   left: 0;
+  right: auto !important;
   width: 310px !important;
   min-width: 310px !important;
   max-width: 310px !important;
@@ -236,10 +237,10 @@
   transition-delay: 0s !important;
 }
 
-/* --- APNA UNLIMITED COLLAPSED STATE (Yearly on Top, Quarterly & Monthly slide right under Yearly) --- */
+/* --- APNA UNLIMITED COLLAPSED STATE (Yearly Top on Right, Monthly & Quarterly slide right under Yearly peeking left) --- */
 .exp-plan-section.active-single .monthly-wrapper .card-yearly {
   z-index: 3;
-  transform: translate(644px, 0px) rotate(0deg) !important;
+  transform: translate(16px, 0px) rotate(0deg) !important;
   opacity: 1 !important;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1) !important;
   pointer-events: none;
@@ -248,7 +249,7 @@
 
 .exp-plan-section.active-single .monthly-wrapper .card-quarterly {
   z-index: 2;
-  transform: translate(636px, 4px) rotate(-0.5deg) !important;
+  transform: translate(8px, 4px) rotate(-0.5deg) !important;
   opacity: 0.95 !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06) !important;
   border: 1px solid var(--neutral-300) !important;
@@ -258,7 +259,7 @@
 
 .exp-plan-section.active-single .monthly-wrapper .card-monthly {
   z-index: 1;
-  transform: translate(628px, 8px) rotate(-1.0deg) !important;
+  transform: translate(0px, 8px) rotate(-1.0deg) !important;
   opacity: 0.88 !important;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
   border: 1px solid var(--neutral-300) !important;
@@ -267,10 +268,10 @@
 }
 
 .exp-plan-section.active-single .monthly-wrapper:hover .card-quarterly {
-  transform: translate(632px, 3px) rotate(-0.7deg) !important;
+  transform: translate(4px, 3px) rotate(-0.7deg) !important;
 }
 .exp-plan-section.active-single .monthly-wrapper:hover .card-monthly {
-  transform: translate(622px, 6px) rotate(-1.4deg) !important;
+  transform: translate(-6px, 6px) rotate(-1.4deg) !important;
 }
 
 /* --- View More Plans Bottom CTA --- */
