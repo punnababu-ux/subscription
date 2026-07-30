@@ -69,10 +69,6 @@ function openModal(cardElement, planName, basePrice) {
     document.getElementById('upsell-8-save').textContent = `Save ₹${save8.toLocaleString('en-IN')}`;
     
     document.getElementById('upsellModal').classList.add('show');
-    
-    const cards = document.querySelectorAll('.upsell-card');
-    cards.forEach(c => c.classList.remove('active'));
-    cards[0].classList.add('active');
   } else {
     // Show new monthly cross-sell modal
     const diff = 2499 - basePrice;
