@@ -107,9 +107,10 @@ body {
 
 .monthly-header {
   padding-left: 12px;
+  padding-top: 4px;
 }
 .monthly-header img {
-  height: 20px;
+  height: 18px;
 }
 
 /* The White Card */
