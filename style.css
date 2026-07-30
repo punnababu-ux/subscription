@@ -939,15 +939,6 @@ input:checked + .slider:before {
 .cross-sell-modal {
   max-width: 1000px;
   width: 90%;
-  padding: 32px;
-}
-
-.cross-sell-title {
-  font-size: 24px;
-  font-weight: 700;
-  text-align: center;
-  margin-bottom: 24px;
-  color: var(--neutral-900);
 }
 
 .cross-sell-container {
