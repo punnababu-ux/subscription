@@ -1,4 +1,4 @@
-/* experiment.css - Richer Darker Green Container Tone & Symmetrical Layout */
+/* experiment.css - Ultra Natural Staggered & Tactile Card Stack Animation */
 
 /* Deeper, Richer Green Tone for Single Job Posting Container */
 .single-jobs-wrapper {
@@ -11,11 +11,11 @@
   gap: 16px;
   align-items: stretch;
   justify-content: center;
-  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.65s cubic-bezier(0.25, 1, 0.35, 1);
 }
 
 .exp-wrapper {
-  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.65s cubic-bezier(0.25, 1, 0.35, 1);
   box-sizing: border-box;
   overflow: hidden !important;
   display: flex;
@@ -87,12 +87,12 @@
 .exp-cards-deck {
   width: 100%;
   position: relative;
-  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.65s cubic-bezier(0.25, 1, 0.35, 1);
   display: flex;
   gap: 12px;
 }
 
-/* PERMANENT FIXED 310px CARD WIDTH (Zero Text Reflow or Resizing) */
+/* PERMANENT FIXED 310px CARD WIDTH & NATURAL STAGGERED TRANSITION */
 .exp-card {
   width: 310px !important;
   min-width: 310px !important;
@@ -103,8 +103,15 @@
   display: flex !important;
   flex-direction: column !important;
   padding: 20px 16px 16px 16px !important;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  transition: transform 0.65s cubic-bezier(0.25, 1, 0.35, 1), 
+              opacity 0.5s ease-out, 
+              box-shadow 0.65s cubic-bezier(0.25, 1, 0.35, 1) !important;
 }
+
+/* Staggered Delay for Fanning Out Card Deck Naturally */
+.exp-card:nth-child(1) { transition-delay: 0.02s !important; }
+.exp-card:nth-child(2) { transition-delay: 0.06s !important; }
+.exp-card:nth-child(3) { transition-delay: 0.1s !important; }
 
 .exp-card .features {
   flex: none !important;
@@ -121,7 +128,7 @@
   border-top: 1px solid var(--neutral-200) !important;
 }
 
-/* --- EXPANDED STATE --- */
+/* --- EXPANDED STATE (Straightened 0deg Cards in a Horizontal Row) --- */
 .exp-plan-section.active-single .single-jobs-wrapper .exp-cards-deck,
 .exp-plan-section.active-unlimited .monthly-wrapper .exp-cards-deck {
   display: flex;
@@ -141,14 +148,14 @@
   min-height: 460px !important;
   max-height: 460px !important;
   opacity: 1 !important;
-  transform: translate(0, 0) !important;
+  transform: translate(0, 0) rotate(0deg) !important;
   z-index: 1 !important;
   box-shadow: none !important;
   pointer-events: auto !important;
   filter: none !important;
 }
 
-/* --- COLLAPSED STATE --- */
+/* --- COLLAPSED STATE (Tactile Stacked Cards with Organic Tilt) --- */
 .exp-plan-section.active-unlimited .single-jobs-wrapper .exp-cards-deck,
 .exp-plan-section.active-single .monthly-wrapper .exp-cards-deck {
   display: block;
@@ -175,51 +182,51 @@
   border: 1px solid var(--neutral-300) !important;
 }
 
-/* Card 1 (Top Visible Card) */
+/* Card 1 (Top Visible Card - Straight) */
 .exp-plan-section.active-unlimited .single-jobs-wrapper .card-classic,
 .exp-plan-section.active-single .monthly-wrapper .card-monthly {
   z-index: 3;
-  transform: translate(0, 0);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transform: translate(0, 0) rotate(0deg);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
   opacity: 1;
   background: #FFFFFF;
 }
 
-/* Card 2 (Middle Layer - 8px Offset) */
+/* Card 2 (Middle Layer - 8px Right, 4px Down, 0.6deg Tilt) */
 .exp-plan-section.active-unlimited .single-jobs-wrapper .card-premium,
 .exp-plan-section.active-single .monthly-wrapper .card-quarterly {
   z-index: 2;
-  transform: translate(8px, 4px);
+  transform: translate(8px, 4px) rotate(0.6deg);
   opacity: 0.95;
   background: #FAFAFA;
   border: 1px solid var(--neutral-300) !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.06);
 }
 
-/* Card 3 (Bottom Layer - 16px Offset) */
+/* Card 3 (Bottom Layer - 16px Right, 8px Down, 1.2deg Tilt) */
 .exp-plan-section.active-unlimited .single-jobs-wrapper .card-super,
 .exp-plan-section.active-single .monthly-wrapper .card-yearly {
   z-index: 1;
-  transform: translate(16px, 8px);
+  transform: translate(16px, 8px) rotate(1.2deg);
   opacity: 0.88;
   background: #F5F5F5;
   border: 1px solid var(--neutral-300) !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
 }
 
-/* Subtle Hover Lift Effect */
+/* Subtle Hover Staggered Playfulness */
 .exp-plan-section.active-unlimited .single-jobs-wrapper:hover .card-premium {
-  transform: translate(12px, 4px);
+  transform: translate(12px, 3px) rotate(0.8deg);
 }
 .exp-plan-section.active-unlimited .single-jobs-wrapper:hover .card-super {
-  transform: translate(22px, 8px);
+  transform: translate(22px, 6px) rotate(1.6deg);
 }
 
 .exp-plan-section.active-single .monthly-wrapper:hover .card-quarterly {
-  transform: translate(12px, 4px);
+  transform: translate(12px, 3px) rotate(0.8deg);
 }
 .exp-plan-section.active-single .monthly-wrapper:hover .card-yearly {
-  transform: translate(22px, 8px);
+  transform: translate(22px, 6px) rotate(1.6deg);
 }
 
 /* --- View More Plans Bottom CTA --- */
