@@ -265,7 +265,7 @@ body {
   color: var(--blue-500);
   text-decoration: underline;
   font-size: 14px;
-  text-align: center;
+  text-align: left;
   margin-top: 16px;
   display: block;
   cursor: pointer;
