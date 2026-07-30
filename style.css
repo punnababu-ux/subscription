@@ -383,7 +383,9 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -979,10 +981,6 @@ input:checked + .slider:before {
 .cross-sell-container .monthly-wrapper {
   background-color: #221C2B;
   border-radius: 12px;
-}
-
-.cross-sell-container .monthly-wrapper .card {
-  background-color: white;
 }
 
 .cross-sell-container .single-jobs-header {
