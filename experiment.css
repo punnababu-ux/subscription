@@ -1,14 +1,14 @@
-/* experiment.css - Perfect Height Alignment & Zero Text Overflow */
+/* experiment.css - Rock-Solid Static Text & Smooth Sliding Deck Animation */
 
 .exp-plan-section {
   display: flex;
   gap: 16px;
   align-items: stretch;
-  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: flex 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .exp-wrapper {
-  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: flex 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   box-sizing: border-box;
   overflow: hidden !important;
   display: flex;
@@ -23,7 +23,7 @@
 }
 
 .exp-wrapper .wrapper-body {
-  padding: 0 16px 16px 16px !important; /* Strictly 16px bottom, left, and right padding */
+  padding: 0 16px 16px 16px !important;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -35,7 +35,7 @@
   cursor: default;
 }
 .exp-plan-section.active-single .monthly-wrapper {
-  flex: 0 0 324px;
+  flex: 0 0 358px;
   cursor: pointer;
 }
 
@@ -44,7 +44,7 @@
   cursor: default;
 }
 .exp-plan-section.active-unlimited .single-jobs-wrapper {
-  flex: 0 0 324px;
+  flex: 0 0 358px;
   cursor: pointer;
 }
 
@@ -64,15 +64,19 @@
   gap: 12px;
 }
 
-/* Strict Internal Card Styling (Fixes Note Text Overflow) */
+/* PERMANENT FIXED 310px CARD WIDTH (Zero Text Reflow or Resizing) */
 .exp-card {
+  width: 310px !important;
+  min-width: 310px !important;
+  max-width: 310px !important;
   box-sizing: border-box !important;
-  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   margin-bottom: 0 !important;
   overflow: hidden !important;
   display: flex !important;
   flex-direction: column !important;
   padding: 20px 16px 16px 16px !important;
+  /* Animate ONLY transform, opacity, and box-shadow for GPU-smooth card sliding */
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 .exp-card .features {
@@ -90,7 +94,7 @@
   border-top: 1px solid var(--neutral-200) !important;
 }
 
-/* --- EXPANDED STATE (Card height matches deck + CTA height of collapsed container) --- */
+/* --- EXPANDED STATE (310px Cards in a Horizontal Row) --- */
 .exp-plan-section.active-single .single-jobs-wrapper .exp-cards-deck,
 .exp-plan-section.active-unlimited .monthly-wrapper .exp-cards-deck {
   display: flex;
@@ -102,21 +106,22 @@
   position: relative !important;
   top: 0 !important;
   left: 0 !important;
-  flex: 1 !important;
-  width: auto !important;
-  min-width: 0 !important;
+  flex: none !important;
+  width: 310px !important;
+  min-width: 310px !important;
+  max-width: 310px !important;
   height: 454px !important;
   min-height: 454px !important;
   max-height: 454px !important;
   opacity: 1 !important;
-  transform: none !important;
+  transform: translate(0, 0) !important;
   z-index: 1 !important;
   box-shadow: none !important;
   pointer-events: auto !important;
   filter: none !important;
 }
 
-/* --- COLLAPSED STATE --- */
+/* --- COLLAPSED STATE (310px Cards Stacked & Peeking) --- */
 .exp-plan-section.active-unlimited .single-jobs-wrapper .exp-cards-deck,
 .exp-plan-section.active-single .monthly-wrapper .exp-cards-deck {
   display: block;
@@ -129,8 +134,9 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 276px !important;
-  min-width: 276px !important;
+  width: 310px !important;
+  min-width: 310px !important;
+  max-width: 310px !important;
   height: 424px !important;
   min-height: 424px !important;
   max-height: 424px !important;
