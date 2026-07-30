@@ -1,4 +1,4 @@
-/* experiment.css - 100% Symmetrical Expanded & Collapsed Padding */
+/* experiment.css - Symmetrical Layout & Optical Header Alignment */
 
 .exp-plan-section {
   display: flex;
@@ -16,22 +16,42 @@
   flex-direction: column;
 }
 
-/* Header & Body Equal 16px Padding System */
+/* Header Optical Alignment */
 .exp-wrapper .wrapper-header {
   padding: 16px 16px 12px 16px !important;
   height: auto !important;
   flex-shrink: 0;
 }
 
+.header-title {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+.single-jobs-header img {
+  width: 18px !important;
+  height: 18px !important;
+  display: block !important;
+  flex-shrink: 0 !important;
+}
+
+.single-jobs-header span {
+  display: inline-block !important;
+  line-height: 1 !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: var(--neutral-900) !important;
+}
+
 .exp-wrapper .wrapper-body {
-  padding: 0 16px 16px 16px !important; /* Exactly 16px left, right, and bottom */
+  padding: 0 16px 16px 16px !important;
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
 /* Explicit Symmetrical Flex Widths */
-/* Expanded Container: 954px deck + 32px side padding = 986px */
 .exp-plan-section.active-single .single-jobs-wrapper {
   flex: 0 0 986px;
   cursor: default;
@@ -95,7 +115,7 @@
   border-top: 1px solid var(--neutral-200) !important;
 }
 
-/* --- EXPANDED STATE (310px Cards in a Horizontal Row) --- */
+/* --- EXPANDED STATE --- */
 .exp-plan-section.active-single .single-jobs-wrapper .exp-cards-deck,
 .exp-plan-section.active-unlimited .monthly-wrapper .exp-cards-deck {
   display: flex;
@@ -122,7 +142,7 @@
   filter: none !important;
 }
 
-/* --- COLLAPSED STATE (310px Cards Stacked & Peeking) --- */
+/* --- COLLAPSED STATE --- */
 .exp-plan-section.active-unlimited .single-jobs-wrapper .exp-cards-deck,
 .exp-plan-section.active-single .monthly-wrapper .exp-cards-deck {
   display: block;
