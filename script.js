@@ -39,7 +39,7 @@ function openModal(cardElement, planName, basePrice) {
   currentPlanName = planName;
   
   const toggle = document.getElementById('toggle-monthly');
-  if (toggle && toggle.checked) {
+  if ((toggle && toggle.checked) || planName.toLowerCase().includes('super')) {
     // Show old quantity upsell modal
     const nameSpans = document.querySelectorAll('.upsell-plan-name');
     nameSpans.forEach(span => span.textContent = planName);
