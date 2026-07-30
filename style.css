@@ -1006,5 +1006,5 @@ input:checked + .slider:before {
   color: var(--neutral-600);
   font-size: 14px;
   font-weight: 500;
-  margin-right: 6px;
+  margin-left: 6px;
 }
