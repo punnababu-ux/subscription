@@ -41,6 +41,15 @@ function handleUnlimitedClick(event, planName, price) {
   window.location.href = `checkout.html?plan=${encodeURIComponent(planName)}&price=${price}`;
 }
 
+function selectExpSlot(el, slots) {
+  if (event) event.stopPropagation();
+  const parent = el.parentElement;
+  if (!parent) return;
+  const btns = parent.querySelectorAll('.toggle-btn');
+  btns.forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+}
+
 // Old User Pricing Toggle sync for experiment page
 document.addEventListener('DOMContentLoaded', () => {
   const oldUserToggle = document.getElementById('toggle-old-user');
