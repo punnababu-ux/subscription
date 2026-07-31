@@ -111,7 +111,7 @@ function continueWithSingleJob() {
 }
 
 function switchToMonthly() {
-  window.location.href = `checkout.html?plan=${encodeURIComponent('Apna Unlimited Monthly Plan')}&count=1&price=2499`;
+  window.location.href = `checkout.html?plan=Monthly&count=1&price=2499`;
 }
 
 function goToCheckout() {

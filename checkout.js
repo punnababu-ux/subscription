@@ -20,8 +20,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const ADDON_PRICE = 1190;
 
-  // Monthly Plan Logic
-  if (planName === 'Monthly') {
+  // Monthly / Unlimited Plan Logic (Displays Payment Mode Selection, Bypasses AI Addon)
+  const isMonthlyOrUnlimited = planName === 'Monthly' || 
+                               planName.toLowerCase().includes('monthly') || 
+                               planName.toLowerCase().includes('unlimited');
+
+  if (isMonthlyOrUnlimited) {
     const singleJobCheckout = document.querySelector('.single-job-checkout');
     const monthlyCheckout = document.querySelector('.monthly-checkout');
     if (singleJobCheckout) singleJobCheckout.style.display = 'none';
@@ -126,20 +130,20 @@ document.addEventListener("DOMContentLoaded", () => {
       checkoutGrid.style.maxWidth = '600px';
       checkoutGrid.style.margin = '0 auto';
     }
-    aiToggleBtn.checked = false; // ensure it doesn't get calculated
+    if (aiToggleBtn) aiToggleBtn.checked = false; // ensure it doesn't get calculated
   }
 
   function calculateTotals() {
     let subtotal = basePrice;
     
     // Add AI Addon price if toggled
-    if (aiToggleBtn.checked) {
+    if (aiToggleBtn && aiToggleBtn.checked) {
       subtotal += ADDON_PRICE;
-      sumAiAddonEl.classList.remove('hidden');
-      aiAddonBox.classList.add('active-addon');
+      if (sumAiAddonEl) sumAiAddonEl.classList.remove('hidden');
+      if (aiAddonBox) aiAddonBox.classList.add('active-addon');
     } else {
-      sumAiAddonEl.classList.add('hidden');
-      aiAddonBox.classList.remove('active-addon');
+      if (sumAiAddonEl) sumAiAddonEl.classList.add('hidden');
+      if (aiAddonBox) aiAddonBox.classList.remove('active-addon');
     }
 
     // Calculate tax (18%)
@@ -147,12 +151,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const total = subtotal + tax;
 
     // Update DOM
-    sumSubtotalEl.textContent = `₹${subtotal.toLocaleString('en-IN')}`;
-    sumTaxEl.textContent = `₹${tax.toLocaleString('en-IN')}`;
-    sumTotalEl.textContent = `₹${total.toLocaleString('en-IN')}`;
+    if (sumSubtotalEl) sumSubtotalEl.textContent = `₹${subtotal.toLocaleString('en-IN')}`;
+    if (sumTaxEl) sumTaxEl.textContent = `₹${tax.toLocaleString('en-IN')}`;
+    if (sumTotalEl) sumTotalEl.textContent = `₹${total.toLocaleString('en-IN')}`;
     
     // Update Checkout Button text
-    proceedBtn.textContent = `Proceed to pay ₹${total.toLocaleString('en-IN')}`;
+    if (proceedBtn) proceedBtn.textContent = `Proceed to pay ₹${total.toLocaleString('en-IN')}`;
   }
 
   // Handle Toggle Change
