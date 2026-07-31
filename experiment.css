@@ -1,8 +1,8 @@
-/* experiment.css - Standard Borders, Primary CTAs & Horizontal Alignment */
+/* experiment.css - 120fps Buttery Smooth Synchronized GPU Motion System */
 
 :root {
-  --exp-spring-easing: cubic-bezier(0.22, 1, 0.36, 1);
-  --exp-duration: 0.72s;
+  --exp-spring-easing: cubic-bezier(0.16, 1, 0.3, 1);
+  --exp-duration: 0.68s;
 }
 
 /* Darker, Richer Green Tone for Single Job Posting Container */
@@ -67,6 +67,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 /* Explicit Symmetrical Flex Widths */
@@ -93,6 +94,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  position: relative;
 }
 
 /* Cards Deck Layout */
@@ -166,14 +168,18 @@
   border-top: 1px solid var(--neutral-200) !important;
 }
 
-/* Unlimited Expanded Note below cards */
+/* Unlimited Expanded Note below cards - Absolute position to prevent layout reflow stutter */
 .unlimited-expanded-note {
-  display: none;
+  position: absolute;
+  bottom: -24px;
+  left: 0;
   font-size: 13px;
   line-height: 16px;
   color: #FFFFFF !important;
-  margin-top: 16px;
-  padding-left: 2px;
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+  transition: opacity 0.25s ease !important;
 }
 
 /* Hide card-level notes on unlimited cards when expanded */
@@ -183,20 +189,12 @@
 
 /* Show single note below unlimited cards when expanded */
 .exp-plan-section.active-unlimited .monthly-wrapper .unlimited-expanded-note {
-  display: block !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  transition: opacity 0.4s ease 0.2s !important;
 }
 
 /* --- JOB SLOTS TOGGLE IN UNLIMITED HEADER --- */
-/* Hide job slots toggle when collapsed */
-.exp-plan-section.active-single .monthly-wrapper .exp-slots-toggle {
-  display: none !important;
-}
-
-/* Show job slots toggle at far end opposite to logo when EXPANDED */
-.exp-plan-section.active-unlimited .monthly-wrapper .exp-slots-toggle {
-  display: flex !important;
-}
-
 .exp-slots-toggle {
   display: flex;
   background: #FFFFFF;
@@ -205,6 +203,17 @@
   padding: 2px !important;
   gap: 2px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.95);
+  transition: opacity 0.2s ease, transform 0.2s ease !important;
+}
+
+.exp-plan-section.active-unlimited .monthly-wrapper .exp-slots-toggle {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  transform: scale(1) !important;
+  transition: opacity 0.35s ease 0.15s, transform 0.35s ease 0.15s !important;
 }
 
 .exp-slots-toggle .toggle-btn {
@@ -246,7 +255,7 @@
   box-shadow: none !important;
   border: 1px solid var(--neutral-200) !important;
   pointer-events: auto !important;
-  transition-delay: 0.03s !important;
+  transition-delay: 0.02s !important;
 }
 
 .exp-plan-section.active-single .single-jobs-wrapper .card-super {
@@ -256,17 +265,20 @@
   box-shadow: none !important;
   border: 1px solid var(--neutral-200) !important;
   pointer-events: auto !important;
-  transition-delay: 0.06s !important;
+  transition-delay: 0.04s !important;
 }
 
-/* --- SINGLE JOBS COLLAPSED STATE --- */
+/* --- SINGLE JOBS COLLAPSED STATE (ZERO-DELAY SYNCHRONIZED LOCKSTEP) --- */
+.exp-plan-section.active-unlimited .single-jobs-wrapper .exp-card {
+  transition-delay: 0s !important;
+}
+
 .exp-plan-section.active-unlimited .single-jobs-wrapper .card-classic {
   z-index: 3;
   transform: translate(0px, 0px) rotate(0deg) !important;
   opacity: 1 !important;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1) !important;
   pointer-events: none;
-  transition-delay: 0s !important;
 }
 
 .exp-plan-section.active-unlimited .single-jobs-wrapper .card-premium {
@@ -276,7 +288,6 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06) !important;
   border: 1px solid var(--neutral-300) !important;
   pointer-events: none;
-  transition-delay: 0.02s !important;
 }
 
 .exp-plan-section.active-unlimited .single-jobs-wrapper .card-super {
@@ -286,7 +297,6 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
   border: 1px solid var(--neutral-300) !important;
   pointer-events: none;
-  transition-delay: 0.04s !important;
 }
 
 .exp-plan-section.active-unlimited .single-jobs-wrapper:hover .card-premium {
@@ -303,7 +313,7 @@
   opacity: 1 !important;
   box-shadow: none !important;
   pointer-events: auto !important;
-  transition-delay: 0.06s !important;
+  transition-delay: 0.04s !important;
 }
 
 .exp-plan-section.active-unlimited .monthly-wrapper .card-quarterly {
@@ -312,7 +322,7 @@
   opacity: 1 !important;
   box-shadow: none !important;
   pointer-events: auto !important;
-  transition-delay: 0.03s !important;
+  transition-delay: 0.02s !important;
 }
 
 .exp-plan-section.active-unlimited .monthly-wrapper .card-yearly {
@@ -324,14 +334,17 @@
   transition-delay: 0s !important;
 }
 
-/* --- APNA UNLIMITED COLLAPSED STATE --- */
+/* --- APNA UNLIMITED COLLAPSED STATE (ZERO-DELAY SYNCHRONIZED LOCKSTEP) --- */
+.exp-plan-section.active-single .monthly-wrapper .exp-card {
+  transition-delay: 0s !important;
+}
+
 .exp-plan-section.active-single .monthly-wrapper .card-yearly {
   z-index: 3;
   transform: translate(16px, 0px) rotate(0deg) !important;
   opacity: 1 !important;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1) !important;
   pointer-events: none;
-  transition-delay: 0s !important;
 }
 
 .exp-plan-section.active-single .monthly-wrapper .card-quarterly {
@@ -341,7 +354,6 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06) !important;
   border: 1px solid var(--neutral-300) !important;
   pointer-events: none;
-  transition-delay: 0.02s !important;
 }
 
 .exp-plan-section.active-single .monthly-wrapper .card-monthly {
@@ -351,7 +363,6 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
   border: 1px solid var(--neutral-300) !important;
   pointer-events: none;
-  transition-delay: 0.04s !important;
 }
 
 .exp-plan-section.active-single .monthly-wrapper:hover .card-quarterly {
