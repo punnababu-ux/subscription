@@ -141,15 +141,15 @@ document.addEventListener("DOMContentLoaded", () => {
     if (sumBulkDiscountEl) sumBulkDiscountEl.classList.add('hidden');
   }
 
-  // Set single AI Calling Agent card labels & fixed ₹1,190 price for all job counts
+  // Set single AI Calling Agent card labels to AI Calling Agent x1 & fixed ₹1,190 price for all job counts
   const addonTitleEl = document.querySelector('#ai-addon-box h3');
   const addonPriceEl = document.querySelector('.addon-price');
   const addonOldPriceEl = document.querySelector('.addon-old-price');
   const sumAiAddonNameEl = document.querySelector('#summary-ai-addon .bold-text:first-child');
   const sumAiAddonValEl = document.querySelector('#summary-ai-addon .bold-text:last-child');
 
-  if (addonTitleEl) addonTitleEl.textContent = `AI Calling Agent`;
-  if (sumAiAddonNameEl) sumAiAddonNameEl.textContent = `AI Calling Agent`;
+  if (addonTitleEl) addonTitleEl.textContent = `AI Calling Agent x1`;
+  if (sumAiAddonNameEl) sumAiAddonNameEl.textContent = `AI Calling Agent x1`;
   if (addonPriceEl) addonPriceEl.textContent = `₹${ADDON_PRICE.toLocaleString('en-IN')}`;
   if (addonOldPriceEl) addonOldPriceEl.textContent = `₹${ADDON_OLD_PRICE.toLocaleString('en-IN')}`;
   if (sumAiAddonValEl) sumAiAddonValEl.textContent = `₹${ADDON_PRICE.toLocaleString('en-IN')}`;
