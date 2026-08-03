@@ -36,7 +36,13 @@
           <div class="summary-content">
             <div class="line-item">
               <span id="summary-plan-name" class="bold-text">Premium job x 1</span>
-              <span id="summary-plan-price" class="bold-text">₹2,499</span>
+              <span id="summary-plan-price" class="bold-text">₹1,999</span>
+            </div>
+
+            <!-- Bulk Discount Line Item -->
+            <div class="line-item hidden" id="summary-bulk-discount">
+              <span class="gray-text">Bulk discount</span>
+              <span id="summary-discount-val" class="bold-text" style="color: var(--core-green);">-₹0</span>
             </div>
 
             <div class="line-item hidden" id="summary-ai-addon">
@@ -48,7 +54,7 @@
             
             <div class="line-item">
               <span class="gray-text">Sub total</span>
-              <span id="summary-subtotal" class="bold-text">₹2,499</span>
+              <span id="summary-subtotal" class="bold-text">₹1,999</span>
             </div>
             
             <div class="line-item tax-row">
@@ -63,14 +69,14 @@
                   </svg>
                 </div>
               </div>
-              <span id="summary-tax" class="bold-text">₹450</span>
+              <span id="summary-tax" class="bold-text">₹360</span>
             </div>
             
             <div class="divider thick"></div>
             
             <div class="line-item total-row">
               <div class="total-label">Total <span class="inc-tax">(Inc tax)</span></div>
-              <span id="summary-total" class="total-price">₹2,949</span>
+              <span id="summary-total" class="total-price">₹2,359</span>
             </div>
             
             <p class="disclaimer summary-disclaimer">
@@ -98,6 +104,7 @@
                 </svg>
                 <h3>AI Calling Agent</h3>
               </div>
+
               <div class="addon-price-block">
                 <span class="addon-old-price">₹1,700</span>
                 <span class="addon-price">₹1,190</span>
@@ -138,7 +145,7 @@
             100% safe and secure checkout
           </div>
 
-          <button class="btn primary proceed-btn" id="proceed-btn">Proceed to pay ₹2,949</button>
+          <button class="btn primary proceed-btn" id="proceed-btn">Proceed to pay ₹2,359</button>
 
         </div>
       </div>

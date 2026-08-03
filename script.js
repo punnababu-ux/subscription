@@ -117,22 +117,20 @@ function switchToMonthly() {
 function goToCheckout() {
   const activeCard = document.querySelector('.upsell-card.active');
   let count = 1;
-  let finalPrice = currentBasePrice;
 
   if (activeCard) {
     if (activeCard.innerText.includes('4 Premium') || activeCard.innerText.includes('4 Classic') || activeCard.innerText.includes('4 Super')) {
       count = 4;
-      finalPrice = Math.round(currentBasePrice * 4 * 0.9);
     } else if (activeCard.innerText.includes('8 Premium') || activeCard.innerText.includes('8 Classic') || activeCard.innerText.includes('8 Super')) {
       count = 8;
-      finalPrice = Math.round(currentBasePrice * 8 * 0.8);
     } else {
       count = 1;
-      finalPrice = currentBasePrice;
     }
   }
 
-  window.location.href = `checkout.html?plan=${encodeURIComponent(currentPlanName)}&count=${count}&price=${finalPrice}`;
+  const fullPrice = currentBasePrice * count;
+
+  window.location.href = `checkout.html?plan=${encodeURIComponent(currentPlanName)}&count=${count}&price=${fullPrice}`;
 }
 
 function selectUpsell(card, count) {

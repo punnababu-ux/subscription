@@ -3,11 +3,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const urlParams = new URLSearchParams(window.location.search);
   const planName = urlParams.get('plan') || 'Premium';
   const planCount = parseInt(urlParams.get('count') || '1');
-  const basePrice = parseInt(urlParams.get('price') || '2499'); // Default based on screenshot
+  const rawPriceParam = parseInt(urlParams.get('price') || '1999');
 
   // DOM Elements
   const sumPlanNameEl = document.getElementById('summary-plan-name');
   const sumPlanPriceEl = document.getElementById('summary-plan-price');
+  const sumBulkDiscountEl = document.getElementById('summary-bulk-discount');
+  const sumDiscountValEl = document.getElementById('summary-discount-val');
   
   const sumAiAddonEl = document.getElementById('summary-ai-addon');
   const sumSubtotalEl = document.getElementById('summary-subtotal');
@@ -72,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
           optionOnetime.style.backgroundColor = 'transparent';
         }
         
-        discount = Math.round(basePrice * 0.05);
+        discount = Math.round(rawPriceParam * 0.05);
         if (document.getElementById('monthly-discount-val')) {
           document.getElementById('monthly-discount-val').textContent = `-₹${discount.toLocaleString('en-IN')}`;
         }
@@ -92,7 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (autorenewBox) autorenewBox.style.display = 'none';
       }
       
-      const subtotal = basePrice - discount;
+      const subtotal = rawPriceParam - discount;
       const tax = Math.round(subtotal * 0.18);
       const total = subtotal + tax;
       
@@ -114,9 +116,33 @@ document.addEventListener("DOMContentLoaded", () => {
     return; // Exit here, do not run Single Job logic
   }
 
-  // --- Single Job Logic (1, 4, 8 jobs all get AI Calling Agent upsell) ---
+  // --- Single Job Logic (Actual Amount + Separate Bulk Discount Line Item) ---
+  
+  // Calculate full original price vs bulk discount
+  let fullJobPrice = rawPriceParam;
+  let bulkDiscount = 0;
+
+  if (planCount === 4) {
+    // If rawPriceParam is already discounted price or unit price:
+    if (rawPriceParam < 5000) fullJobPrice = rawPriceParam * 4;
+    bulkDiscount = Math.round(fullJobPrice * 0.10); // 10% bulk discount for 4 jobs
+  } else if (planCount === 8) {
+    if (rawPriceParam < 9000) fullJobPrice = rawPriceParam * 8;
+    bulkDiscount = Math.round(fullJobPrice * 0.20); // 20% bulk discount for 8 jobs
+  }
+
+  const netJobPrice = fullJobPrice - bulkDiscount;
+
   if (sumPlanNameEl) sumPlanNameEl.textContent = `${planName} job x ${planCount}`;
-  if (sumPlanPriceEl) sumPlanPriceEl.textContent = `₹${basePrice.toLocaleString('en-IN')}`;
+  if (sumPlanPriceEl) sumPlanPriceEl.textContent = `₹${fullJobPrice.toLocaleString('en-IN')}`;
+
+  // Bulk Discount Line Item
+  if (planCount > 1 && bulkDiscount > 0) {
+    if (sumBulkDiscountEl) sumBulkDiscountEl.classList.remove('hidden');
+    if (sumDiscountValEl) sumDiscountValEl.textContent = `-₹${bulkDiscount.toLocaleString('en-IN')}`;
+  } else {
+    if (sumBulkDiscountEl) sumBulkDiscountEl.classList.add('hidden');
+  }
 
   // Update AI addon card labels & prices for planCount (1, 4, 8 jobs)
   const addonTitleEl = document.querySelector('#ai-addon-box h3');
@@ -134,7 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (sumAiAddonValEl) sumAiAddonValEl.textContent = `₹${currentAddonPrice.toLocaleString('en-IN')}`;
 
   function calculateTotals() {
-    let subtotal = basePrice;
+    let subtotal = netJobPrice;
     
     // Add AI Addon price if toggled
     if (aiToggleBtn && aiToggleBtn.checked) {
