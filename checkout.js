@@ -216,8 +216,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const sumAiAddonNameEl = document.querySelector('#summary-ai-addon .bold-text:first-child');
   const sumAiAddonValEl = document.querySelector('#summary-ai-addon .bold-text:last-child');
 
-  if (addonTitleEl) addonTitleEl.textContent = `AI Calling Agent x1`;
-  if (sumAiAddonNameEl) sumAiAddonNameEl.textContent = `AI Calling Agent x1`;
+  if (addonTitleEl) addonTitleEl.textContent = `AI Calling Agent x 1`;
+  if (sumAiAddonNameEl) sumAiAddonNameEl.textContent = `AI Calling Agent x 1`;
   if (addonPriceEl) addonPriceEl.textContent = `₹${ADDON_PRICE.toLocaleString('en-IN')}`;
   if (addonOldPriceEl) addonOldPriceEl.textContent = `₹${ADDON_OLD_PRICE.toLocaleString('en-IN')}`;
   if (sumAiAddonValEl) sumAiAddonValEl.textContent = `₹${ADDON_PRICE.toLocaleString('en-IN')}`;
