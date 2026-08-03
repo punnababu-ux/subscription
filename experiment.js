@@ -17,8 +17,13 @@ function setActiveSection(section) {
   }
 }
 
-// Trigger expand animation ONLY when clicking the collapsed container edge or link
+// Trigger expand animation ONLY when clicking the container background, header, or link
+// (Ignore clicks originating from cards or buttons so CTA clicks go directly to checkout/modal)
 function onContainerClick(event, targetSection) {
+  if (event && event.target && (event.target.closest('button') || event.target.closest('.card') || event.target.closest('.cta-btn'))) {
+    return;
+  }
+
   if (currentActiveSection !== targetSection) {
     if (event) event.stopPropagation();
     setActiveSection(targetSection);
@@ -27,7 +32,9 @@ function onContainerClick(event, targetSection) {
 
 // Clicking a Single Job card or CTA button always opens popup / proceeds to checkout
 function handleCardClick(event, planName) {
-  if (event) event.stopPropagation();
+  if (event) {
+    if (typeof event.stopPropagation === 'function') event.stopPropagation();
+  }
   
   if (typeof openModal === 'function') {
     openModal(null, planName);
@@ -36,13 +43,17 @@ function handleCardClick(event, planName) {
 
 // Clicking an Unlimited card or CTA button always proceeds directly to checkout
 function handleUnlimitedClick(event, planName, price) {
-  if (event) event.stopPropagation();
+  if (event) {
+    if (typeof event.stopPropagation === 'function') event.stopPropagation();
+  }
   
   window.location.href = `checkout.html?plan=${encodeURIComponent(planName)}&price=${price}`;
 }
 
 function selectExpSlot(el, slots) {
-  if (event) event.stopPropagation();
+  if (event) {
+    if (typeof event.stopPropagation === 'function') event.stopPropagation();
+  }
   const parent = el.parentElement;
   if (!parent) return;
   const btns = parent.querySelectorAll('.toggle-btn');
