@@ -25,31 +25,19 @@ function onContainerClick(event, targetSection) {
   }
 }
 
+// Clicking a Single Job card or CTA button always opens popup / proceeds to checkout
 function handleCardClick(event, planName) {
   if (event) event.stopPropagation();
   
-  // If clicked while single section is collapsed, expand single section
-  if (currentActiveSection !== 'single') {
-    setActiveSection('single');
-    return;
-  }
-  
-  // If already active section, open popup directly without section animation
   if (typeof openModal === 'function') {
     openModal(null, planName);
   }
 }
 
+// Clicking an Unlimited card or CTA button always proceeds directly to checkout
 function handleUnlimitedClick(event, planName, price) {
   if (event) event.stopPropagation();
   
-  // If clicked while unlimited section is collapsed, expand unlimited section
-  if (currentActiveSection !== 'unlimited') {
-    setActiveSection('unlimited');
-    return;
-  }
-  
-  // If already active section, proceed to checkout directly without section animation
   window.location.href = `checkout.html?plan=${encodeURIComponent(planName)}&price=${price}`;
 }
 
