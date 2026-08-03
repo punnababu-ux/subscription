@@ -18,12 +18,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const aiAddonBox = document.getElementById('ai-addon-box');
   const proceedBtn = document.getElementById('proceed-btn');
 
-  const ADDON_PRICE = 1190;
+  const BASE_ADDON_PRICE = 1190;
+  const BASE_ADDON_OLD_PRICE = 1700;
+
+  const currentAddonPrice = BASE_ADDON_PRICE * planCount;
+  const currentAddonOldPrice = BASE_ADDON_OLD_PRICE * planCount;
 
   // Monthly / Unlimited Plan Logic (Displays Payment Mode Selection, Bypasses AI Addon)
   const isMonthlyOrUnlimited = planName === 'Monthly' || 
                                planName.toLowerCase().includes('monthly') || 
-                               planName.toLowerCase().includes('unlimited');
+                               planName.toLowerCase().includes('unlimited') ||
+                               planName.toLowerCase().includes('quarterly') ||
+                               planName.toLowerCase().includes('yearly');
 
   if (isMonthlyOrUnlimited) {
     const singleJobCheckout = document.querySelector('.single-job-checkout');
@@ -108,37 +114,31 @@ document.addEventListener("DOMContentLoaded", () => {
     return; // Exit here, do not run Single Job logic
   }
 
-  // --- Single Job Logic below ---
-  sumPlanNameEl.textContent = `${planName} job x ${planCount}`;
-  sumPlanPriceEl.textContent = `₹${basePrice.toLocaleString('en-IN')}`;
+  // --- Single Job Logic (1, 4, 8 jobs all get AI Calling Agent upsell) ---
+  if (sumPlanNameEl) sumPlanNameEl.textContent = `${planName} job x ${planCount}`;
+  if (sumPlanPriceEl) sumPlanPriceEl.textContent = `₹${basePrice.toLocaleString('en-IN')}`;
 
-  // Hide AI addon for multiple jobs
-  if (planCount > 1) {
-    const checkoutRight = document.querySelector('.checkout-right');
-    const checkoutGrid = document.querySelector('.checkout-grid');
-    const checkoutLeftCard = document.querySelector('.purchase-summary-card');
-    const secureCheckout = document.querySelector('.secure-checkout');
-    
-    if (checkoutLeftCard && secureCheckout && proceedBtn) {
-      checkoutLeftCard.appendChild(secureCheckout);
-      checkoutLeftCard.appendChild(proceedBtn);
-    }
-    
-    if (checkoutRight) checkoutRight.style.display = 'none';
-    if (checkoutGrid) {
-      checkoutGrid.style.gridTemplateColumns = '1fr';
-      checkoutGrid.style.maxWidth = '600px';
-      checkoutGrid.style.margin = '0 auto';
-    }
-    if (aiToggleBtn) aiToggleBtn.checked = false; // ensure it doesn't get calculated
-  }
+  // Update AI addon card labels & prices for planCount (1, 4, 8 jobs)
+  const addonTitleEl = document.querySelector('#ai-addon-box h3');
+  const addonPriceEl = document.querySelector('.addon-price');
+  const addonOldPriceEl = document.querySelector('.addon-old-price');
+  const sumAiAddonNameEl = document.querySelector('#summary-ai-addon .bold-text:first-child');
+  const sumAiAddonValEl = document.querySelector('#summary-ai-addon .bold-text:last-child');
+
+  const addonLabelText = planCount > 1 ? `AI Calling Agent x ${planCount}` : `AI Calling Agent`;
+  
+  if (addonTitleEl) addonTitleEl.textContent = addonLabelText;
+  if (sumAiAddonNameEl) sumAiAddonNameEl.textContent = addonLabelText;
+  if (addonPriceEl) addonPriceEl.textContent = `₹${currentAddonPrice.toLocaleString('en-IN')}`;
+  if (addonOldPriceEl) addonOldPriceEl.textContent = `₹${currentAddonOldPrice.toLocaleString('en-IN')}`;
+  if (sumAiAddonValEl) sumAiAddonValEl.textContent = `₹${currentAddonPrice.toLocaleString('en-IN')}`;
 
   function calculateTotals() {
     let subtotal = basePrice;
     
     // Add AI Addon price if toggled
     if (aiToggleBtn && aiToggleBtn.checked) {
-      subtotal += ADDON_PRICE;
+      subtotal += currentAddonPrice;
       if (sumAiAddonEl) sumAiAddonEl.classList.remove('hidden');
       if (aiAddonBox) aiAddonBox.classList.add('active-addon');
     } else {
