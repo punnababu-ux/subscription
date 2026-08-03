@@ -44,7 +44,8 @@ function openModal(cardElement, planName) {
   
   const toggle = document.getElementById('toggle-monthly');
   const hasMonthlyUpsellModal = !!document.getElementById('monthlyUpsellModal');
-  const showQuantityUpsell = !hasMonthlyUpsellModal || (toggle && toggle.checked) || planName.toLowerCase().includes('super');
+  const isExperimentPage = !!document.getElementById('expSection') || window.location.pathname.includes('experiment.html');
+  const showQuantityUpsell = isExperimentPage || !hasMonthlyUpsellModal || (toggle && toggle.checked) || planName.toLowerCase().includes('super');
 
   if (showQuantityUpsell) {
     // Show quantity upsell modal
