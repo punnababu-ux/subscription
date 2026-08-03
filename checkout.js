@@ -20,11 +20,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const aiAddonBox = document.getElementById('ai-addon-box');
   const proceedBtn = document.getElementById('proceed-btn');
 
-  const BASE_ADDON_PRICE = 1190;
-  const BASE_ADDON_OLD_PRICE = 1700;
-
-  const currentAddonPrice = BASE_ADDON_PRICE * planCount;
-  const currentAddonOldPrice = BASE_ADDON_OLD_PRICE * planCount;
+  // Fixed single AI Calling Agent price (₹1,190) for 1, 4, and 8 jobs
+  const ADDON_PRICE = 1190;
+  const ADDON_OLD_PRICE = 1700;
 
   // Monthly / Unlimited Plan Logic (Displays Payment Mode Selection, Bypasses AI Addon)
   const isMonthlyOrUnlimited = planName === 'Monthly' || 
@@ -123,7 +121,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let bulkDiscount = 0;
 
   if (planCount === 4) {
-    // If rawPriceParam is already discounted price or unit price:
     if (rawPriceParam < 5000) fullJobPrice = rawPriceParam * 4;
     bulkDiscount = Math.round(fullJobPrice * 0.10); // 10% bulk discount for 4 jobs
   } else if (planCount === 8) {
@@ -144,27 +141,25 @@ document.addEventListener("DOMContentLoaded", () => {
     if (sumBulkDiscountEl) sumBulkDiscountEl.classList.add('hidden');
   }
 
-  // Update AI addon card labels & prices for planCount (1, 4, 8 jobs)
+  // Set single AI Calling Agent card labels & fixed ₹1,190 price for all job counts
   const addonTitleEl = document.querySelector('#ai-addon-box h3');
   const addonPriceEl = document.querySelector('.addon-price');
   const addonOldPriceEl = document.querySelector('.addon-old-price');
   const sumAiAddonNameEl = document.querySelector('#summary-ai-addon .bold-text:first-child');
   const sumAiAddonValEl = document.querySelector('#summary-ai-addon .bold-text:last-child');
 
-  const addonLabelText = planCount > 1 ? `AI Calling Agent x ${planCount}` : `AI Calling Agent`;
-  
-  if (addonTitleEl) addonTitleEl.textContent = addonLabelText;
-  if (sumAiAddonNameEl) sumAiAddonNameEl.textContent = addonLabelText;
-  if (addonPriceEl) addonPriceEl.textContent = `₹${currentAddonPrice.toLocaleString('en-IN')}`;
-  if (addonOldPriceEl) addonOldPriceEl.textContent = `₹${currentAddonOldPrice.toLocaleString('en-IN')}`;
-  if (sumAiAddonValEl) sumAiAddonValEl.textContent = `₹${currentAddonPrice.toLocaleString('en-IN')}`;
+  if (addonTitleEl) addonTitleEl.textContent = `AI Calling Agent`;
+  if (sumAiAddonNameEl) sumAiAddonNameEl.textContent = `AI Calling Agent`;
+  if (addonPriceEl) addonPriceEl.textContent = `₹${ADDON_PRICE.toLocaleString('en-IN')}`;
+  if (addonOldPriceEl) addonOldPriceEl.textContent = `₹${ADDON_OLD_PRICE.toLocaleString('en-IN')}`;
+  if (sumAiAddonValEl) sumAiAddonValEl.textContent = `₹${ADDON_PRICE.toLocaleString('en-IN')}`;
 
   function calculateTotals() {
     let subtotal = netJobPrice;
     
-    // Add AI Addon price if toggled
+    // Add single AI Addon price if toggled
     if (aiToggleBtn && aiToggleBtn.checked) {
-      subtotal += currentAddonPrice;
+      subtotal += ADDON_PRICE;
       if (sumAiAddonEl) sumAiAddonEl.classList.remove('hidden');
       if (aiAddonBox) aiAddonBox.classList.add('active-addon');
     } else {
