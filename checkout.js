@@ -3,7 +3,22 @@ document.addEventListener("DOMContentLoaded", () => {
   const urlParams = new URLSearchParams(window.location.search);
   const planName = urlParams.get('plan') || 'Premium';
   const planCount = parseInt(urlParams.get('count') || '1');
-  const rawPriceParam = parseInt(urlParams.get('price') || '1999');
+  
+  // Resolve Unit Price cleanly without guesswork
+  let unitPrice = parseInt(urlParams.get('unitPrice') || '0');
+  
+  if (!unitPrice || isNaN(unitPrice)) {
+    const rawPriceParam = parseInt(urlParams.get('price') || '1999');
+    const lowerName = planName.toLowerCase();
+    
+    if (lowerName.includes('classic')) {
+      unitPrice = (rawPriceParam === 699 || rawPriceParam === 2796 || rawPriceParam === 2516 || rawPriceParam === 5592 || rawPriceParam === 4474) ? 699 : 999;
+    } else if (lowerName.includes('super')) {
+      unitPrice = (rawPriceParam === 2799 || rawPriceParam === 11196 || rawPriceParam === 10076 || rawPriceParam === 22392 || rawPriceParam === 17914) ? 2799 : 2999;
+    } else { // Premium
+      unitPrice = (rawPriceParam === 1399 || rawPriceParam === 5596 || rawPriceParam === 5036 || rawPriceParam === 11192 || rawPriceParam === 8954) ? 1399 : 1999;
+    }
+  }
 
   // DOM Elements
   const sumPlanNameEl = document.getElementById('summary-plan-name');
@@ -37,6 +52,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (singleJobCheckout) singleJobCheckout.style.display = 'none';
     if (monthlyCheckout) monthlyCheckout.style.display = '';
     
+    const monthlyBasePrice = parseInt(urlParams.get('price') || '2499');
+
     // Set auto-renew date (30 days from now)
     const renewDate = new Date();
     renewDate.setDate(renewDate.getDate() + 30);
@@ -72,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
           optionOnetime.style.backgroundColor = 'transparent';
         }
         
-        discount = Math.round(rawPriceParam * 0.05);
+        discount = Math.round(monthlyBasePrice * 0.05);
         if (document.getElementById('monthly-discount-val')) {
           document.getElementById('monthly-discount-val').textContent = `-₹${discount.toLocaleString('en-IN')}`;
         }
@@ -92,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (autorenewBox) autorenewBox.style.display = 'none';
       }
       
-      const subtotal = rawPriceParam - discount;
+      const subtotal = monthlyBasePrice - discount;
       const tax = Math.round(subtotal * 0.18);
       const total = subtotal + tax;
       
@@ -115,40 +132,13 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // --- Single Job Logic ---
-  let fullJobPrice = rawPriceParam;
+  const fullJobPrice = unitPrice * planCount;
   let bulkDiscount = 0;
 
   if (planCount === 4) {
-    // 4 jobs pack = 10% bulk discount
-    // Check if rawPriceParam is unit price, discounted total, or full total
-    if (rawPriceParam < 4000) {
-      // Unit price passed
-      fullJobPrice = rawPriceParam * 4;
-      bulkDiscount = Math.round(fullJobPrice * 0.10);
-    } else if (rawPriceParam % 10 !== 0 || rawPriceParam % 4 !== 0) {
-      // Discounted total passed
-      fullJobPrice = Math.round(rawPriceParam / 0.9);
-      bulkDiscount = fullJobPrice - rawPriceParam;
-    } else {
-      // Full total passed
-      fullJobPrice = rawPriceParam;
-      bulkDiscount = Math.round(fullJobPrice * 0.10);
-    }
+    bulkDiscount = Math.round(fullJobPrice * 0.10); // 10% discount for 4 jobs
   } else if (planCount === 8) {
-    // 8 jobs pack = 20% bulk discount
-    if (rawPriceParam < 4000) {
-      // Unit price passed
-      fullJobPrice = rawPriceParam * 8;
-      bulkDiscount = Math.round(fullJobPrice * 0.20);
-    } else if (rawPriceParam % 10 !== 0 || rawPriceParam % 8 !== 0) {
-      // Discounted total passed
-      fullJobPrice = Math.round(rawPriceParam / 0.8);
-      bulkDiscount = fullJobPrice - rawPriceParam;
-    } else {
-      // Full total passed
-      fullJobPrice = rawPriceParam;
-      bulkDiscount = Math.round(fullJobPrice * 0.20);
-    }
+    bulkDiscount = Math.round(fullJobPrice * 0.20); // 20% discount for 8 jobs
   }
 
   const netJobPrice = fullJobPrice - bulkDiscount;

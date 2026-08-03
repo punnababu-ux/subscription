@@ -107,7 +107,7 @@ function closeMonthlyModal() {
 }
 
 function continueWithSingleJob() {
-  window.location.href = `checkout.html?plan=${encodeURIComponent(currentPlanName)}&count=1&price=${currentBasePrice}`;
+  window.location.href = `checkout.html?plan=${encodeURIComponent(currentPlanName)}&count=1&unitPrice=${currentBasePrice}`;
 }
 
 function switchToMonthly() {
@@ -128,9 +128,7 @@ function goToCheckout() {
     }
   }
 
-  const fullPrice = currentBasePrice * count;
-
-  window.location.href = `checkout.html?plan=${encodeURIComponent(currentPlanName)}&count=${count}&price=${fullPrice}`;
+  window.location.href = `checkout.html?plan=${encodeURIComponent(currentPlanName)}&count=${count}&unitPrice=${currentBasePrice}`;
 }
 
 function selectUpsell(card, count) {
