@@ -52,11 +52,45 @@ document.addEventListener("DOMContentLoaded", () => {
     if (singleJobCheckout) singleJobCheckout.style.display = 'none';
     if (monthlyCheckout) monthlyCheckout.style.display = '';
     
+    const lowerPlanName = planName.toLowerCase();
+    const isMonthlyPlan = lowerPlanName.includes('monthly') || planName === 'Monthly';
+    
+    const optionOnetime = document.getElementById('option-onetime');
+    const optionAutopay = document.getElementById('option-autopay');
+    const autopayRadio = document.querySelector('input[name="payment-mode"][value="autopay"]');
+
+    if (isMonthlyPlan) {
+      // Monthly plan: Remove One-time option; Auto pay is auto-selected by default
+      if (optionOnetime) optionOnetime.style.display = 'none';
+      if (autopayRadio) autopayRadio.checked = true;
+    } else {
+      // Quarterly and Yearly/Annual plans: Keep One-time option available
+      if (optionOnetime) optionOnetime.style.display = 'flex';
+    }
+
+    // Dynamic title & base price updates for Monthly/Quarterly/Yearly
+    const planTitleEl = document.querySelector('.monthly-plan-name .plan-title');
+    const monthlyBasePriceEl = document.getElementById('monthly-base-price');
     const monthlyBasePrice = parseInt(urlParams.get('price') || '2499');
 
-    // Set auto-renew date (30 days from now)
+    if (planTitleEl) {
+      if (lowerPlanName.includes('quarterly')) {
+        planTitleEl.textContent = 'Quarterly plan';
+      } else if (lowerPlanName.includes('yearly') || lowerPlanName.includes('annual')) {
+        planTitleEl.textContent = 'Yearly plan';
+      } else {
+        planTitleEl.textContent = 'Monthly plan';
+      }
+    }
+
+    if (monthlyBasePriceEl) {
+      monthlyBasePriceEl.textContent = `₹${monthlyBasePrice.toLocaleString('en-IN')}`;
+    }
+
+    // Set auto-renew date (30 days for monthly, 90 days for quarterly, 365 days for yearly)
+    const daysToAdd = lowerPlanName.includes('quarterly') ? 90 : (lowerPlanName.includes('yearly') || lowerPlanName.includes('annual') ? 365 : 30);
     const renewDate = new Date();
-    renewDate.setDate(renewDate.getDate() + 30);
+    renewDate.setDate(renewDate.getDate() + daysToAdd);
     const options = { day: 'numeric', month: 'long', year: 'numeric' };
     const renewDateStr = renewDate.toLocaleDateString('en-GB', options);
     const renewDateEl = document.getElementById('renew-date');
@@ -67,8 +101,6 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!modeInput) return;
       const mode = modeInput.value;
       
-      const optionAutopay = document.getElementById('option-autopay');
-      const optionOnetime = document.getElementById('option-onetime');
       const discountRow = document.getElementById('monthly-discount-row');
       const autorenewBox = document.getElementById('monthly-autorenew-box');
       const subtotalEl = document.getElementById('monthly-subtotal');
