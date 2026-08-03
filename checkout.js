@@ -114,18 +114,41 @@ document.addEventListener("DOMContentLoaded", () => {
     return; // Exit here, do not run Single Job logic
   }
 
-  // --- Single Job Logic (Actual Amount + Separate Bulk Discount Line Item) ---
-  
-  // Calculate full original price vs bulk discount
+  // --- Single Job Logic ---
   let fullJobPrice = rawPriceParam;
   let bulkDiscount = 0;
 
   if (planCount === 4) {
-    if (rawPriceParam < 5000) fullJobPrice = rawPriceParam * 4;
-    bulkDiscount = Math.round(fullJobPrice * 0.10); // 10% bulk discount for 4 jobs
+    // 4 jobs pack = 10% bulk discount
+    // Check if rawPriceParam is unit price, discounted total, or full total
+    if (rawPriceParam < 4000) {
+      // Unit price passed
+      fullJobPrice = rawPriceParam * 4;
+      bulkDiscount = Math.round(fullJobPrice * 0.10);
+    } else if (rawPriceParam % 10 !== 0 || rawPriceParam % 4 !== 0) {
+      // Discounted total passed
+      fullJobPrice = Math.round(rawPriceParam / 0.9);
+      bulkDiscount = fullJobPrice - rawPriceParam;
+    } else {
+      // Full total passed
+      fullJobPrice = rawPriceParam;
+      bulkDiscount = Math.round(fullJobPrice * 0.10);
+    }
   } else if (planCount === 8) {
-    if (rawPriceParam < 9000) fullJobPrice = rawPriceParam * 8;
-    bulkDiscount = Math.round(fullJobPrice * 0.20); // 20% bulk discount for 8 jobs
+    // 8 jobs pack = 20% bulk discount
+    if (rawPriceParam < 4000) {
+      // Unit price passed
+      fullJobPrice = rawPriceParam * 8;
+      bulkDiscount = Math.round(fullJobPrice * 0.20);
+    } else if (rawPriceParam % 10 !== 0 || rawPriceParam % 8 !== 0) {
+      // Discounted total passed
+      fullJobPrice = Math.round(rawPriceParam / 0.8);
+      bulkDiscount = fullJobPrice - rawPriceParam;
+    } else {
+      // Full total passed
+      fullJobPrice = rawPriceParam;
+      bulkDiscount = Math.round(fullJobPrice * 0.20);
+    }
   }
 
   const netJobPrice = fullJobPrice - bulkDiscount;
