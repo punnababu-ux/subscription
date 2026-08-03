@@ -6,6 +6,10 @@
 }
 
 /* Darker, Richer Green Tone for Single Job Posting Container */
+.header {
+  text-align: center !important;
+}
+
 .single-jobs-wrapper {
   background-color: #B8E4D8 !important;
   border-color: #89CFBD !important;
