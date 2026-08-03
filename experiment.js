@@ -47,7 +47,7 @@ function handleUnlimitedClick(event, planName, price) {
     if (typeof event.stopPropagation === 'function') event.stopPropagation();
   }
   
-  window.location.href = `checkout.html?plan=${encodeURIComponent(planName)}&price=${price}`;
+  window.location.href = `checkout.html?plan=${encodeURIComponent(planName)}&price=${price}&from=experiment`;
 }
 
 function selectExpSlot(el, slots) {

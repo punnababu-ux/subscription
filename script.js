@@ -141,11 +141,13 @@ function closeMonthlyModal() {
 }
 
 function continueWithSingleJob() {
-  window.location.href = `checkout.html?plan=${encodeURIComponent(currentPlanName)}&count=1&unitPrice=${currentBasePrice}`;
+  const fromParam = (window.location.pathname.includes('experiment.html') || document.getElementById('expSection')) ? '&from=experiment' : '';
+  window.location.href = `checkout.html?plan=${encodeURIComponent(currentPlanName)}&count=1&unitPrice=${currentBasePrice}${fromParam}`;
 }
 
 function switchToMonthly() {
-  window.location.href = `checkout.html?plan=Monthly&count=1&price=2499`;
+  const fromParam = (window.location.pathname.includes('experiment.html') || document.getElementById('expSection')) ? '&from=experiment' : '';
+  window.location.href = `checkout.html?plan=Monthly&count=1&price=2499${fromParam}`;
 }
 
 function goToCheckout() {
@@ -162,7 +164,8 @@ function goToCheckout() {
     }
   }
 
-  window.location.href = `checkout.html?plan=${encodeURIComponent(currentPlanName)}&count=${count}&unitPrice=${currentBasePrice}`;
+  const fromParam = (window.location.pathname.includes('experiment.html') || document.getElementById('expSection')) ? '&from=experiment' : '';
+  window.location.href = `checkout.html?plan=${encodeURIComponent(currentPlanName)}&count=${count}&unitPrice=${currentBasePrice}${fromParam}`;
 }
 
 function confirmUpsell() {

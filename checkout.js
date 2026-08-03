@@ -3,7 +3,21 @@ document.addEventListener("DOMContentLoaded", () => {
   const urlParams = new URLSearchParams(window.location.search);
   const planName = urlParams.get('plan') || 'Premium';
   const planCount = parseInt(urlParams.get('count') || '1');
-  
+
+  // Handle Back Navigation target (experiment vs standard index)
+  const fromParam = urlParams.get('from');
+  const isFromExperiment = fromParam === 'experiment' || (document.referrer && document.referrer.includes('experiment.html'));
+  if (isFromExperiment) {
+    const backLinks = document.querySelectorAll('.back-link-minimal, .back-link, a[href="index.html"]');
+    backLinks.forEach(link => {
+      link.setAttribute('href', 'experiment.html');
+      link.onclick = function(e) {
+        e.preventDefault();
+        window.location.href = 'experiment.html';
+      };
+    });
+  }
+
   // Resolve Unit Price cleanly without guesswork
   let unitPrice = parseInt(urlParams.get('unitPrice') || '0');
   
