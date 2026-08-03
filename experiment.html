@@ -324,44 +324,123 @@
   </div>
 
   <!-- Quantity Upsell Modal -->
-  <div class="modal-overlay" id="upsell-modal" onclick="closeModalOnOverlay(event)">
-    <div class="modal-card">
-      <div class="modal-header">
-        <h2>Buy job postings in bulk & save up to 10% extra</h2>
-        <button class="close-btn" onclick="closeModal()">&times;</button>
+  <div class="modal-overlay" id="upsellModal">
+    <div class="modal-content">
+      <div class="modal-close" onclick="closeModal()">
+        <img src="assets/close.svg" alt="close">
       </div>
-      <div class="modal-body">
-        <p class="subtitle">Valid for 1 year • Use anytime</p>
-        <div class="upsell-grid">
-          <div class="upsell-card active" onclick="selectUpsell(this, 1)">
-            <div class="badge-placeholder"></div>
-            <div class="upsell-title">1 <span class="upsell-plan-name">Job</span></div>
-            <div class="upsell-price-container">
-              <div class="price-old" style="visibility: hidden;">&nbsp;</div>
-              <div class="price-new" id="upsell-1-price">₹1,999</div>
-            </div>
-            <div class="savings-text">Standard price</div>
+      <div class="modal-title">Buy more, <span class="save-text">save</span> more</div>
+      
+      <div class="upsell-cards">
+        <!-- 1 Job -->
+        <div class="upsell-card active" onclick="selectUpsell(this, 1)">
+          <div class="upsell-price-row">
+            <span class="upsell-price" id="upsell-1-price">₹1,999</span>
           </div>
-          <div class="upsell-card" onclick="selectUpsell(this, 4)">
-            <div class="upsell-badge">Save 10%</div>
-            <div class="upsell-title">4 <span class="upsell-plan-name">Jobs</span></div>
-            <div class="upsell-price-container">
-              <div class="price-old" id="upsell-4-old">₹7,996</div>
-              <div class="price-new" id="upsell-4-new">₹7,196</div>
-            </div>
-            <div class="savings-text" id="upsell-4-save">Save ₹800</div>
+          <div class="upsell-desc">1 <span class="upsell-plan-name">Premium</span> Job</div>
+        </div>
+        
+        <!-- 4 Jobs -->
+        <div class="upsell-card" onclick="selectUpsell(this, 4)">
+          <div class="upsell-desc-row">
+            <div class="upsell-desc">4 <span class="upsell-plan-name">Premium</span> Jobs</div>
+            <div class="upsell-tag" id="upsell-4-save">Save 10%</div>
           </div>
-          <div class="upsell-card" onclick="selectUpsell(this, 8)">
-            <div class="upsell-badge">Save 10%</div>
-            <div class="upsell-title">8 <span class="upsell-plan-name">Jobs</span></div>
-            <div class="upsell-price-container">
-              <div class="price-old" id="upsell-8-old">₹15,992</div>
-              <div class="price-new" id="upsell-8-new">₹14,393</div>
-            </div>
-            <div class="savings-text" id="upsell-8-save">Save ₹1,599</div>
+          <div class="upsell-price-row">
+            <span class="upsell-old-price" id="upsell-4-old">₹7,996</span>
+            <span class="upsell-price" id="upsell-4-price">₹7,196</span>
           </div>
         </div>
-        <button class="cta-btn" id="upsell-btn" onclick="confirmUpsell()">Proceed to pay</button>
+
+        <!-- 8 Jobs -->
+        <div class="upsell-card" onclick="selectUpsell(this, 8)">
+          <div class="upsell-desc-row">
+            <div class="upsell-desc">8 <span class="upsell-plan-name">Premium</span> Jobs</div>
+            <div class="upsell-tag" id="upsell-8-save">Save 20%</div>
+          </div>
+          <div class="upsell-price-row">
+            <span class="upsell-old-price" id="upsell-8-old">₹15,992</span>
+            <span class="upsell-price" id="upsell-8-price">₹12,793</span>
+          </div>
+        </div>
+      </div>
+      <button class="btn primary modal-continue-btn" id="upsell-btn" style="width: 100%;" onclick="goToCheckout()">Proceed to pay</button>
+    </div>
+  </div>
+
+  <!-- Monthly Upsell Modal (Cross-sell) -->
+  <div class="modal-overlay" id="monthlyUpsellModal">
+    <div class="modal-content cross-sell-modal">
+      <div class="modal-close" onclick="closeMonthlyModal()">
+        <img src="assets/close.svg" alt="close">
+      </div>
+      <div class="modal-title">
+        Get 30-day unlimited hiring for just <span class="save-text" id="monthly-diff-price">₹1,100</span> more
+      </div>
+      
+      <div class="cross-sell-container">
+        <!-- Left Side: Single Job -->
+        <div class="wrapper-container single-jobs-container" style="margin-top:0; width: 100%;">
+          <div class="wrapper-header single-jobs-header" style="justify-content: flex-start; padding-left: 16px;">
+            <img src="assets/clock.svg" alt="clock">
+            <span>Single job posting</span>
+          </div>
+          <div class="wrapper-body" style="padding: 0 8px 8px 8px;">
+            <div class="card bordered" id="monthly-upsell-left-card">
+              <div class="card-title" id="mu-plan-name">Classic job</div>
+              <div class="card-price">
+                <span id="mu-plan-price">₹999</span><span class="asterisk">*</span>
+              </div>
+              <div id="mu-plan-features" style="margin-bottom: 24px;">
+                <!-- Injected dynamically -->
+              </div>
+              <button class="btn" style="margin-bottom:0;" id="mu-btn-continue" onclick="continueWithSingleJob()">Continue with classic job</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side: Apna Unlimited -->
+        <div class="wrapper-container monthly-wrapper" style="margin-top:0; width: 100%;">
+          <div class="wrapper-header monthly-header" style="justify-content: flex-start; padding-left: 16px;">
+            <img src="assets/logo-unlimited.svg" alt="apna Unlimited">
+          </div>
+          <div class="wrapper-body" style="padding: 0 8px 8px 8px;">
+            <div class="card">
+              <div class="card-title">Monthly plan</div>
+              <div class="card-price">
+                <span>₹2,499</span><span class="asterisk">*</span> <span class="monthly-price-suffix">/month</span>
+              </div>
+              <ul class="features">
+                <li class="feature">
+                  <img src="assets/business.svg" class="icon" alt="business">
+                  <span class="feature-text">
+                    <span class="bold">1</span> Active job slot for <span class="bold">30 days</span>
+                  </span>
+                </li>
+                <li class="feature">
+                  <img src="assets/infinite.svg" class="icon" alt="infinite">
+                  <span class="feature-text">Unlimited free reposts on job expiry</span>
+                </li>
+                <li class="feature">
+                  <img src="assets/shield.svg" class="icon" alt="shield">
+                  <span class="feature-text">
+                    <span class="bold">200</span> database unlocks <span class="italic">worth ₹2,000</span>
+                  </span>
+                </li>
+                <li class="feature">
+                  <img src="assets/whatsapp-solid.svg" class="icon" alt="wa-solid">
+                  <span class="feature-text">WhatsApp boost for more applications</span>
+                </li>
+                <li class="feature">
+                  <img src="assets/support.svg" class="icon" alt="support">
+                  <span class="feature-text">Priority support</span>
+                </li>
+              </ul>
+              <div class="note" style="margin-top: 24px; margin-bottom: 24px;">Note: This plan is valid in a single city.</div>
+              <button class="btn primary" style="margin-bottom:0;" onclick="switchToMonthly()">Switch to apna unlimited</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
