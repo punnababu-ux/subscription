@@ -44,7 +44,8 @@ document.addEventListener("DOMContentLoaded", () => {
                                planName.toLowerCase().includes('monthly') || 
                                planName.toLowerCase().includes('unlimited') ||
                                planName.toLowerCase().includes('quarterly') ||
-                               planName.toLowerCase().includes('yearly');
+                               planName.toLowerCase().includes('yearly') ||
+                               planName.toLowerCase().includes('annual');
 
   if (isMonthlyOrUnlimited) {
     const singleJobCheckout = document.querySelector('.single-job-checkout');
@@ -54,10 +55,13 @@ document.addEventListener("DOMContentLoaded", () => {
     
     const lowerPlanName = planName.toLowerCase();
     const isMonthlyPlan = lowerPlanName.includes('monthly') || planName === 'Monthly';
-    
+    const isQuarterlyPlan = lowerPlanName.includes('quarterly');
+    const isYearlyPlan = lowerPlanName.includes('yearly') || lowerPlanName.includes('annual');
+
     const optionOnetime = document.getElementById('option-onetime');
     const optionAutopay = document.getElementById('option-autopay');
     const autopayRadio = document.querySelector('input[name="payment-mode"][value="autopay"]');
+    const onetimeSubtextEl = document.querySelector('#option-onetime .option-subtext');
 
     if (isMonthlyPlan) {
       // Monthly plan: Remove One-time option; Auto pay is auto-selected by default
@@ -66,20 +70,36 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       // Quarterly and Yearly/Annual plans: Keep One-time option available
       if (optionOnetime) optionOnetime.style.display = 'flex';
+      if (onetimeSubtextEl) {
+        if (isQuarterlyPlan) onetimeSubtextEl.textContent = 'Expires after 90 days';
+        else if (isYearlyPlan) onetimeSubtextEl.textContent = 'Expires after 365 days';
+        else onetimeSubtextEl.textContent = 'Expires after 30 days';
+      }
     }
 
-    // Dynamic title & base price updates for Monthly/Quarterly/Yearly
+    // Dynamic title, subtext & base price updates for Monthly/Quarterly/Yearly
     const planTitleEl = document.querySelector('.monthly-plan-name .plan-title');
+    const planSubtextEl = document.querySelector('.monthly-plan-name .plan-subtext');
     const monthlyBasePriceEl = document.getElementById('monthly-base-price');
-    const monthlyBasePrice = parseInt(urlParams.get('price') || '2499');
+    const monthlyBasePrice = parseInt(urlParams.get('price') || (isQuarterlyPlan ? '6499' : isYearlyPlan ? '19999' : '2499'));
 
     if (planTitleEl) {
-      if (lowerPlanName.includes('quarterly')) {
+      if (isQuarterlyPlan) {
         planTitleEl.textContent = 'Quarterly plan';
-      } else if (lowerPlanName.includes('yearly') || lowerPlanName.includes('annual')) {
+      } else if (isYearlyPlan) {
         planTitleEl.textContent = 'Yearly plan';
       } else {
         planTitleEl.textContent = 'Monthly plan';
+      }
+    }
+
+    if (planSubtextEl) {
+      if (isQuarterlyPlan) {
+        planSubtextEl.innerHTML = '(<span class="bold">1 active</span> job slot + <span class="bold">600 Database</span> credits for 90 days)';
+      } else if (isYearlyPlan) {
+        planSubtextEl.innerHTML = '(<span class="bold">1 active</span> job slot + <span class="bold">2400 Database</span> credits for 365 days)';
+      } else {
+        planSubtextEl.innerHTML = '(<span class="bold">1 active</span> job slot + <span class="bold">200 Database</span> credits for 30 days)';
       }
     }
 
@@ -88,13 +108,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Set auto-renew date (30 days for monthly, 90 days for quarterly, 365 days for yearly)
-    const daysToAdd = lowerPlanName.includes('quarterly') ? 90 : (lowerPlanName.includes('yearly') || lowerPlanName.includes('annual') ? 365 : 30);
+    const daysToAdd = isQuarterlyPlan ? 90 : (isYearlyPlan ? 365 : 30);
     const renewDate = new Date();
     renewDate.setDate(renewDate.getDate() + daysToAdd);
     const options = { day: 'numeric', month: 'long', year: 'numeric' };
     const renewDateStr = renewDate.toLocaleDateString('en-GB', options);
     const renewDateEl = document.getElementById('renew-date');
     if (renewDateEl) renewDateEl.textContent = renewDateStr;
+
+    // Period suffix (/month, /quarter, /year)
+    const freqSuffix = isQuarterlyPlan ? '/quarter' : (isYearlyPlan ? '/year' : '/month');
 
     window.updateMonthlyTotals = function() {
       const modeInput = document.querySelector('input[name="payment-mode"]:checked');
@@ -150,8 +173,8 @@ document.addEventListener("DOMContentLoaded", () => {
       if (totalEl) totalEl.textContent = `₹${total.toLocaleString('en-IN')}`;
       
       if (mode === 'autopay') {
-        if (proceedBtn) proceedBtn.textContent = `Subscribe ₹${total.toLocaleString('en-IN')} /month`;
-        if (renewAmountEl) renewAmountEl.textContent = `₹${total.toLocaleString('en-IN')}`;
+        if (proceedBtn) proceedBtn.textContent = `Subscribe ₹${total.toLocaleString('en-IN')} ${freqSuffix}`;
+        if (renewAmountEl) renewAmountEl.textContent = `₹${total.toLocaleString('en-IN')} ${freqSuffix}`;
       } else {
         if (proceedBtn) proceedBtn.textContent = `Proceed to pay ₹${total.toLocaleString('en-IN')}`;
       }
@@ -208,7 +231,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (sumAiAddonEl) sumAiAddonEl.classList.remove('hidden');
       if (aiAddonBox) aiAddonBox.classList.add('active-addon');
     } else {
-      if (sumAiAddonEl) sumAiAddonEl.classList.add('hidden');
+      if (sumAiAddonEl) sumAiAddonEl.classList.hidden = true;
       if (aiAddonBox) aiAddonBox.classList.remove('active-addon');
     }
 
