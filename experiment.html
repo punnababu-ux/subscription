@@ -49,7 +49,7 @@
     <div class="plan-section exp-plan-section active-single" id="expSection">
       
       <!-- Single Job Postings Container -->
-      <div class="wrapper-box single-jobs-wrapper exp-wrapper" id="singleWrapper" onclick="setActiveSection('single')">
+      <div class="wrapper-box single-jobs-wrapper exp-wrapper" id="singleWrapper" onclick="onContainerClick(event, 'single')">
         <div class="wrapper-header single-jobs-header">
           <div class="header-title">
             <img src="assets/clock.svg" alt="clock">
@@ -166,7 +166,7 @@
             </div>
 
             <!-- Bottom CTA outside cards -->
-            <div class="view-more-cta single-view-more">
+            <div class="view-more-cta single-view-more" onclick="onContainerClick(event, 'unlimited')">
               <span class="view-more-text">View more plans</span> <span class="chevron-right">›</span>
             </div>
           </div>
@@ -174,7 +174,7 @@
       </div>
 
       <!-- Monthly Plan (apna Unlimited) Container -->
-      <div class="wrapper-box monthly-wrapper exp-wrapper" id="unlimitedWrapper" onclick="setActiveSection('unlimited')">
+      <div class="wrapper-box monthly-wrapper exp-wrapper" id="unlimitedWrapper" onclick="onContainerClick(event, 'unlimited')">
         <div class="wrapper-header monthly-header">
           <div class="header-title">
             <img src="assets/logo-unlimited.svg" alt="apna Unlimited">
@@ -303,7 +303,7 @@
             <div class="unlimited-expanded-note">Note: These plans are valid in a single city.</div>
 
             <!-- Bottom CTA outside cards -->
-            <div class="view-more-cta unlimited-view-more">
+            <div class="view-more-cta unlimited-view-more" onclick="onContainerClick(event, 'single')">
               <span class="chevron-left">‹</span> <span class="view-more-text">View more plans</span>
             </div>
           </div>

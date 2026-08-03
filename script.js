@@ -1,28 +1,22 @@
 // Handle plan selection in the Single Job section
 function selectPlan(selectedCard) {
-  // Reset all cards in the single job section
   const cards = document.querySelectorAll('.single-jobs-cards .card');
   cards.forEach(card => {
     card.classList.remove('premium');
     card.classList.add('bordered');
   });
 
-  // Highlight the hovered card
   selectedCard.classList.remove('bordered');
   selectedCard.classList.add('premium');
 }
 
-// Reset focus back to the default Premium card when mouse leaves the cards area
 function resetToDefault() {
   const cards = document.querySelectorAll('.single-jobs-cards .card');
-  
-  // Reset all to bordered
   cards.forEach(card => {
-    card.classList.remove('premium');
-    card.classList.add('bordered');
+    card.classList.remove('bordered');
+    card.classList.add('premium');
   });
 
-  // Highlight the middle (Premium job) card which is the 2nd card (index 1)
   if (cards.length > 1) {
     const premiumCard = cards[1];
     premiumCard.classList.remove('bordered');
@@ -49,14 +43,17 @@ function openModal(cardElement, planName) {
   currentPlanName = planName;
   
   const toggle = document.getElementById('toggle-monthly');
-  if ((toggle && toggle.checked) || planName.toLowerCase().includes('super')) {
-    // Show old quantity upsell modal
+  const hasMonthlyUpsellModal = !!document.getElementById('monthlyUpsellModal');
+  const showQuantityUpsell = !hasMonthlyUpsellModal || (toggle && toggle.checked) || planName.toLowerCase().includes('super');
+
+  if (showQuantityUpsell) {
+    // Show quantity upsell modal
     const nameSpans = document.querySelectorAll('.upsell-plan-name');
     nameSpans.forEach(span => span.textContent = planName);
     
-    document.getElementById('upsell-1-price').textContent = `₹${basePrice.toLocaleString('en-IN')}`;
+    const u1price = document.getElementById('upsell-1-price');
+    if (u1price) u1price.textContent = `₹${basePrice.toLocaleString('en-IN')}`;
     
-    // Reset selection to 1 job
     const cards = document.querySelectorAll('.upsell-card');
     cards.forEach(c => c.classList.remove('active'));
     if(cards.length > 0) cards[0].classList.add('active');
@@ -67,43 +64,79 @@ function openModal(cardElement, planName) {
     const price4Old = basePrice * 4;
     const price4New = Math.round(price4Old * 0.9);
     const save4 = price4Old - price4New;
-    document.getElementById('upsell-4-old').textContent = `₹${price4Old.toLocaleString('en-IN')}`;
-    document.getElementById('upsell-4-price').textContent = `₹${price4New.toLocaleString('en-IN')}`;
-    document.getElementById('upsell-4-save').textContent = `Save ₹${save4.toLocaleString('en-IN')}`;
+    
+    const u4old = document.getElementById('upsell-4-old');
+    if (u4old) u4old.textContent = `₹${price4Old.toLocaleString('en-IN')}`;
+    
+    const u4new = document.getElementById('upsell-4-price') || document.getElementById('upsell-4-new');
+    if (u4new) u4new.textContent = `₹${price4New.toLocaleString('en-IN')}`;
+    
+    const u4save = document.getElementById('upsell-4-save');
+    if (u4save) u4save.textContent = `Save ₹${save4.toLocaleString('en-IN')}`;
     
     const price8Old = basePrice * 8;
     const price8New = Math.round(price8Old * 0.8);
     const save8 = price8Old - price8New;
-    document.getElementById('upsell-8-old').textContent = `₹${price8Old.toLocaleString('en-IN')}`;
-    document.getElementById('upsell-8-price').textContent = `₹${price8New.toLocaleString('en-IN')}`;
-    document.getElementById('upsell-8-save').textContent = `Save ₹${save8.toLocaleString('en-IN')}`;
     
-    document.getElementById('upsellModal').classList.add('show');
+    const u8old = document.getElementById('upsell-8-old');
+    if (u8old) u8old.textContent = `₹${price8Old.toLocaleString('en-IN')}`;
+    
+    const u8new = document.getElementById('upsell-8-price') || document.getElementById('upsell-8-new');
+    if (u8new) u8new.textContent = `₹${price8New.toLocaleString('en-IN')}`;
+    
+    const u8save = document.getElementById('upsell-8-save');
+    if (u8save) u8save.textContent = `Save ₹${save8.toLocaleString('en-IN')}`;
+    
+    const modal1 = document.getElementById('upsellModal');
+    const modal2 = document.getElementById('upsell-modal');
+    if (modal1) modal1.classList.add('show');
+    if (modal2) modal2.classList.add('show');
   } else {
     // Show new monthly cross-sell modal
     const diff = 2499 - basePrice;
-    document.getElementById('monthly-diff-price').textContent = `₹${diff.toLocaleString('en-IN')}`;
+    const diffEl = document.getElementById('monthly-diff-price');
+    if (diffEl) diffEl.textContent = `₹${diff.toLocaleString('en-IN')}`;
     
-    document.getElementById('mu-plan-name').textContent = planName + ' job';
-    document.getElementById('mu-plan-price').textContent = `₹${basePrice.toLocaleString('en-IN')}`;
-    document.getElementById('mu-btn-continue').textContent = `Continue with ${planName.toLowerCase()} job`;
+    const muName = document.getElementById('mu-plan-name');
+    if (muName) muName.textContent = planName + ' job';
     
-    // Copy features from the clicked card
-    const featuresList = cardElement.querySelector('.features');
-    if (featuresList) {
-      document.getElementById('mu-plan-features').innerHTML = featuresList.outerHTML;
+    const muPrice = document.getElementById('mu-plan-price');
+    if (muPrice) muPrice.textContent = `₹${basePrice.toLocaleString('en-IN')}`;
+    
+    const muBtn = document.getElementById('mu-btn-continue');
+    if (muBtn) muBtn.textContent = `Continue with ${planName.toLowerCase()} job`;
+    
+    if (cardElement) {
+      const featuresList = cardElement.querySelector('.features');
+      const muFeatures = document.getElementById('mu-plan-features');
+      if (featuresList && muFeatures) {
+        muFeatures.innerHTML = featuresList.outerHTML;
+      }
     }
     
-    document.getElementById('monthlyUpsellModal').classList.add('show');
+    const mModal = document.getElementById('monthlyUpsellModal');
+    if (mModal) mModal.classList.add('show');
   }
 }
 
 function closeModal() {
-  document.getElementById('upsellModal').classList.remove('show');
+  const modal1 = document.getElementById('upsellModal');
+  const modal2 = document.getElementById('upsell-modal');
+  const modal3 = document.getElementById('monthlyUpsellModal');
+  if (modal1) modal1.classList.remove('show');
+  if (modal2) modal2.classList.remove('show');
+  if (modal3) modal3.classList.remove('show');
+}
+
+function closeModalOnOverlay(event) {
+  if (event.target === event.currentTarget) {
+    closeModal();
+  }
 }
 
 function closeMonthlyModal() {
-  document.getElementById('monthlyUpsellModal').classList.remove('show');
+  const modal3 = document.getElementById('monthlyUpsellModal');
+  if (modal3) modal3.classList.remove('show');
 }
 
 function continueWithSingleJob() {
@@ -119,9 +152,9 @@ function goToCheckout() {
   let count = 1;
 
   if (activeCard) {
-    if (activeCard.innerText.includes('4 Premium') || activeCard.innerText.includes('4 Classic') || activeCard.innerText.includes('4 Super')) {
+    if (activeCard.innerText.includes('4 Premium') || activeCard.innerText.includes('4 Classic') || activeCard.innerText.includes('4 Super') || activeCard.innerText.includes('4 Jobs')) {
       count = 4;
-    } else if (activeCard.innerText.includes('8 Premium') || activeCard.innerText.includes('8 Classic') || activeCard.innerText.includes('8 Super')) {
+    } else if (activeCard.innerText.includes('8 Premium') || activeCard.innerText.includes('8 Classic') || activeCard.innerText.includes('8 Super') || activeCard.innerText.includes('8 Jobs')) {
       count = 8;
     } else {
       count = 1;
@@ -131,8 +164,11 @@ function goToCheckout() {
   window.location.href = `checkout.html?plan=${encodeURIComponent(currentPlanName)}&count=${count}&unitPrice=${currentBasePrice}`;
 }
 
+function confirmUpsell() {
+  goToCheckout();
+}
+
 function selectUpsell(card, count) {
-  // Update active state on the cards
   const cards = document.querySelectorAll('.upsell-card');
   cards.forEach(c => c.classList.remove('active'));
   card.classList.add('active');

@@ -17,27 +17,39 @@ function setActiveSection(section) {
   }
 }
 
+// Trigger expand animation ONLY when clicking the collapsed container edge or link
+function onContainerClick(event, targetSection) {
+  if (currentActiveSection !== targetSection) {
+    if (event) event.stopPropagation();
+    setActiveSection(targetSection);
+  }
+}
+
 function handleCardClick(event, planName) {
+  if (event) event.stopPropagation();
+  
+  // If clicked while single section is collapsed, expand single section
   if (currentActiveSection !== 'single') {
-    event.stopPropagation();
     setActiveSection('single');
     return;
   }
   
-  event.stopPropagation();
+  // If already active section, open popup directly without section animation
   if (typeof openModal === 'function') {
     openModal(null, planName);
   }
 }
 
 function handleUnlimitedClick(event, planName, price) {
+  if (event) event.stopPropagation();
+  
+  // If clicked while unlimited section is collapsed, expand unlimited section
   if (currentActiveSection !== 'unlimited') {
-    event.stopPropagation();
     setActiveSection('unlimited');
     return;
   }
   
-  event.stopPropagation();
+  // If already active section, proceed to checkout directly without section animation
   window.location.href = `checkout.html?plan=${encodeURIComponent(planName)}&price=${price}`;
 }
 
